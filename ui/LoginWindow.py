@@ -4,8 +4,6 @@ from PIL import ImageTk, Image
 from cryptography.fernet import Fernet  
 import time
 from ui.Helpers import clear_window
-from ui.SelectRoleWindow import select_role
-
 
 def logIn_screen(window):
 	clear_window(window)
@@ -31,7 +29,7 @@ def logIn_screen(window):
 			print("Password: " ) 
 			print(ciphered_text)
 			if user_name == "test":
-				select_role(window)
+				window.open_select_role(window)
 				return
 		messagebox.showerror("Invalid input", "Incorrect Username/Password")
 		

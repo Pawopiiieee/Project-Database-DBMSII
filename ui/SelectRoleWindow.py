@@ -18,8 +18,12 @@ def select_role(window): #the case that a teacher is also an admin
 	label_logo.image = test
 	label_logo.place(x=170,y=70)
 
+	def call_teacher_window():
+		window.open_teacher(window)
+	def call_admin_window():
+		window.open_admin(window)
 
-	admin_button = Button(window,text = "Continue as an Admin", bd = '5',command = window.destroy)
+	admin_button = Button(window,text = "Continue as an Admin", bd = '5',command = call_admin_window)
 	admin_button.place(x = 180, y = 250)
-	teacher_button = Button(window,text = "Continue as a Teacher", bd = '5',command = window.destroy)
+	teacher_button = Button(window,text = "Continue as a Teacher", bd = '5',command = call_teacher_window)
 	teacher_button.place(x = 180, y = 300)
