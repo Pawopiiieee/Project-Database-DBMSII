@@ -71,15 +71,15 @@ def student_window(window): #this is personal, only individual can see the whole
 	schedule_button.place(x=308, y = 440)
 	#schedule_button1 = Button(window, text = "Schedule", highlightbackground = "green",fg = "#191966", font="Courier 18",height = 3,width = 15, command = open_schedule, cursor = "pointinghand")
 
-	def open_exam_result():
-		window.open_student_exam_result(window,student_window)
+	def open_result():
+		window.open_student_result(window,student_window)
 	examResult_pic = Image.open("images/exam_result.png")
 	examResult_pic = examResult_pic.resize((54,54), Image.ANTIALIAS)
 	examResult_image =ImageTk.PhotoImage(examResult_pic)
 	examResult_image.icon = examResult_image
-	examResult_image = Button(window, image = examResult_image, command = open_exam_result, cursor = "pointinghand")
+	examResult_image = Button(window, image = examResult_image, command = open_result, cursor = "pointinghand")
 	examResult_image.place(x=253, y = 510)
-	examResult_button = Button(window, text = "Exam Result",fg = "#1f3d7a", font="Courier 18",height = 3,width = 15, command = open_exam_result, cursor = "pointinghand")
+	examResult_button = Button(window, text = "Results",fg = "#1f3d7a", font="Courier 18",height = 3,width = 15, command = open_result, cursor = "pointinghand")
 	examResult_button.place(x=308, y = 510)
 
 

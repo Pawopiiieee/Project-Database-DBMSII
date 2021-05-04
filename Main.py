@@ -10,7 +10,7 @@ from ui.StudentCourse import student_personal_course
 from ui.StudentSchedule import student_personal_schedule
 from ui.StudentCounselor import student_personal_counselor
 from ui.StudentExamRegistration import student_exam_registration
-from ui.StudentExamResult import student_exam_results
+from ui.StudentExamResult import student_results
 
 if __name__ == "__main__":
 	
@@ -31,7 +31,7 @@ if __name__ == "__main__":
 	master.open_student_schedule = student_personal_schedule
 	master.open_student_counselor = student_personal_counselor
 	master.open_exam_registration = student_exam_registration
-	master.open_student_exam_result = student_exam_results  
+	master.open_student_result = student_results  
 
 	#loading_screen(master)
 	student_window(master)

@@ -5,8 +5,9 @@ from ui.Helpers import clear_window, go_back
 from ui.SignOut import sign_out
 
 
-def student_exam_results(window, return_function): #this is going to show personal data
+def student_results(window, return_function): #this is going to show personal data
 	clear_window(window)
+
 	personal_data_label = Label(window,text = "Results, and detail" )
 	personal_data_label.place(x=100,y=100)
 	go_back(window, return_function)
