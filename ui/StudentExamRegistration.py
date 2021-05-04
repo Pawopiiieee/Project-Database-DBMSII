@@ -3,10 +3,9 @@ from tkinter import messagebox
 from PIL import ImageTk, Image  
 from ui.Helpers import clear_window, go_back
 from ui.SignOut import sign_out
+from functools import partial
 
 
-def confirm_register():
-	print ("registered for exam")
 
 def student_exam_registration(window, return_function): #this is going to show personal data
 	clear_window(window)
@@ -20,13 +19,27 @@ def student_exam_registration(window, return_function): #this is going to show p
 		"exam 2"
 	]
 
-	n_exam = 200
+	buttons = []
+	def confirm_register(exam_n):
+		button = buttons[exam_n]
+		if button["text"] == "Register":
+			button["text"] = "Deregister"
+			button["fg"] = "red"
+
+		else:
+			button["text"] = "Register"
+			button["fg"] = "#1f3d7a"
+
+	exam_pos_y = 200
+	exam_number = 0
 	for exam in exams:
 		exam_label = Label(window,text = exam, fg = "#00293c", font = "Impact 15", highlightbackground ="#acd0c0", height = 2, width = 15)
-		exam_label.place(x = 50, y = n_exam)
-		exam_register = Button(window, text = "Register", font = "Impact 15", height = 2, width = 10, highlightbackground ="#d9b44a", command = confirm_register)
-		exam_register.place(x = 300, y = n_exam)
-		n_exam += 50
+		exam_label.place(x = 50, y = exam_pos_y)
+		exam_register = Button(window, text = "Register", fg = "#1f3d7a", font = "Impact 15", height = 2, width = 10, highlightbackground ="#d9b44a", command = partial(confirm_register, exam_number))
+		exam_register.place(x = 300, y = exam_pos_y)
+		buttons.append(exam_register)
+		exam_pos_y += 50
+		exam_number += 1
 
 	go_back(window, return_function)
 	sign_out(window)

@@ -5,9 +5,22 @@ from ui.Helpers import clear_window, go_back
 from ui.SignOut import sign_out
 
 
-def student_personal_course(window, return_function): #this is going to show personal data
+def student_personal_course(window, return_function): 
 	clear_window(window)
-	personal_data_label = Label(window,text = "Course and detail" )
-	personal_data_label.place(x=100,y=100)
+
+	whole_window = Canvas(window, width = 500, height = 700, bg = "#75b1a9")
+	whole_window.pack()
+	header_label = Label(window,text = "Course Name", fg = "#00293c", font = "Impact 35", bg ="#d9b44a", height = 2, width = 15)
+	header_label.place(x = 105, y = 40)
+
+	code_label = Label(window,text = "Code", fg = "#00293c", font = "Courier 15", highlightbackground ="#acd0c0", height = 2,width = 15)
+	code_label.place(x = 35, y = 200)
+	subject_label = Label(window,text = "Subject", fg = "#00293c", font = "Courier 15", highlightbackground ="#acd0c0", height = 2,width = 25)
+	subject_label.place(x = 150, y = 200)
+	exam_label = Label(window,text = "Exam", fg = "#00293c", font = "Courier 15", highlightbackground ="#acd0c0", height = 2,width = 12)
+	exam_label.place(x = 350, y = 200)
+
+
+
 	go_back(window, return_function)
 	sign_out(window)
