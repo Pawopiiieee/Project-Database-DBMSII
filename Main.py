@@ -8,7 +8,7 @@ from ui.SelectRoleWindow import select_role
 from ui.StudentPersonalData import student_personal_data
 from ui.StudentCourse import student_personal_course
 from ui.StudentSchedule import student_personal_schedule
-from ui.StudentCounselor import student_personal_counselor
+from ui.StudentCounsellor import student_personal_counsellor
 from ui.StudentExamRegistration import student_exam_registration
 from ui.StudentExamResult import student_results
 
@@ -29,7 +29,7 @@ if __name__ == "__main__":
 	master.open_student_personal = student_personal_data
 	master.open_student_course = student_personal_course
 	master.open_student_schedule = student_personal_schedule
-	master.open_student_counselor = student_personal_counselor
+	master.open_student_counsellor = student_personal_counsellor
 	master.open_exam_registration = student_exam_registration
 	master.open_student_result = student_results  
 
