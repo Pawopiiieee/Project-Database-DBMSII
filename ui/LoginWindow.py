@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk, Image
-from cryptography.fernet import Fernet  
+from cryptography.fernet import Fernet 
 import time
 from ui.Helpers import clear_window
 
@@ -22,12 +22,15 @@ def logIn_screen(window):
 		pass_word = password.get()
 		if type(user_name) == str and user_name != "": #actually this part goes to the db to check username/password
 			print("Username: " + user_name) #its temporary for testing only
-			pass_word = bytes(pass_word, "utf-8")
+			
+			#this is the ephemeral encryption for testing the login part, when the db is completed, it will be removed.
+			pass_word = bytes(pass_word, "utf-8")  
 			key = b'pRmgMa8T0INjEAfksaq2aafzoZXEuwKI7wDe4c1F8AY='
 			cipher_suite = Fernet(key)
 			ciphered_text = cipher_suite.encrypt(pass_word)
 			print("Password: " ) 
 			print(ciphered_text)
+			
 			if user_name == "test":
 				window.open_select_role(window)
 				return
@@ -43,4 +46,3 @@ def logIn_screen(window):
 	password_entry.place(x =207, y = 200)
 	submit_button = Button(window,text = "Log In", command = input_value)
 	submit_button.place(x = 200, y = 250)
-	

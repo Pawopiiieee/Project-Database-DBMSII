@@ -76,7 +76,9 @@ def full_name(first_names,last_names,gender,stu_nationality,city,stu):
 	days_between_dates = time_between_dates.days
 	random_number_of_days = random.randrange(days_between_dates)
 	date_of_birth = start_birthday + datetime.timedelta(days=random_number_of_days)
+	
 	student.date_of_birth = date_of_birth.strftime('%Y/%m/%d')
+	student.dob_password = date_of_birth.strftime("%Y%m%d")
 	student.nationality = random.choice(stu_nationality)
 	alphabets = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 	student.street_name = ''.join(random.choice(alphabets) for _ in range(6))
@@ -87,17 +89,21 @@ def full_name(first_names,last_names,gender,stu_nationality,city,stu):
 	student.start_year = random.randint(2015,2020)
 	counselor = ["L. Broglie","M. Planck","L. de Broglie","Planck","B. de Wit"]
 	student.counselor = random.choice(counselor)
-
+	password = student.first_name+student.dob_password
+	student.password = password
 	return student
 
 
-for i in range (50):
+for i in range (5):
 	boy_name = full_name(male_name,last_name,"M", nationality,city_name,study)
 	print(boy_name)
 
-for i in range (50):
-	girl_name = full_name(girl_name,last_name,"F", nationality,city_name,study)
+for i in range (5):
+	girl_name = full_name(female_name,last_name,"F", nationality,city_name,study)
 	print(girl_name)
-
-
-
+"""
+class Person:
+	name = None
+	last_name = None
+	id = None
+"""

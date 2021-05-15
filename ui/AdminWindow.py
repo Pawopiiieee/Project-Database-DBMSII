@@ -3,59 +3,48 @@ from tkinter import messagebox
 from PIL import ImageTk, Image  
 from ui.Helpers import clear_window
 
-
-def admin_window(window): 
+def admin_window(window):
 	clear_window(window)
-	whole_window = Canvas(window, width = 500, height = 700, bg = "#EBEBE9")
-	whole_window.create_rectangle(0, 0, 500, 70, fill="#006386", outline = "#006386")
-	whole_window.pack()
-	header_label = Label(window,text = "An Overview", fg = "#e6b800", font = "Alice 35", bg ="#006386")
-	header_label.place(x = 150, y = 15)
+	upper_window = Canvas(window, width = 500, height = 700, bg = "#EBEBE9")
+	upper_window.create_rectangle(0, 0, 500, 210, fill="#e6b800",outline = "#e6b800")
+	admin_logo = ImageTk.PhotoImage(file="images/Admin.png")
+	upper_window.profile_logo = admin_logo
+	upper_window.create_image(250, 100, image=admin_logo)
+	upper_window.create_text(250, 180, fill = "#EBEBE9", font = "Alice 20", 
+					text = "Welcome Admin...")
+	upper_window.pack()
 
-	create_data_text = Button(text = "Create new data", fg = "#e6b800", font="Alice 12",height = 2, width = 15, cursor = "pointinghand", highlightbackground =  "#006386")
-	create_data_text.place(x=20, y = 80)
+	def open_study_data(): #confidential data
+		window.open_admin_window_studies(window, admin_window)
+	course_pic = Image.open("images/course_admin.png")
+	course_pic = course_pic.resize((63,63), Image.ANTIALIAS)
+	course_image =ImageTk.PhotoImage(course_pic)
+	course_image.icon = course_image
+	course_data = Button(window, image = course_image, command = open_study_data, cursor = "pointinghand")
+	course_data.place(x=150, y = 250)
+	course_data_text = Button(text = "Studies", fg = "#006386", font="Alice 18 bold",height = 3, width = 10, cursor = "pointinghand", command = open_study_data)
+	course_data_text.place(x=215, y = 250)
 
-	header_label1 = Label(window, text = "#",fg = "#e6b800", font="Alice 13 bold",height = 2, width = 3,bg ="#006386")
-	header_label1.place(x=10, y = 120)
-	header_label2 = Label(window, text = "Title",fg = "#e6b800", font="Alice 13 bold",height = 2, width = 15,bg ="#006386")
-	header_label2.place(x=40, y = 120)
-	header_label3 = Label(window, text = "Description",fg = "#e6b800", font="Alice 13 bold",height = 2, width = 15,bg ="#006386" )
-	header_label3.place(x=180, y = 120)
-	header_label4 = Label(window, text = "Action",fg = "#e6b800", font="Alice 13 bold",height = 2, width = 18,bg ="#006386" )
-	header_label4.place(x=320, y = 120)
+	def open_student_data(): #confidential data
+		window.open_admin_window_students(window, admin_window)
+	student_pic = Image.open("images/student_admin.png")
+	student_pic = student_pic.resize((63,63), Image.ANTIALIAS)
+	student_image =ImageTk.PhotoImage(student_pic)
+	student_image.icon = student_image
+	teacher_image = Button(window, image = student_image, command = open_student_data, cursor = "pointinghand")
+	teacher_image.place(x=150, y = 350)
+	teacher_data_text = Button(text = "Students", fg = "#00ace6", font="Alice 18 bold",height = 3, width = 10, cursor = "pointinghand", command = open_student_data)
+	teacher_data_text.place(x=215, y = 350)
 
-	courses = ["abc","def","ghi","jkl","mno"]
-	descriptions = ["abcdefghi","abcdefghi","abcdefghi","abcdefghi","abcdefghi"]
-	num_pos_y = 158
-	#initial_num = 0
-	y_position = 165
-	for i in range (len(courses)):
-		number_label = Label(window, text = (i + 1),fg = "#00293c", font = "Alice 13", height = 2, width = 3 )
-		number_label.place(x = 10, y = num_pos_y)
-		#initial_num += 1
-		course_label = Label(window, text = courses[i],fg = "#00293c", font = "Alice 13", height = 2, width = 15)
-		course_label.place(x = 40, y = num_pos_y)
+	def open_teacher_data(): #confidential data
+		window.open_admin_window_teachers(window, admin_window)
+	teacher_pic = Image.open("images/teacher_admin.png")
+	teacher_pic = teacher_pic.resize((63,63), Image.ANTIALIAS)
+	teacher_image =ImageTk.PhotoImage(teacher_pic)
+	teacher_image.icon = teacher_image
+	teacher_image = Button(window, image = teacher_image, command = open_teacher_data, cursor = "pointinghand")
+	teacher_image.place(x=150, y = 450)
+	teacher_data_text = Button(text = "Teachers", fg = "#1f1f7a", font="Alice 18 bold",height = 3, width = 10, cursor = "pointinghand", command = open_teacher_data)
+	teacher_data_text.place(x=215, y = 450)
 
-		desc_label = Label(window, text = descriptions[i],fg = "#00293c", font = "Alice 13",  height = 2, width = 15)
-		desc_label.place(x = 180 , y = num_pos_y)
 
-		bg_label = Label(window, height = 2, width = 18)
-		bg_label.place(x=320, y= num_pos_y)
-		num_pos_y += 30
-
-		view_button = Button(window, text = "View",font = "Alice 14", fg = "#006386",highlightbackground = "#ccd9ff",cursor = "pointinghand", height = 1,width = 4, relief = FLAT)
-		view_button.place(x= 330, y = y_position)
-		edit_button = Button(window, text = "Edit",font = "Alice 14", fg = "#006386",highlightbackground = "#fff2cc",cursor = "pointinghand", height = 1,width = 4, relief = FLAT)
-		edit_button.place(x= 380, y = y_position)
-		delete_button = Button(window, text = "Delete",font = "Alice 14", fg = "#006386",highlightbackground = "#ffcccc",cursor = "pointinghand", height = 1,width = 5, relief = FLAT)
-		delete_button.place(x= 430, y = y_position)
-		y_position += 30
-
-"""
-	create_pic = Image.open("images/create-w.png")
-	create_pic = create_pic.resize((30,30), Image.ANTIALIAS)
-	create_image =ImageTk.PhotoImage(create_pic)
-	create_image.icon = create_image
-	create_data = Button(window, image = create_image, cursor = "pointinghand")
-	create_data.place(x=20, y = 80)
-"""

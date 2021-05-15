@@ -2,6 +2,9 @@ from tkinter import *
 from ui.LoadingWindow import loading_screen
 from ui.LoginWindow import logIn_screen
 from ui.AdminWindow import admin_window
+from ui.AdminWindowStudies import admin_window_studies
+from ui.AdminWindowTeachers import admin_window_teachers
+from ui.AdminWindowStudents import admin_window_students
 
 from ui.TeacherWindow import teacher_window
 from ui.StudentWindow import student_window
@@ -24,6 +27,9 @@ if __name__ == "__main__":
 	master.open_login = logIn_screen
 	master.open_select_role = select_role
 	master.open_admin = admin_window
+	master.open_admin_window_studies = admin_window_studies
+	master.open_admin_window_teachers = admin_window_teachers
+	master.open_admin_window_students = admin_window_students
 	master.open_teacher = teacher_window
 	master.open_teacher_personal = personal_data
 	master.open_teacher_course = course
@@ -35,8 +41,6 @@ if __name__ == "__main__":
 	master.open_student_counsellor = student_personal_counsellor
 	master.open_exam_registration = student_exam_registration
 	master.open_student_result = student_results
-
-
 
 	#loading_screen(master)
 	admin_window(master)
