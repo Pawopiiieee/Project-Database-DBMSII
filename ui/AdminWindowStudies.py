@@ -4,6 +4,7 @@ from PIL import ImageTk, Image
 from ui.Helpers import clear_window, go_back
 from ui.AdminWindowStudyEdit import study_overview_edit
 from ui.AdminWindowStudyView import study_over_view
+from tkinter.messagebox import askquestion 
 from ui.SignOut import sign_out
 from functools import partial
 
@@ -52,7 +53,11 @@ def admin_window_studies(window,return_function):
 	
 		edit_button = Button(window, text = "Edit",font = "Alice 14", fg = "#006386",highlightbackground = "#fff2cc",cursor = "pointinghand", height = 1,width = 4, relief = FLAT,command = partial(study_overview_edit, window, return_function))
 		edit_button.place(x= 380, y = y_position)
-		delete_button = Button(window, text = "Delete",font = "Alice 14", fg = "#006386",highlightbackground = "#ffcccc",cursor = "pointinghand", height = 1,width = 5, relief = FLAT)
+
+		def confirm_deletion():
+			askquestion(title="Delete Data", message= "Do you want to process?", icon = "warning")
+
+		delete_button = Button(window, text = "Delete",font = "Alice 14", fg = "#006386",highlightbackground = "#ffcccc",cursor = "pointinghand", height = 1,width = 5, relief = FLAT, command = confirm_deletion)
 		delete_button.place(x= 430, y = y_position)
 		y_position += 30
 

@@ -1,9 +1,12 @@
 from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk, Image  
+from ui.AdminWindowStudentView import student_view
+from ui.AdminWindowStudentEdit import student_edit
+from tkinter.messagebox import askquestion 
 from ui.Helpers import clear_window, go_back
 from ui.SignOut import sign_out
-
+from functools import partial
 
 def admin_window_students(window,return_function): 
 	clear_window(window)
@@ -44,11 +47,15 @@ def admin_window_students(window,return_function):
 		bg_label.place(x=320, y= num_pos_y)
 		num_pos_y += 30
 
-		view_button = Button(window, text = "View",font = "Alice 14", fg = "#006386",highlightbackground = "#ccd9ff",cursor = "pointinghand", height = 1,width = 4, relief = FLAT)
+		view_button = Button(window, text = "View",font = "Alice 14", fg = "#006386",highlightbackground = "#ccd9ff",cursor = "pointinghand", height = 1,width = 4, relief = FLAT,command = partial(student_view, window, return_function))
 		view_button.place(x= 330, y = y_position)
-		edit_button = Button(window, text = "Edit",font = "Alice 14", fg = "#006386",highlightbackground = "#fff2cc",cursor = "pointinghand", height = 1,width = 4, relief = FLAT)
+		edit_button = Button(window, text = "Edit",font = "Alice 14", fg = "#006386",highlightbackground = "#fff2cc",cursor = "pointinghand", height = 1,width = 4, relief = FLAT, command = partial(student_edit, window, return_function))
 		edit_button.place(x= 380, y = y_position)
-		delete_button = Button(window, text = "Delete",font = "Alice 14", fg = "#006386",highlightbackground = "#ffcccc",cursor = "pointinghand", height = 1,width = 5, relief = FLAT)
+
+		def confirm_deletion():
+			askquestion(title="Delete Data", message= "Do you want to process?",icon = "warning")
+
+		delete_button = Button(window, text = "Delete",font = "Alice 14", fg = "#006386",highlightbackground = "#ffcccc",cursor = "pointinghand", height = 1,width = 5, relief = FLAT, command = confirm_deletion)
 		delete_button.place(x= 430, y = y_position)
 		y_position += 30
 
