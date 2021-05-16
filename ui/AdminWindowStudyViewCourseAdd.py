@@ -40,10 +40,5 @@ def view_course_add(window, return_function):
 	submit_text.place(x=200, y = 300)
 
 
-
-
-
-
-
 	go_back(window, return_function)
 	sign_out(window)

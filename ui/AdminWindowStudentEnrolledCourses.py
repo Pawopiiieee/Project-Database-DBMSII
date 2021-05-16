@@ -33,11 +33,11 @@ def enrolledCourses_students(window, return_function):
 	
 	for i in range (len(courses)):
 
-		lastName_label = Label(window, text = courses[i],fg = "#00293c", font = "Alice 13", height = 2, width = 25,relief="ridge",borderwidth=2)
-		lastName_label.place(x = 20, y = num_pos_y)
+		course_label = Label(window, text = courses[i],fg = "#00293c", font = "Alice 13", height = 2, width = 25,relief="ridge",borderwidth=2)
+		course_label.place(x = 20, y = num_pos_y)
 
-		studentID_label = Label(window, text = course_id[i],fg = "#00293c", font = "Alice 13",  height = 2, width = 13,relief="ridge",borderwidth=2)
-		studentID_label.place(x = 250 , y = num_pos_y)
+		courseID_label = Label(window, text = course_id[i],fg = "#00293c", font = "Alice 13",  height = 2, width = 13,relief="ridge",borderwidth=2)
+		courseID_label.place(x = 250 , y = num_pos_y)
 
 		bg_label = Label(window, height = 2, width = 10,relief="ridge",borderwidth=2)
 		bg_label.place(x=370, y= num_pos_y)
