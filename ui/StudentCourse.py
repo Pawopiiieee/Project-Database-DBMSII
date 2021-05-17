@@ -15,9 +15,9 @@ def student_personal_course(window, return_function):
 
 
 
-	code_label = Label(window,text = "Code", fg = "#00293c", font = "Alice 15", highlightbackground ="#acd0c0", height = 2,width = 12,borderwidth=2, relief="groove")
+	code_label = Label(window,text = "Course ID", fg = "#00293c", font = "Alice 15", highlightbackground ="#acd0c0", height = 2,width = 12,borderwidth=2, relief="groove")
 	code_label.place(x = 35, y = 120)
-	subject_label = Label(window,text = "Subject", fg = "#00293c", font = "Alice 15", highlightbackground ="#acd0c0", height = 2,width = 22,borderwidth=2, relief="groove")
+	subject_label = Label(window,text = "Course Name", fg = "#00293c", font = "Alice 15", highlightbackground ="#acd0c0", height = 2,width = 22,borderwidth=2, relief="groove")
 	subject_label.place(x = 148, y = 120)
 	exam_label = Label(window,text = "Exam", fg = "#00293c", font = "Alice 15", highlightbackground ="#acd0c0", height = 2,width = 12,borderwidth=2, relief="groove")
 	exam_label.place(x = 350, y = 120)
@@ -49,7 +49,7 @@ def student_personal_course(window, return_function):
 	]
 	
 	for exam_date in exam_dates:
-		subject_label = Label(window,text = exam_date, fg = "#00293c", font = "Alice 15", highlightbackground ="#acd0c0", height = 2, width = 12,borderwidth=2, relief="groove")
+		subject_label = Label(window,text = exam_date, fg = "#00293c", font = "Alice 15",  highlightbackground ="#acd0c0", height = 2, width = 12,borderwidth=2, relief="groove")
 		subject_label.place(x = 350, y = id_pos_y)
 		id_pos_y += 32
 

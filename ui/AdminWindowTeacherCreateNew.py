@@ -4,15 +4,15 @@ from ui.Helpers import clear_window, go_back
 from tkinter.messagebox import showinfo,askquestion
 from ui.SignOut import sign_out
 from functools import partial
-import ui.AdminWindowStudentView
+import ui.AdminWindowTeachers
 
-def student_edit(window, return_function):
+def createNew_teacher(window, return_function):
 	clear_window(window)
 	whole_window = Canvas(window, width = 500, height = 700, bg = "#EBEBE9")
 	whole_window.create_rectangle(0, 0, 500, 70, fill="#006386", outline = "#006386")
 	whole_window.pack()
-	header_label = Label(window,text = "Student Overview", fg = "#e6b800", font = "Alice 35", bg ="#006386")
-	header_label.place(x = 140, y = 15)
+	header_label = Label(window,text = "Teacher Overview", fg = "#e6b800", font = "Alice 35", bg ="#006386")
+	header_label.place(x = 120, y = 15)
 
 	lastname_label = Label(window,text = "Lastname", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
 	lastname_label.place(x = 20, y = 100)
@@ -24,29 +24,19 @@ def student_edit(window, return_function):
 	input_firstname = Text(window, height = 1, width = 14, bg = "light yellow", highlightbackground = "#006386", font = "Alice 13")
 	input_firstname.place(x=330, y = 100)
 
-	studentID_label = Label(window,text = "Student ID", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
-	studentID_label.place(x = 20, y = 130)
-	input_studentID = Text(window, height = 1, width = 14, bg = "light yellow", highlightbackground = "#006386", font = "Alice 13")
-	input_studentID.place(x=100, y = 130)
+	teacherID_label = Label(window,text = "Teacher ID", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
+	teacherID_label.place(x = 20, y = 130)
+	input_teacherID = Text(window, height = 1, width = 14, bg = "light yellow", highlightbackground = "#006386", font = "Alice 13")
+	input_teacherID.place(x=100, y = 130)
 
-	startYear = IntVar()
-	start_Year = []
-	for i in range(2010,2022):
-		start_Year.append(i)
-	start_Year_sh = ttk.Combobox(window,textvariable = startYear, width = 5)
-	start_Year_sh["value"] = start_Year
-	start_Year_sh["state"] = "readonly"
-	def start_Year_choose (event):
-		confirm_msg = f"You Selected {start_Year_sh.get()}!"
-		showinfo(title="Result", message= confirm_msg)
-	start_Year_sh.bind("<<ComboboxSelected>>", start_Year_choose)
-	start_Year_sh.place(x = 330, y = 130)
-	startYear_label = Label(window,text = "Start Year", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
-	startYear_label.place(x = 250, y = 130)
+	salary_label = Label(window,text = "Salary", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
+	salary_label.place(x = 250, y = 130)
+	input_salary = Text(window, height = 1, width = 14, bg = "light yellow", highlightbackground = "#006386", font = "Alice 13")
+	input_salary.place(x=330, y = 130)
 
 	selected_study = StringVar()
 	studies = ["abc","def","ghi","jkl","mno"]
-	study_sh = ttk.Combobox(window,textvariable = selected_study,width = 20)
+	study_sh = ttk.Combobox(window,textvariable = selected_study,width = 18)
 	study_sh["value"] = studies
 	study_sh["state"] = "readonly"
 	def study_changed (event):
@@ -58,18 +48,17 @@ def student_edit(window, return_function):
 	study_label.place(x = 20, y = 160)
 
 	selected_counsellor = StringVar()
-	counsellors = ["bob1","bob2","bob3","bob4","bob5"]
-	counsellor_sh = ttk.Combobox(window,textvariable = selected_counsellor,width = 20)
+	counsellors = ["Yes", "No"]
+	counsellor_sh = ttk.Combobox(window,textvariable = selected_counsellor,width = 4)
 	counsellor_sh["value"] = counsellors
 	counsellor_sh["state"] = "readonly"
-
 	def counsellor_changed (event):
 		confirm_msg = f"You Selected {counsellor_sh.get()}!"
 		showinfo(title="Result", message= confirm_msg)
 	counsellor_sh.bind("<<ComboboxSelected>>", counsellor_changed)
-	counsellor_sh.place(x = 170, y = 190)
+	counsellor_sh.place(x = 420, y = 160)
 	studentCounsellor_label = Label(window, text = "Student Counsellor",fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9" )
-	studentCounsellor_label.place(x = 20, y = 190)
+	studentCounsellor_label.place(x = 270, y = 160)
 
 	personal_label = Label(window,text = "Personal Detail", fg = "#e6b800", font = "Alice 18 bold", bg ="#006386")
 	personal_label.place(x = 20, y = 240)
@@ -190,8 +179,8 @@ def student_edit(window, return_function):
 		result = askquestion(title="Confirmation", message= "Do you want to process?")
 		get_lastname = input_lastname.get(1.0, "end-1c")
 		get_firstname = input_firstname.get(1.0, "end-1c")
-		get_studentID = input_studentID.get(1.0, "end-1c")
-		get_startYear = startYear.get()
+		get_studentID = input_teacherID.get(1.0, "end-1c")
+		get_startYear = input_salary.get(1.0, "end-1c")
 		get_study = selected_study.get()
 		get_counsellor = selected_counsellor.get()
 		get_birthYear = birthYear.get()
@@ -212,10 +201,16 @@ def student_edit(window, return_function):
 		print(get_birthYear,get_birthMonth,get_birthDay,get_selected_nationality,get_selected_gender)
 		print(get_houseNo,get_houseNo2,get_street,get_city,get_postal,get_postal2,get_phoneNumber,get_email)
 		if result == "yes":
-			ui.AdminWindowStudentView.student_view(window, return_function) #avoid circular import
+			ui.AdminWindowTeachers.admin_window_teachers(window, return_function) #avoid circular import
 		
+
 	submit_text = Button(window, text = "Submit",font = "Alice 20 bold",fg = "#006386",highlightbackground ="#48C9B0",height = 2, width = 6, command =submit_all,cursor = "pointinghand")
 	submit_text.place(x=200, y = 530)
+
+
+
+
+
 
 	go_back(window, return_function)
 	sign_out(window)

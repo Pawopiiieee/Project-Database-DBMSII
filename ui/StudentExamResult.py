@@ -3,6 +3,8 @@ from tkinter import messagebox
 from PIL import ImageTk, Image  
 from ui.Helpers import clear_window, go_back
 from ui.SignOut import sign_out
+from ui.StudentExamStudyProgress import student_studyProgress
+from functools import partial
 
 
 def student_results(window, return_function): #this is going to show personal data
@@ -60,6 +62,11 @@ def student_results(window, return_function): #this is going to show personal da
 			subject_label = Label(window,text = result, fg = "#2eb82e", font = "Alice 15", bg ="#e6f2ff", height = 2, width = 12,borderwidth=2, relief="groove")
 			subject_label.place(x = 350, y = id_pos_y)
 			id_pos_y += 30
+	
+	exam_label = Button(window,text = "Study Progress", fg = "#2E4053", font = "Alice 15 bold", highlightbackground ="#48C9B0", height = 2,width = 15,borderwidth=2, relief="groove",cursor = "pointinghand",command = partial(student_studyProgress,window,return_function))
+	exam_label.place(x = 170, y = 500)
+
+
 
 
 	go_back(window, return_function)

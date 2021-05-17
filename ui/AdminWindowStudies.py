@@ -4,6 +4,7 @@ from PIL import ImageTk, Image
 from ui.Helpers import clear_window, go_back
 from ui.AdminWindowStudyEdit import study_overview_edit
 from ui.AdminWindowStudyView import study_over_view
+from ui.AdminWindowStudyCreateNew import create_study
 from tkinter.messagebox import askquestion 
 from ui.SignOut import sign_out
 from functools import partial
@@ -17,7 +18,7 @@ def admin_window_studies(window,return_function):
 	header_label = Label(window,text = "An Overview", fg = "#e6b800", font = "Alice 35", bg ="#006386")
 	header_label.place(x = 150, y = 15)
 
-	create_data_text = Button(text = "Create new studies", fg = "#e6b800", font="Alice 12",height = 2, width = 15, cursor = "pointinghand", highlightbackground =  "#006386")
+	create_data_text = Button(text = "Create new studies", fg = "#e6b800", font="Alice 12",height = 2, width = 15, cursor = "pointinghand", highlightbackground =  "#006386", command = partial(create_study,window,return_function))
 	create_data_text.place(x=20, y = 80)
 
 	header_label1 = Label(window, text = "#",fg = "#e6b800", font="Alice 13 bold",height = 2, width = 3,bg ="#006386")

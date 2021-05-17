@@ -4,15 +4,15 @@ from ui.Helpers import clear_window, go_back
 from tkinter.messagebox import showinfo,askquestion
 from ui.SignOut import sign_out
 from functools import partial
-import ui.AdminWindowStudentView
+import ui.AdminWindowStudents
 
-def student_edit(window, return_function):
+def createNew_student(window, return_function):
 	clear_window(window)
 	whole_window = Canvas(window, width = 500, height = 700, bg = "#EBEBE9")
 	whole_window.create_rectangle(0, 0, 500, 70, fill="#006386", outline = "#006386")
 	whole_window.pack()
-	header_label = Label(window,text = "Student Overview", fg = "#e6b800", font = "Alice 35", bg ="#006386")
-	header_label.place(x = 140, y = 15)
+	header_label = Label(window,text = "Create New Student", fg = "#e6b800", font = "Alice 35", bg ="#006386")
+	header_label.place(x = 100, y = 15)
 
 	lastname_label = Label(window,text = "Lastname", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
 	lastname_label.place(x = 20, y = 100)
@@ -212,7 +212,7 @@ def student_edit(window, return_function):
 		print(get_birthYear,get_birthMonth,get_birthDay,get_selected_nationality,get_selected_gender)
 		print(get_houseNo,get_houseNo2,get_street,get_city,get_postal,get_postal2,get_phoneNumber,get_email)
 		if result == "yes":
-			ui.AdminWindowStudentView.student_view(window, return_function) #avoid circular import
+			ui.AdminWindowStudents.admin_window_students(window, return_function) #avoid circular import
 		
 	submit_text = Button(window, text = "Submit",font = "Alice 20 bold",fg = "#006386",highlightbackground ="#48C9B0",height = 2, width = 6, command =submit_all,cursor = "pointinghand")
 	submit_text.place(x=200, y = 530)

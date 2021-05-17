@@ -5,11 +5,14 @@ from ui.AdminWindow import admin_window
 from ui.AdminWindowStudies import admin_window_studies
 from ui.AdminWindowTeachers import admin_window_teachers
 from ui.AdminWindowStudents import admin_window_students
+from ui.SelectRoleWindow import select_role
 
 from ui.TeacherWindow import teacher_window
+
+from ui.TeacherSchedule import schedule
+from ui.TeacherPersonalData import personal_data
+from ui.TeacherCourses import course
 from ui.StudentWindow import student_window
-from ui.TeacherWindowNext import personal_data, course, schedule
-from ui.SelectRoleWindow import select_role
 from ui.StudentPersonalData import student_personal_data
 from ui.StudentCourse import student_personal_course
 from ui.StudentSchedule import student_personal_schedule
@@ -43,7 +46,7 @@ if __name__ == "__main__":
 	master.open_student_result = student_results
 
 	#loading_screen(master)
-	admin_window(master)
+	#admin_window(master)
 	#student_window(master)
-	#teacher_window(master)
+	teacher_window(master)
 	master.mainloop()

@@ -17,7 +17,7 @@ def view_students(window, return_function):
 	title_label = Label(window,text = "Study: ", fg = "#006386", font = "Alice 16 bold", bg ="#EBEBE9")
 	title_label.place(x = 20, y = 100)
 
-	add_student = Button(window,text = "Add + ",fg = "#006386", font = "Alice 12 bold", highlightbackground = "#006386",command = partial(view_students_add, window, return_function))
+	add_student = Button(window,text = "Add + ",fg = "#006386", font = "Alice 12 bold", cursor = "pointinghand",highlightbackground = "#006386",command = partial(view_students_add, window, return_function))
 	add_student.place(x = 400, y = 100)
 
 	student_name_label = Label(window, text = "Lastname   Firstname", fg = "#e6b800", font="Alice 13 bold",height = 1, width = 25,bg ="#006386")

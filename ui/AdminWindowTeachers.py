@@ -3,6 +3,7 @@ from tkinter import messagebox
 from PIL import ImageTk, Image  
 from ui.AdminWindowTeacherView import teacher_view
 from ui.AdminWindowTeacherEdit import teacher_edit
+from ui.AdminWindowTeacherCreateNew import createNew_teacher
 from tkinter.messagebox import askquestion
 from ui.Helpers import clear_window, go_back
 from ui.SignOut import sign_out
@@ -16,7 +17,7 @@ def admin_window_teachers(window,return_function):
 	header_label = Label(window,text = "An Overview", fg = "#e6b800", font = "Alice 35", bg ="#006386")
 	header_label.place(x = 150, y = 15)
 
-	create_data_text = Button(text = "Create new data", fg = "#e6b800", font="Alice 12",height = 2, width = 15, cursor = "pointinghand", highlightbackground =  "#006386")
+	create_data_text = Button(text = "Create new data", fg = "#e6b800", font="Alice 12",height = 2, width = 15, cursor = "pointinghand", highlightbackground =  "#006386", command = partial(createNew_teacher,window,return_function))
 	create_data_text.place(x=20, y = 80)
 
 	header_label1 = Label(window, text = "#",fg = "#e6b800", font="Alice 13 bold",height = 2, width = 3,bg ="#006386")

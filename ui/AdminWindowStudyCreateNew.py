@@ -1,17 +1,18 @@
 from tkinter import *
 from tkinter import ttk
-import ui.AdminWindowStudies #avoid circular import
+import ui.AdminWindowStudies 
 from tkinter.messagebox import askquestion 
 from ui.Helpers import clear_window, go_back
 from ui.SignOut import sign_out
+from functools import partial
 
-def study_overview_edit(window, return_function):
+def create_study(window, return_function):
 	clear_window(window)
 	whole_window = Canvas(window, width = 500, height = 700, bg = "#EBEBE9")
 	whole_window.create_rectangle(0, 0, 500, 70, fill="#006386", outline = "#006386")
 	whole_window.pack()
-	header_label = Label(window,text = "Modify Study", fg = "#e6b800", font = "Alice 35", bg ="#006386")
-	header_label.place(x = 140, y = 15)
+	header_label = Label(window,text = "Create New Study", fg = "#e6b800", font = "Alice 35", bg ="#006386")
+	header_label.place(x = 120, y = 15)
 
 	study_name = Label(window, text = "Title: ",fg = "#006386", font = "Alice 15 bold", bg ="#EBEBE9" )
 	study_name.place(x = 20, y = 93)
@@ -62,9 +63,10 @@ def study_overview_edit(window, return_function):
 		total_y = get_total.get()
 		print(get_text,get_study, lang, num_year,total_y)
 		if result == "yes":
-			ui.AdminWindowStudies.admin_window_studies(window, return_function) #avoid circular import	
+			ui.AdminWindowStudies.admin_window_studies(window, return_function) #avoid circular import
+	
 	submit_text = Button(window, text = "Submit",font = "Alice 20 bold",fg = "#006386",highlightbackground ="#48C9B0",height = 2, width = 6, command =submit_all,cursor = "pointinghand")
-	submit_text.place(x=200, y = 530)
+	submit_text.place(x=200, y = 550)
 
 	go_back(window, return_function)
 	sign_out(window)

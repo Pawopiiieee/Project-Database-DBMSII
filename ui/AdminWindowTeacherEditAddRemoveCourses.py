@@ -6,7 +6,6 @@ from ui.SignOut import sign_out
 import ui.AdminWindowTeacherEditCourses
 from functools import partial
 
-
 def add_remove_courses(window, return_function):
 	clear_window(window)
 	whole_window = Canvas(window, width = 500, height = 700, bg = "#EBEBE9")
@@ -41,7 +40,6 @@ def add_remove_courses(window, return_function):
 		study_ini[i].bind("<<ComboboxSelected>>", partial(study_changed,i))
 		num_pos_y += 70
 
-
 		select_coures = Label(window, text = "Select Course",fg = "#006386", font = "Alice 12 bold", bg ="#EBEBE9" )
 		select_coures.place(x = 20, y = num_pos_y2)
 		selected_course = StringVar()
@@ -64,7 +62,7 @@ def add_remove_courses(window, return_function):
 
 		print(get_study,get_course)
 		if result == "yes":
-			ui.AdminWindowTeacherEditCourses.teacher_edit_courses(window, return_function) #avoid circular import
+			ui.AdminWindowTeacherEditCourses.teacher_edit_courses(window,return_function) #avoid circular import
 		
 
 	submit_text = Button(window, text = "Submit",font = "Alice 20 bold",fg = "#006386",highlightbackground ="#48C9B0",height = 2, width = 6, command =submit_all,cursor = "pointinghand")
