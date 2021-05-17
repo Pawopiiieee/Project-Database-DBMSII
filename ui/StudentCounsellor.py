@@ -3,7 +3,8 @@ from tkinter import messagebox
 from PIL import ImageTk, Image  
 from ui.Helpers import clear_window, go_back
 from ui.SignOut import sign_out
-
+from ui.StudentCounsellorContact import contact_counsellor
+from functools import partial
 
 def student_personal_counsellor(window, return_function): #this is going to show personal data
 	clear_window(window)
@@ -18,19 +19,19 @@ def student_personal_counsellor(window, return_function): #this is going to show
 	fg = "#006386", font = "Alice 13", bg ="#EBEBE9", justify = "left")
 	explanation_label.place(x = 10, y = 90)
 
-	special_circumstances_button = Button(window, text = "Special Circumstances", fg = "#1f3d7a", font="Alice 18",height = 2,width = 20, cursor = "pointinghand")
+	special_circumstances_button = Button(window, text = "Special Circumstances", fg = "#1f3d7a", font="Alice 18",height = 2,width = 20, cursor = "pointinghand",command = partial(contact_counsellor,window,return_function))
 	special_circumstances_button.place(x = 50, y = 150)
 	special_circumstances_label = Label(window,text = "-Family Circumstance \n-Illness \n-Study Delay \n-Registration and Deregistration", 
 	fg = "#006386", font = "Alice 13", bg ="#EBEBE9",justify = "left")
 	special_circumstances_label.place(x= 50, y = 210)
 
-	financial_problem_button = Button(window, text = "Financial Problems", fg = "#1f3d7a", font="Alice 18",height = 2,width = 20, cursor = "pointinghand")
+	financial_problem_button = Button(window, text = "Financial Problems", fg = "#1f3d7a", font="Alice 18",height = 2,width = 20, cursor = "pointinghand",command = partial(contact_counsellor,window,return_function))
 	financial_problem_button.place(x = 50, y = 300)
 	financial_problem_label = Label(window,text = "-Applying for financial compensation in case of study delay \n-When you are not (or no longer) eligible for student finance \nand loans provided by the Dutch government or need advice \nor information about their student finance", 
 	fg = "#006386", font = "Alice 13", bg ="#EBEBE9",justify = "left")
 	financial_problem_label.place(x= 50, y = 360)
 
-	disability_button = Button(window, text = "Study with a Disability or a Chronic Illness", fg = "#1f3d7a", font="Alice 18",height = 2,width = 35, cursor = "pointinghand")
+	disability_button = Button(window, text = "Study with a Disability or a Chronic Illness", fg = "#1f3d7a", font="Alice 18",height = 2,width = 35, cursor = "pointinghand",command = partial(contact_counsellor,window,return_function))
 	disability_button.place(x = 50, y = 455)
 	disability_label = Label(window,text = "-Studying with a disability \n-Applying for educational facilities due to a physical/mental illness ", 
 	fg = "#006386", font = "Alice 13", bg ="#EBEBE9",justify = "left")

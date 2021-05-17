@@ -47,6 +47,6 @@ if __name__ == "__main__":
 
 	#loading_screen(master)
 	#admin_window(master)
-	#student_window(master)
-	teacher_window(master)
+	student_window(master)
+	#teacher_window(master)
 	master.mainloop()
