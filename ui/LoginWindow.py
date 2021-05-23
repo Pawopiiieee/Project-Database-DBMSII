@@ -5,6 +5,9 @@ from cryptography.fernet import Fernet
 import time
 from ui.Helpers import clear_window
 
+from model.Database import *
+from model.Person import *
+
 def logIn_screen(window):
 	clear_window(window)
 	academy_logo = Image.open("images/diemen_logo2.png")
@@ -24,14 +27,15 @@ def logIn_screen(window):
 			print("Username: " + user_name) #its temporary for testing only
 			
 			#this is the ephemeral encryption for testing the login part, when the db is completed, it will be removed.
-			pass_word = bytes(pass_word, "utf-8")  
-			key = b'pRmgMa8T0INjEAfksaq2aafzoZXEuwKI7wDe4c1F8AY='
-			cipher_suite = Fernet(key)
-			ciphered_text = cipher_suite.encrypt(pass_word)
-			print("Password: " ) 
-			print(ciphered_text)
+			#pass_word = bytes(pass_word, "utf-8")  
+			#key = b'pRmgMa8T0INjEAfksaq2aafzoZXEuwKI7wDe4c1F8AY='
+			#cipher_suite = Fernet(key)
+			#ciphered_text = cipher_suite.encrypt(pass_word)
+			#print("Password: " ) 
+			#print(ciphered_text)
 			
-			if user_name == "test":
+			person = Person()
+			if person.loadByUsername(user_name, pass_word):
 				window.open_select_role(window)
 				return
 		messagebox.showerror("Invalid input", "Incorrect Username/Password")
