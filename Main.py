@@ -21,7 +21,7 @@ from ui.StudentExamRegistration import student_exam_registration
 from ui.StudentExamResult import student_results
 
 if __name__ == "__main__":
-	
+
 	master = Tk()
 	master.title("Diemen Academy")
 	master.geometry("500x700")
@@ -45,8 +45,9 @@ if __name__ == "__main__":
 	master.open_exam_registration = student_exam_registration
 	master.open_student_result = student_results
 
+	logIn_screen(master)
 	#loading_screen(master)
 	#admin_window(master)
-	student_window(master)
+	#student_window(master)
 	#teacher_window(master)
 	master.mainloop()
