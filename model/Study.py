@@ -15,7 +15,7 @@ from model.Database import *
 """
 
 class Study:
-    StudyID = None
+    studyID = None
     studyname = None
     description = None
     language = None

@@ -13,69 +13,69 @@ from model.Database import *
 """
 
 class Result:
-    ResultID = None
-    examID    = None
-    studentID = None
-    grade = None
-    passed = None
+	ResultID = None
+	examID    = None
+	studentID = None
+	grade = None
+	passed = None
 
-    def load(self, id):
-        global g_Database
-        if id != -1:
-            rows = g_Database.fetchAll('SELECT * FROM result WHERE ResultID='+str(id))
-        else:
-            rows = g_Database.fetchAll('SELECT * FROM result')
-        if not len(rows):
-            return False # no row found
+	def load(self, id):
+		global g_Database
+		if id != -1:
+			rows = g_Database.fetchAll('SELECT * FROM result WHERE ResultID='+str(id))
+		else:
+			rows = g_Database.fetchAll('SELECT * FROM result')
+		if not len(rows):
+			return False # no row found
 
-        self.ResultID  = rows[0]['ResultID']
-        self.examID    = rows[0]['examID']
-        self.studentID = rows[0]['studentID']
-        self.passed    = rows[0]['passed']
-        self.grade     = rows[0]['grade']
+		self.ResultID  = rows[0]['ResultID']
+		self.examID    = rows[0]['examID']
+		self.studentID = rows[0]['studentID']
+		self.passed    = rows[0]['passed']
+		self.grade     = rows[0]['grade']
 
-        return True
-
-
-    def insert(self):
-        global g_Database
-        self.ResultID = g_Database.executeQuery(
-            """
-            INSERT INTO result
-            (examID, studentID, passed, grade)
-            VALUES (%s, %s, %s, %s)
-            """,
-            (
-                self.examID,
-                self.studentID,
-                self.passed,
-                self.grade
-            )
-        )
-        print("Result ID = " + str(self.ResultID))
+		return True
 
 
-    def update(self):
-        global g_Database
-        g_Database.executeQuery(
-            """
-            UPDATE result
-            SET examID = %s, studentID = %s, passed = %s, grade = %s
-            WHERE ResultID=%s
-            """,
-            (
-                self.examID,
-                self.studentID,
-                self.passed,
-                self.grade,
-                self.ResultID
-            )
-        )
+	def insert(self):
+		global g_Database
+		self.ResultID = g_Database.executeQuery(
+			"""
+			INSERT INTO result
+			(examID, studentID, passed, grade)
+			VALUES (%s, %s, %s, %s)
+			""",
+			(
+				self.examID,
+				self.studentID,
+				self.passed,
+				self.grade
+			)
+		)
+		print("Result ID = " + str(self.ResultID))
 
-    def delete(self):
-        global g_Database
-        g_Database.executeQuery('DELETE FROM result WHERE ResultID = ' + str(self.resultID))
 
-    def __repr__(self):
-        return str(self.__dict__)
+	def update(self):
+		global g_Database
+		g_Database.executeQuery(
+			"""
+			UPDATE result
+			SET examID = %s, studentID = %s, passed = %s, grade = %s
+			WHERE ResultID=%s
+			""",
+			(
+				self.examID,
+				self.studentID,
+				self.passed,
+				self.grade,
+				self.ResultID
+			)
+		)
+
+	def delete(self):
+		global g_Database
+		g_Database.executeQuery('DELETE FROM result WHERE ResultID = ' + str(self.ResultID))
+
+	def __repr__(self):
+		return str(self.__dict__)
 ###

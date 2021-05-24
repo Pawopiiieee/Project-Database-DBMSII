@@ -6,6 +6,8 @@ from ui.Helpers import clear_window, go_back
 from ui.SignOut import sign_out
 from functools import partial
 
+from model.Study import Study
+
 def create_study(window, return_function):
 	clear_window(window)
 	whole_window = Canvas(window, width = 500, height = 700, bg = "#EBEBE9")
@@ -31,7 +33,7 @@ def create_study(window, return_function):
 	selected_language["value"] = ["Dutch","English","German"]
 	selected_language.current(0)
 	selected_language.place(x = 170, y = 420)
-
+	""""
 	start_year = Label(window, text = "Start Year: ",fg = "#006386", font = "Alice 15 bold", bg ="#EBEBE9" )
 	start_year.place(x = 20, y = 450)
 	get_year = IntVar()
@@ -42,9 +44,9 @@ def create_study(window, return_function):
 	started_year["value"] = year
 	started_year.current(0)
 	started_year.place(x = 110, y = 450)
-	
+	"""	
 	amout_year = Label(window, text = "Amount of Years: ",fg = "#006386", font = "Alice 15 bold", bg ="#EBEBE9" )
-	amout_year.place(x = 210, y = 450)
+	amout_year.place(x = 20, y = 450)
 	get_total = IntVar()
 	amount_years = []
 	for i in range(1,11):
@@ -52,17 +54,24 @@ def create_study(window, return_function):
 	total_year = ttk.Combobox(window,textvariable = get_total, width = 7)
 	total_year["value"] = amount_years
 	total_year.current(0)
-	total_year.place(x = 350, y = 450)
+	total_year.place(x = 160, y = 450)
 
 	def submit_all():
 		result = askquestion(title="Confirmation", message= "Do you want to process?")
 		get_text = input_text.get(1.0, "end-1c")
 		get_study = input_study.get(1.0, "end-1c")
 		lang = get_language.get()
-		num_year = get_year.get()
+		#num_year = get_year.get()
 		total_y = get_total.get()
-		print(get_text,get_study, lang, num_year,total_y)
+		print(get_text,get_study, lang,total_y)
 		if result == "yes":
+			study = Study()
+			study.studyname = get_study
+			study.description = get_text
+			study.language = lang
+			study.studyyears = total_y
+			study.insert()
+
 			ui.AdminWindowStudies.admin_window_studies(window, return_function) #avoid circular import
 	
 	submit_text = Button(window, text = "Submit",font = "Alice 20 bold",fg = "#006386",highlightbackground ="#48C9B0",height = 2, width = 6, command =submit_all,cursor = "pointinghand")
