@@ -2,6 +2,10 @@ from model.Database import *
 from model.Person import *
 from model.Student import *
 from model.Result import *
+from model.Exam import *
+from model.Course import *
+from model.Teacher import *
+from model.Study import * 
 import random
 import datetime
 import itertools
@@ -89,22 +93,80 @@ def generatePerson(first_names,last_names,gender,stu_nationality,city,stu):
 #studentID = student.insert()
 
 # Load and modify student object
-student = Student()
-studentID = 2
-student.load(studentID)
-student.personID = 4
-student.update()
-student.delete()
+# student = Student()
+# studentID = 1
+# student.load(studentID)
+# student.personID = 4
+# student.update()
+#student.delete()
 #print(student)
 #print(student.getPerson())
 
 #insert a result
-result = Result()
-result.examID = '301'
-result.passed = 'Y'
-result.grade = 7
-result.ResultID = result.insert()
+# result = Result()
+# result.examID = '301'
+# result.passed = 'Y'
+# result.grade = 7
+# result.ResultID = result.insert()
 
+#load and modify result object
+# result = Result()
+# resultID = 1
+# result.load(resultID)
+# result.grade = 6
+# result.update()
+
+#insert an exam
+# exam = Exam()
+# exam.coursetitle = 'calculus'
+# exam.room = 'ao23'
+# exam.resit = 'Y'
+# exam.date = '2021-08-09'
+# exam.time = '12:00:01'
+# exam.courseID = 2
+# exam.examID = exam.insert()
+
+#load and modify exam object
+# exam = Exam()
+# examID = 2
+# exam.load(examID)
+# exam.room = 'a201'
+# exam.update()
+# exam.delete()
+
+# course = Course()
+# course.coursetitle = 'calculus'
+# course.description = 'This course in calculus is intended to develop practical skills in differential and integral calculus'
+# course.teacherID = 2
+# course.courseID = course.insert()
+
+
+# Insert a teacher
+# teacher = Teacher()
+# teacher.salary = 34689
+# teacher.studycouncerlor = 'Y'
+# teacher.personID = 4
+# teacherID = teacher.insert()
+
+
+# Load and modify teacher object
+
+# teacher = Teacher()
+# teacherID = 1
+# teacher.load(teacherID)
+# teacher.personID = 8
+# teacher.update()
+# print(teacher)
+# print(teacher.getPerson())
+
+
+#insert a study
+study = Study()
+study.studyname = "Mathematical Engineering"
+study.description = "Learn math & code"
+study.language = "EN"
+study.studyyears = 4
+studyID = study.insert()
 
 
 #for i in range (1):

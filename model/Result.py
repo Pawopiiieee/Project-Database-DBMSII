@@ -21,7 +21,10 @@ class Result:
 
     def load(self, id):
         global g_Database
-        rows = g_Database.fetchAll('SELECT * FROM result WHERE ResultID='+str(id))
+        if id != -1:
+            rows = g_Database.fetchAll('SELECT * FROM result WHERE ResultID='+str(id))
+        else:
+            rows = g_Database.fetchAll('SELECT * FROM result')
         if not len(rows):
             return False # no row found
 
@@ -38,12 +41,11 @@ class Result:
         global g_Database
         self.ResultID = g_Database.executeQuery(
             """
-                INSERT INTO result
-                (ResultID, examID, studentID, passed, grade
-                VALUES (%s, %s, %s, %s, %s)
+            INSERT INTO result
+            (examID, studentID, passed, grade)
+            VALUES (%s, %s, %s, %s)
             """,
             (
-                self.ResultID,
                 self.examID,
                 self.studentID,
                 self.passed,
@@ -57,16 +59,16 @@ class Result:
         global g_Database
         g_Database.executeQuery(
             """
-            UPDATE person
-            SET ResultID = %s, examID = %s, studentID = %s, passed = %s, grade = %s
+            UPDATE result
+            SET examID = %s, studentID = %s, passed = %s, grade = %s
             WHERE ResultID=%s
             """,
             (
-                self.resultID,
                 self.examID,
                 self.studentID,
                 self.passed,
                 self.grade,
+                self.ResultID
             )
         )
 
