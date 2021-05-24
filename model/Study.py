@@ -64,7 +64,7 @@ class Study:
                 WHERE courseID=%s
             """,
             (
-                self.coursetitle,
+                self.studyname,
                 self.description,
                 self.language,
                 self.studyID
