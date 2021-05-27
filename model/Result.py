@@ -13,18 +13,20 @@ from model.Database import *
 """
 
 class Result:
-    ResultID = None
+    ResultID  = None
     examID    = None
     studentID = None
-    grade = None
-    passed = None
+    grade     = None
+    passed    = None
 
-    def load(self, id):
+    def load(self, id = -1):
         global g_Database
         if id != -1:
             rows = g_Database.fetchAll('SELECT * FROM result WHERE ResultID='+str(id))
         else:
             rows = g_Database.fetchAll('SELECT * FROM result')
+        for row in rows:
+            print(row)
         if not len(rows):
             return False # no row found
 
@@ -35,6 +37,17 @@ class Result:
         self.grade     = rows[0]['grade']
 
         return True
+
+    def getStudentGrades(self, id = -1):
+        global g_Database
+        if id != -1:
+            rows = g_Database.fetchAll('Select grade from result where studentID = ?'+str(id))
+        else:
+            rows = g_Database.fetchAll('select result.grade, student.StudentID from result inner join student on student.StudentID = result.StudentID')
+        for row in rows:
+            print(row)
+        if not len(rows):
+            return False
 
 
     def insert(self):

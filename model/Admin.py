@@ -3,13 +3,15 @@ from model.Person import *
 
 class Admin:
     adminID = None
-
-    def load(self, id): # by PersonID
+    #option by ID or No ID
+    def load(self, id = -1):
         global g_Database
         if id != -1:
-            rows = g_Database.fetchAll('SELECT * FROM admin inner join person on admin.PersonID = person.PersonID')
+            rows = g_Database.fetchAll('SELECT * FROM admin inner join person on admin.PersonID = person.PersonID where admin.adminID =' +str(id))
         else:
-            rows = g_Database.fetchAll('SELECT * FROM admin')
+            rows = g_Database.fetchAll('SELECT * FROM admin inner join person on admin.PersonID = person.PersonID')
+        for row in rows:
+            print(rows)
         if not len(rows):
             return False
 

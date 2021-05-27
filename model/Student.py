@@ -5,7 +5,7 @@ class Student:
     studentID = None
     startYear = None
     studyCouncelor = None
-
+    #read student data
     def load(self, id = -1):
         global g_Database
         if id != -1:
@@ -22,12 +22,17 @@ class Student:
 
         return True
 
-    def getPerson(self):
-        if self.personID is None:
-            return None
-        person = Person()
-        person.load(self.personID)
-        return person
+    #get full student data: options ID or No ID
+    def getStudent(self, id = -1):
+        global g_Database
+        if id != -1:
+            rows = g_Database.fetchAll('select * from student inner join person on student.personID = person.PersonID where student.StudentID =' +str(id))
+        else:
+            rows = g_Database.fetchAll('select * from student inner join person on student.personID = person.PersonID')
+        for row in rows:
+            print(rows)
+        if not len(rows):
+            return False
 
     def insert(self):
         global g_Database

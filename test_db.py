@@ -5,7 +5,8 @@ from model.Result import *
 from model.Exam import *
 from model.Course import *
 from model.Teacher import *
-from model.Study import * 
+from model.Study import *
+from model.Admin import *
 import random
 import datetime
 import itertools
@@ -92,14 +93,14 @@ def generatePerson(first_names,last_names,gender,stu_nationality,city,stu):
 #student.personID = 7
 #studentID = student.insert()
 
-# Load and modify student object
-# student = Student()
-# studentID = 1
-# student.load(studentID)
-# student.personID = 4
-# student.update()
-#student.delete()
-#print(student)
+# Load and modify student objec
+#student = Student()
+# # studentID = 1
+# # student.load(studentID)
+# # student.personID = 4
+# # student.update()
+# #student.delete()
+# #print(student)
 #print(student.getPerson())
 
 #insert a result
@@ -145,30 +146,68 @@ def generatePerson(first_names,last_names,gender,stu_nationality,city,stu):
 # teacher = Teacher()
 # teacher.salary = 34689
 # teacher.studycouncerlor = 'Y'
-# teacher.personID = 4
+# teacher.personID = 3
 # teacherID = teacher.insert()
 
 
 # Load and modify teacher object
-
+#
 # teacher = Teacher()
-# teacherID = 1
-# teacher.load(teacherID)
-# teacher.personID = 8
+# # teacherID = 1
+# teacher.load(3)
+# teacher.salary = 88888
 # teacher.update()
 # print(teacher)
 # print(teacher.getPerson())
 
 
 #insert a study
-study = Study()
-study.studyname = "Mathematical Engineering"
-study.description = "Learn math & code"
-study.language = "EN"
-study.studyyears = 4
-studyID = study.insert()
+# study = Study()
+# study.studyname = "Mathematical Engineering"
+# study.description = "Learn math & code"
+# study.language = "EN"
+# study.studyyears = 4
+# studyID = study.insert()
+
+# study.load()
+
+# person = Person()
+# person.load()
+# person.load(3)
+# teacher = Teacher()
+# #teacher.load()
+# teacher.getPerson()
+# teacher.getPerson(4)
+# course = Course()
+# course.load()
+# course.load(3)
+# print(person.getStudent())
+
+#print(teacher.getPerson())
 
 
+# teacher = Teacher()
+# teacher.getTeacher()
+# exam = Exam()
+# exam.load()
+# student = Student()
+# student.getStudent()
+# study = Study()
+# study.load(1)
+# study = Study()
+# study.getStudentsEnrolledInStudy()
+# result = Result()
+# result.getStudentGrades()
+# result.load()
+# teacher = Teacher()
+# teacher.getTeacher(2)
+# teacher.getTeacherStudies(3)
+# teacher.getTeacherCourse(2)
+course = Course()
+course.getStudentsInCourse()
+course.studentID = 3
+course.insertIntoStudentCourse()
+# teacher.update()
 #for i in range (1):
 #    boy_name = generatePerson(male_name,last_name,"M", nationality,city_name,study)
 #    boy_name.insert();

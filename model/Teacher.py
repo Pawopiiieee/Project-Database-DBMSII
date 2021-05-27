@@ -18,12 +18,15 @@ class Teacher:
     salary         = None
     studycouncelor = None
 
+    #retrieves teachers, option: ID or No ID
     def load(self, id = -1):
         global g_Database
         if id != -1:
             rows = g_Database.fetchAll('SELECT * FROM teacher WHERE teacherID='+str(id))
         else:
             rows = g_Database.fetchAll('SELECT * FROM teacher')
+        for row in rows:
+            print(row)
         if not len(rows):
             return False # no row found
 
@@ -33,13 +36,56 @@ class Teacher:
         self.personID       = rows[0]['personID']
 
         return True
+    #retrieves full information of teachers from person table: Options: ID or No ID
+    def getTeacher(self, id = -1):
+        global g_Database
+        if id != -1:
+            rows = g_Database.fetchAll('select * from teacher inner join person on teacher.personID = person.PersonID where teacher.teacherID=' +str(id))
+        else:
+            rows = g_Database.fetchAll('select * from teacher inner join person on teacher.personID = person.PersonID')
+        for row in rows:
+            print(rows)
+        if not len(rows):
+            return False
 
-    def getPerson(self):
-        if self.personID is None:
-            return None
-        person = Person()
-        person.load(self.personID)
-        return person
+        self.teacherID = rows[0]['TeacherID']
+        self.salary = rows[0]['salary']
+        self.studycouncelor = rows[0]['studycouncelor']
+        self.personID = rows[0]['personID']
+
+        return True
+
+    def getTeacherStudies(self, id = -1):
+        global g_Database
+        if id != -1:
+            rows = g_Database.fetchAll('select studyname, teacherID from study where teacherID =' +str(id))
+        else:
+            rows = g_Database.fetchAll('select studyname, teacherID from study')
+        for row in rows:
+            print(row)
+        if not len(rows):
+            return False
+
+        self.studyname = rows[0]['studyname']
+        self.teacherID = rows[0]['teacherID']
+
+        return True
+
+    def getTeacherCourse(self, id = -1):
+        global g_Database
+        if id != -1:
+            rows = g_Database.fetchAll('select coursetitle, teacherID from course where teacherID=' +str(id))
+        else:
+            rows = g_Database.fetchAll('select coursetitle, teacherID from course')
+        for row in rows:
+            print(row)
+        if not len(rows):
+            return False;
+
+        self.coursetitle = rows[0]['coursetitle']
+        self.teacherID = rows[0]['teacherID']
+
+        return True
 
     def insert(self):
         global g_Database
@@ -74,7 +120,7 @@ class Teacher:
 
     def delete(self):
         global g_Database
-        g_Database.executeQuery('DELETE FROM teacher WHERE teacherID = ' + str(self.studentID))
+        g_Database.executeQuery('DELETE FROM teacher WHERE teacherID = ' + str(self.teacherID))
 
     def __repr__(self):
         return str(self.__dict__)
