@@ -21,33 +21,33 @@ def view_courses(window, return_function):
 	add_course = Button(window,text = "Add + ",fg = "#006386", font = "Arial 12 bold", cursor = get_handcursor(),highlightbackground = "#006386",command = partial(view_course_add, window, return_function))
 	add_course.place(x = 400, y = 100)
 
-	course_name_label = Label(window, text = "Courses", fg = "#e6b800", font="Arial 10 bold",height = 1, width = 25,bg ="#006386")
-	course_name_label.place(x=20, y = 140)
-	course_id_label = Label(window, text = "Course ID", fg = "#e6b800", font="Arial 10 bold",height = 1, width = 13,bg ="#006386")
-	course_id_label.place(x=250, y = 140)
-	action_label = Label(window, text = "Action",fg = "#e6b800", font="Arial 10 bold",height = 1, width = 10,bg ="#006386")
-	action_label.place(x=370, y = 140)
+	course_name_label = Label(window, text = "Courses", fg = "#e6b800", font="Arial 10 bold",bg ="#006386")
+	course_name_label.place(x=20, y = 140, width=250, height= 30)
+	course_id_label = Label(window, text = "Course ID", fg = "#e6b800", font="Arial 10 bold",bg ="#006386")
+	course_id_label.place(x=270, y = 140, width=100, height= 30)
+	action_label = Label(window, text = "Action",fg = "#e6b800", font="Arial 10 bold",bg ="#006386")
+	action_label.place(x=370, y = 140, width=100, height= 30)
 
 	course_name = ["abc","def","ghi","jkl","mno"]
 	id_student= ["AA12345","AA22345","AA32345","AA42345","AA52345"]
-	num_pos_y = 162
-	y_position = 169
+	num_pos_y = 167
+	y_position = 172
 
 	for i in range (len(course_name)):
 
-		courseName_label = Button(window, text = course_name[i],fg = "#00293c", font = "Arial 13", height = 2, width = 25,relief="ridge",borderwidth=2,cursor = get_handcursor(), command = partial(submit_grade_courses, window, return_function))
-		courseName_label.place(x = 20, y = num_pos_y)
+		courseName_label = Button(window, text = course_name[i],fg = "#00293c", font = "Arial 10", height = 2, width = 25,relief="ridge",borderwidth=2,cursor = get_handcursor(), command = partial(submit_grade_courses, window, return_function))
+		courseName_label.place(x = 20, y = num_pos_y, width=250, height= 30)
 
-		courseID_label = Label(window, text = id_student[i],fg = "#00293c", font = "Arial 13",  height = 2, width = 13,relief="ridge",borderwidth=2)
-		courseID_label.place(x = 250 , y = num_pos_y)
+		courseID_label = Label(window, text = id_student[i],fg = "#00293c", font = "Arial 10",  height = 2, width = 13,relief="ridge",borderwidth=2)
+		courseID_label.place(x = 270 , y = num_pos_y, width=100, height= 30)
 
-		bg_label = Label(window, height = 2, width = 10,relief="ridge",borderwidth=2)
-		bg_label.place(x=370, y= num_pos_y)
+		bg_label = Label(window, relief="ridge",borderwidth=2)
+		bg_label.place(x=370, y= num_pos_y, width=100, height= 30)
 
 		def confirm_deletion():
 			askquestion(title="Confirmation", message= "Do you want to delete this data?")
-		delete_button = Button(window, text = "Delete",font = "Arial 10", fg = "#006386",highlightbackground = "#ffcccc",cursor = get_handcursor(), height = 1,width = 5, relief = FLAT, command = confirm_deletion)
-		delete_button.place(x= 395, y = y_position)
+		delete_button = Button(window, text = "Delete",font = "Arial 10", fg = "#006386",bg = "#ffcccc",highlightbackground = "#ffcccc",cursor = get_handcursor(), height = 1,width = 5, relief = FLAT, command = confirm_deletion)
+		delete_button.place(x= 390, y = y_position, width=70, height= 20)
 
 		num_pos_y += 30
 		y_position += 30

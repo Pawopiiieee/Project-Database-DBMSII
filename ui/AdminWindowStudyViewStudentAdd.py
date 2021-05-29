@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from ui.Helpers import clear_window, go_back
+from ui.Helpers import clear_window, go_back,get_handcursor
 import ui.AdminWindowStudyViewStudents
 from tkinter.messagebox import askquestion,showerror
 from ui.SignOut import sign_out
@@ -36,8 +36,8 @@ def view_students_add(window, return_function):
 				ui.AdminWindowStudyViewStudents.view_students(window, return_function)
 
 
-	submit_text = Button(window, text = "Submit",font = "Arial 20 bold",fg = "#006386",highlightbackground ="#48C9B0",height = 2, width = 6, command =submit_data,cursor = get_handcursor())
-	submit_text.place(x=200, y = 300)
+	submit_text = Button(window, text = "Submit",font = "Arial 14 bold",fg = "#006386",bg="#48C9B0",highlightbackground ="#48C9B0",command =submit_data,cursor = get_handcursor())
+	submit_text.place(x=180, y = 300, width = 150,height = 30)
 
 
 

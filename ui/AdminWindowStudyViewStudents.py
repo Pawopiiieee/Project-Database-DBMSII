@@ -20,12 +20,12 @@ def view_students(window, return_function):
 	add_student = Button(window,text = "Add + ",fg = "#006386", font = "Arial 10 bold", cursor = get_handcursor(),highlightbackground = "#006386",command = partial(view_students_add, window, return_function))
 	add_student.place(x = 400, y = 100)
 
-	student_name_label = Label(window, text = "Lastname   Firstname", fg = "#e6b800", font="Arial 10 bold",height = 1, width = 25,bg ="#006386")
-	student_name_label.place(x=20, y = 140)
+	student_name_label = Label(window, text = "Lastname   Firstname", fg = "#e6b800", font="Arial 10 bold",bg ="#006386")
+	student_name_label.place(x=20, y = 140, width = 250,height = 30)
 	student_id_label = Label(window, text = "Student ID", fg = "#e6b800", font="Arial 10 bold",height = 1, width = 13,bg ="#006386")
-	student_id_label.place(x=250, y = 140)
+	student_id_label.place(x=270, y = 140, width = 100,height = 30)
 	action_label = Label(window, text = "Action",fg = "#e6b800", font="Arial 10 bold",height = 1, width = 10,bg ="#006386")
-	action_label.place(x=370, y = 140)
+	action_label.place(x=370, y = 140, width = 100,height = 30)
 
 	lastname_students = ["abc","def","ghi","jkl","mno"]
 	firstname_students = ["mnb","kgb","cni","kpn","zos"]
@@ -35,14 +35,14 @@ def view_students(window, return_function):
 
 	for i in range (len(lastname_students)):
 
-		lastName_label = Label(window, text = lastname_students[i] + "   "  + firstname_students[i],fg = "#00293c", font = "Arial 13",relief="ridge",borderwidth=2)
+		lastName_label = Label(window, text = lastname_students[i] + "   "  + firstname_students[i],fg = "#00293c", font = "Arial 10",relief="ridge",borderwidth=2)
 		lastName_label.place(x = 20, y = num_pos_y, width = 250,height=30)
 
-		studentID_label = Label(window, text = id_student[i],fg = "#00293c", font = "Arial 13",  height = 2, width = 13,relief="ridge",borderwidth=2)
-		studentID_label.place(x = 250 , y = num_pos_y,width =120,height=30)
+		studentID_label = Label(window, text = id_student[i],fg = "#00293c", font = "Arial 10",relief="ridge",borderwidth=2)
+		studentID_label.place(x = 270 , y = num_pos_y,width =100,height=30)
 
-		bg_label = Label(window, height = 2, width = 14,relief="ridge",borderwidth=2)
-		bg_label.place(x=370, y= num_pos_y,width = 106,height=30)
+		bg_label = Label(window, relief="ridge",borderwidth=2)
+		bg_label.place(x=370, y= num_pos_y,width = 100,height=30)
 
 		def confirm_deletion():
 			askquestion(title="Confirmation", message= "Do you want to delete this data?")
