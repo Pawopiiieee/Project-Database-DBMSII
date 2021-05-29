@@ -4,7 +4,7 @@ from tkinter.messagebox import askquestion
 from ui.AdminWindowStudyViewCourseAdd import view_course_add
 from ui.AdminWindowStudyViewCourseGrade import submit_grade_courses
 from functools import partial
-from ui.Helpers import clear_window, go_back
+from ui.Helpers import clear_window, go_back,get_handcursor
 from ui.SignOut import sign_out
 
 def view_courses(window, return_function):

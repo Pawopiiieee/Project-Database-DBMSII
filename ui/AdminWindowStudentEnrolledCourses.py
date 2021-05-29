@@ -18,14 +18,14 @@ def enrolledCourses_students(window, return_function):
 	Study_label = Label(window, text = "Study",fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
 	Study_label.place(x=20, y = 160)
 
-	Courses_label = Label(window, text = "Course Name",fg = "#e6b800", font="Arial 10 bold",height = 2, width = 25,bg ="#006386")
-	Courses_label.place(x=20, y = 220, height=30)
+	Courses_label = Label(window, text = "Course Name",fg = "#e6b800", font="Arial 10 bold",bg ="#006386")
+	Courses_label.place(x=20, y = 220,width=250, height=30)
 
-	CourseID_label = Label(window, text = "Course ID",fg = "#e6b800", font="Arial 10 bold",height = 2, width = 13,bg ="#006386")
-	CourseID_label.place(x=250, y = 220, height=30)
+	CourseID_label = Label(window, text = "Course ID",fg = "#e6b800", font="Arial 10 bold",bg ="#006386")
+	CourseID_label.place(x=270, y = 220, width=140, height=30)
 
-	grades_label = Label(window, text = "Grade",fg = "#e6b800", font="Arial 10 bold",height = 2, width = 10,bg ="#006386")
-	grades_label.place(x=370, y = 220, height=30)
+	grades_label = Label(window, text = "Grade",fg = "#e6b800", font="Arial 10 bold",bg ="#006386")
+	grades_label.place(x=390, y = 220, width= 90,height=30)
 
 	courses = ["abc","def","ghi","jkl","mno"]
 	course_id= ["AA12345","AA22345","AA32345","AA42345","AA52345"]
@@ -33,14 +33,14 @@ def enrolledCourses_students(window, return_function):
 
 	for i in range (len(courses)):
 
-		course_label = Label(window, text = courses[i],fg = "#00293c", font = "Arial 13", height = 2, width = 25,relief="ridge",borderwidth=2)
-		course_label.place(x = 20, y = num_pos_y, height=30)
+		course_label = Label(window, text = courses[i],fg = "#00293c", font = "Arial 10",relief="ridge",borderwidth=2)
+		course_label.place(x=20, y = num_pos_y,width=250, height=30)
 
-		courseID_label = Label(window, text = course_id[i],fg = "#00293c", font = "Arial 13",  height = 2, width = 13,relief="ridge",borderwidth=2)
-		courseID_label.place(x = 250 , y = num_pos_y, height=30)
+		courseID_label = Label(window, text = course_id[i],fg = "#00293c", font = "Arial 10", relief="ridge",borderwidth=2)
+		courseID_label.place(x=270, y = num_pos_y, width=140, height=30)
 
 		bg_label = Label(window,relief="ridge",borderwidth=2)
-		bg_label.place(x=370, y= num_pos_y,width = 106, height=30)
+		bg_label.place(x=390, y = num_pos_y, width= 90,height=30)
 
 		num_pos_y += 30
 

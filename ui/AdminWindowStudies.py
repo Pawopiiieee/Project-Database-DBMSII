@@ -18,15 +18,15 @@ def admin_window_studies(window,return_function):
 	header_label = Label(window,text = "An Overview", fg = "#e6b800", font = "Arial 30", bg ="#006386")
 	header_label.place(x = 150, y = 15)
 
-	create_data_text = Button(text = "Create new studies", fg = "#e6b800", font="Arial 12", width = 15, cursor = get_handcursor(), highlightbackground =  "#006386", command = partial(create_study,window,return_function))
-	create_data_text.place(x=20, y = 80, height = 40)
+	create_data_text = Button(text = "+ Create new data", fg = "#e6b800", font="Arial 12 bold", bg = "#2F4F4F", width = 15, cursor = get_handcursor(), highlightbackground =  "#006386", command = partial(create_study,window,return_function))
+	create_data_text.place(x=10, y = 80,height = 35)
 
-	header_label1 = Label(window, text = "#",fg = "#e6b800", font="Arial 10 bold", width = 3,bg ="#006386")
-	header_label1.place(x=10, y = 125, height=30)
-	header_label2 = Label(window, text = "Title",fg = "#e6b800", font="Arial 10 bold", width = 15,bg ="#006386")
-	header_label2.place(x=40, y = 125, height=30)
-	header_label3 = Label(window, text = "Description",fg = "#e6b800", font="Arial 10 bold", width = 15,bg ="#006386" )
-	header_label3.place(x=180, y = 125, height=30)
+	header_label1 = Label(window, text = "#",fg = "#e6b800", font="Arial 10 bold",bg ="#006386")
+	header_label1.place(x=10, y = 125, width = 30, height=30)
+	header_label2 = Label(window, text = "Title",fg = "#e6b800", font="Arial 10 bold",bg ="#006386")
+	header_label2.place(x=40, y = 125, width = 140, height=30)
+	header_label3 = Label(window, text = "Description",fg = "#e6b800", font="Arial 10 bold",bg ="#006386" )
+	header_label3.place(x=180, y = 125, width = 140 , height=30)
 	header_label4 = Label(window, text = "Action",fg = "#e6b800", font="Arial 10 bold", bg ="#006386" )
 	header_label4.place(x=320, y = 125, width=165, height=30)
 
@@ -36,14 +36,14 @@ def admin_window_studies(window,return_function):
 	#initial_num = 0
 	y_position = 160
 	for i in range (len(studies)):
-		number_label = Label(window, text = (i + 1),fg = "#00293c", font = "Arial 13", height = 2, width = 3 )
-		number_label.place(x = 10, y = num_pos_y, height=30)
+		number_label = Label(window, text = (i + 1),fg = "#00293c", font = "Arial 10", height = 2, width = 3 )
+		number_label.place(x = 10, y = num_pos_y,width = 30, height=30)
 		#initial_num += 1
-		course_label = Label(window, text = studies[i],fg = "#00293c", font = "Arial 13", height = 2, width = 15)
-		course_label.place(x = 40, y = num_pos_y, height=30)
+		course_label = Label(window, text = studies[i],fg = "#00293c", font = "Arial 10", height = 2, width = 15)
+		course_label.place(x = 40, y = num_pos_y, width = 140, height=30)
 
-		desc_label = Label(window, text = descriptions[i],fg = "#00293c", font = "Arial 13",  height = 2, width = 15)
-		desc_label.place(x = 180 , y = num_pos_y, height=30)
+		desc_label = Label(window, text = descriptions[i],fg = "#00293c", font = "Arial 10",  height = 2, width = 15)
+		desc_label.place(x = 180 , y = num_pos_y, width = 140, height=30)
 
 		bg_label = Label(window)
 		bg_label.place(x=320, y= num_pos_y, width = 165, height=30)
