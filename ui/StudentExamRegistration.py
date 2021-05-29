@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
-from PIL import ImageTk, Image  
+from PIL import ImageTk, Image
 from ui.Helpers import clear_window, go_back
 from ui.SignOut import sign_out
 from functools import partial
@@ -12,7 +12,7 @@ def student_exam_registration(window, return_function): #this is going to show p
 	whole_window = Canvas(window, width = 500, height = 700, bg = "#EBEBE9")
 	whole_window.create_rectangle(0, 0, 500, 70, fill="#006386", outline = "#006386")
 	whole_window.pack()
-	header_label = Label(window,text = "Exam Registraion", fg = "#EBEBE9", font = "Alice 35", bg ="#006386")
+	header_label = Label(window,text = "Exam Registraion", fg = "#EBEBE9", font = "Arial 24", bg ="#006386")
 	header_label.place(x = 120, y = 15)
 
 	exams = [
@@ -34,12 +34,12 @@ def student_exam_registration(window, return_function): #this is going to show p
 	exam_pos_y = 200
 	exam_number = 0
 	for exam in exams:
-		exam_label = Label(window,text = exam, fg = "#00293c", font = "Alice 15", bg = "#e6f2ff", highlightbackground ="#8AA989", height = 2, width = 15)
-		exam_label.place(x = 50, y = exam_pos_y)
-		exam_register = Button(window, text = "Register", fg = "#1f3d7a", font = "Alice 15", height = 2, width = 10, highlightbackground ="#8AA989", command = partial(confirm_register, exam_number))
-		exam_register.place(x = 300, y = exam_pos_y)
+		exam_label = Label(window,text = exam, fg = "#00293c", font = "Arial 12", bg = "#e6f2ff", highlightbackground ="#8AA989", width = 20)
+		exam_label.place(x = 50, y = exam_pos_y,height=30)
+		exam_register = Button(window, text = "Register", fg = "#1f3d7a", font = "Arial 12", width = 10, highlightbackground ="#8AA989", command = partial(confirm_register, exam_number))
+		exam_register.place(x = 300, y = exam_pos_y,height=30)
 		buttons.append(exam_register)
-		exam_pos_y += 50
+		exam_pos_y += 40
 		exam_number += 1
 
 	go_back(window, return_function)

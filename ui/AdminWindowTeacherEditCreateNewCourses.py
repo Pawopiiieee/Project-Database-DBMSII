@@ -1,9 +1,9 @@
 from tkinter import *
-from tkinter import ttk 
+from tkinter import ttk
 from tkinter.messagebox import askquestion,showinfo
-from ui.Helpers import clear_window, go_back
+from ui.Helpers import clear_window, go_back,get_handcursor
 from ui.SignOut import sign_out
-import ui.AdminWindowTeacherEditCourses
+import ui.AdminWindowTeacherAddEditCourses
 from functools import partial
 
 def add_remove_courses(window, return_function):
@@ -11,12 +11,12 @@ def add_remove_courses(window, return_function):
 	whole_window = Canvas(window, width = 500, height = 700, bg = "#EBEBE9")
 	whole_window.create_rectangle(0, 0, 500, 70, fill="#006386", outline = "#006386")
 	whole_window.pack()
-	header_label = Label(window,text = "Teacher Overview", fg = "#e6b800", font = "Alice 35", bg ="#006386")
-	header_label.place(x = 120, y = 15)
+	header_label = Label(window,text = "Teacher Overview", fg = "#e6b800", font = "Arial 30", bg ="#006386")
+	header_label.place(x = 100, y = 15)
 
-	teacherName_label = Label(window, text = "TeacherName", fg = "#006386", font="Alice 13 bold",bg = "#EBEBE9")
+	teacherName_label = Label(window, text = "TeacherName", fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
 	teacherName_label.place(x=20, y = 100)
-	teacher_id_label = Label(window, text = "Teacher ID", fg = "#006386", font="Alice 13 bold",bg = "#EBEBE9")
+	teacher_id_label = Label(window, text = "Teacher ID", fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
 	teacher_id_label.place(x=20, y = 130)
 
 	num_pos_y = 180
@@ -25,7 +25,7 @@ def add_remove_courses(window, return_function):
 	study_ini = []
 	for i in range (5):
 
-		selected_study = Label(window, text = "Select Study",fg = "#006386", font = "Alice 12 bold", bg ="#EBEBE9" )
+		selected_study = Label(window, text = "Select Study",fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9" )
 		selected_study.place(x = 20, y = num_pos_y)
 		selected_study = StringVar()
 		studies = ["abc","def","ghi","jkl","mno"]
@@ -40,7 +40,7 @@ def add_remove_courses(window, return_function):
 		study_ini[i].bind("<<ComboboxSelected>>", partial(study_changed,i))
 		num_pos_y += 70
 
-		select_coures = Label(window, text = "Select Course",fg = "#006386", font = "Alice 12 bold", bg ="#EBEBE9" )
+		select_coures = Label(window, text = "Select Course",fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9" )
 		select_coures.place(x = 20, y = num_pos_y2)
 		selected_course = StringVar()
 		courses = ["abc","def","ghi","jkl","mno"]
@@ -62,10 +62,10 @@ def add_remove_courses(window, return_function):
 
 		print(get_study,get_course)
 		if result == "yes":
-			ui.AdminWindowTeacherEditCourses.teacher_edit_courses(window,return_function) #avoid circular import
-		
+			ui.AdminWindowTeacherAddEditCourses.teacher_edit_courses(window,return_function) #avoid circular import
 
-	submit_text = Button(window, text = "Submit",font = "Alice 20 bold",fg = "#006386",highlightbackground ="#48C9B0",height = 2, width = 6, command =submit_all,cursor = "pointinghand")
+
+	submit_text = Button(window, text = "Submit",font = "Arial 14 bold",fg = "#006386",highlightbackground ="#48C9B0",height =1, width = 6, command =submit_all,cursor = get_handcursor())
 	submit_text.place(x=200, y = 550)
 
 

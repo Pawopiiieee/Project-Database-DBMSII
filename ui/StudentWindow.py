@@ -1,17 +1,17 @@
 from tkinter import *
 from tkinter import messagebox
-from PIL import ImageTk, Image  
-from ui.Helpers import clear_window
+from PIL import ImageTk, Image
+from ui.Helpers import clear_window,get_handcursor
 
 def student_window(window): #this is personal, only individual can see the whole detail
 	clear_window(window)
 	upper_window = Canvas(window, width = 500, height = 700, bg = "#EBEBE9")
 	upper_window.create_rectangle(0, 0, 500, 210, fill="#006386",outline = "#006386")
-	upper_window.create_text(120,30, fill = "#EBEBE9", font = "Alice 28", text = "Hello There!")
+	upper_window.create_text(120,30, fill = "#EBEBE9", font = "Arial 28", text = "Hello There!")
 	profile_logo = ImageTk.PhotoImage(file="images/student-w.png")
 	upper_window.profile_logo = profile_logo
 	upper_window.create_image(250, 80, image=profile_logo)
-	upper_window.create_text(250, 180, fill = "#EBEBE9", font = "Alice 15", 
+	upper_window.create_text(250, 180, fill = "#EBEBE9", font = "Arial 10",
 					text = "First_name Last_name  \nstudent_number@diemen_academy.nl")
 	upper_window.pack()
 
@@ -21,10 +21,10 @@ def student_window(window): #this is personal, only individual can see the whole
 	profile_pic = profile_pic.resize((42,42), Image.ANTIALIAS)
 	personal_image =ImageTk.PhotoImage(profile_pic)
 	personal_image.icon = personal_image
-	personal_data = Button(window, image = personal_image, command = open_student_personal_data, cursor = "pointinghand")
-	personal_data.place(x=20, y = 300)
-	personal_data_text = Button(text = "Personal Data", fg = "#1f3d7a", font="Alice 18",command = open_student_personal_data,height = 2, width = 15, cursor = "pointinghand")
-	personal_data_text.place(x=64, y = 300)
+	personal_data = Button(window, image = personal_image, command = open_student_personal_data, cursor = get_handcursor())
+	personal_data.place(x=20, y = 300, width = 75, height = 75)
+	personal_data_text = Button(text = "Personal Data", fg = "#1f3d7a", font="Arial 14",command = open_student_personal_data,cursor = get_handcursor())
+	personal_data_text.place(x=90, y = 300, width = 135, height = 75)
 
 	def open_course():
 		window.open_student_course(window,student_window)
@@ -32,10 +32,10 @@ def student_window(window): #this is personal, only individual can see the whole
 	course_pic = course_pic.resize((42,42), Image.ANTIALIAS)
 	course_image =ImageTk.PhotoImage(course_pic)
 	course_image.icon = course_image
-	course_image_button = Button(window, image = course_image, command = open_course, cursor = "pointinghand")
-	course_image_button.place(x=20, y = 370)
-	course_text = Button(window, text = "Courses" , fg = "#1f3d7a" , font="Alice 18",height = 2,width = 15, command = open_course, cursor = "pointinghand")
-	course_text.place(x=64, y = 370)
+	course_image_button = Button(window, image = course_image, command = open_course, cursor = get_handcursor())
+	course_image_button.place(x=20, y = 370,width = 75, height = 75)
+	course_text = Button(window, text = "Courses" , fg = "#1f3d7a" , font="Arial 14", command = open_course, cursor = get_handcursor())
+	course_text.place(x=90, y = 370,width = 135, height = 75)
 
 	def open_exam_register():#other teachers can see schedules
 		window.open_exam_registration(window,student_window)
@@ -43,10 +43,10 @@ def student_window(window): #this is personal, only individual can see the whole
 	exam_pic = exam_pic.resize((42,42), Image.ANTIALIAS)
 	exam_image =ImageTk.PhotoImage(exam_pic)
 	exam_image.icon = exam_image
-	exam_image = Button(window, image = exam_image, command = open_exam_register, cursor = "pointinghand")
-	exam_image.place(x=20, y = 440)
-	exam_button = Button(window, text = "Examinations", fg = "#1f3d7a",font="Alice 18",height = 2,width = 15,  command = open_exam_register, cursor = "pointinghand")
-	exam_button.place(x=64, y = 440)
+	exam_image = Button(window, image = exam_image, command = open_exam_register, cursor = get_handcursor())
+	exam_image.place(x=20, y = 440,width = 75, height = 75)
+	exam_button = Button(window, text = "Examinations", fg = "#1f3d7a",font="Arial 14",  command = open_exam_register, cursor = get_handcursor())
+	exam_button.place(x=90, y = 440,width = 135, height = 75)
 
 	def open_counsellor():
 		window.open_student_counsellor(window,student_window)
@@ -54,10 +54,10 @@ def student_window(window): #this is personal, only individual can see the whole
 	counsellor_pic = counsellor_pic.resize((42,42), Image.ANTIALIAS)
 	scounsellor_image =ImageTk.PhotoImage(counsellor_pic)
 	scounsellor_image.icon = scounsellor_image
-	scounsellor_image = Button(window, image = scounsellor_image, command = open_counsellor, cursor = "pointinghand")
-	scounsellor_image.place(x=253, y = 300)
-	scounsellor_button = Button(window, text = "Counsellor",fg = "#1f3d7a", font="Alice 18",height = 2,width = 15, command = open_counsellor, cursor = "pointinghand")
-	scounsellor_button.place(x=297, y = 300)
+	scounsellor_image = Button(window, image = scounsellor_image, command = open_counsellor, cursor = get_handcursor())
+	scounsellor_image.place(x=253, y = 300,width = 75, height = 75)
+	scounsellor_button = Button(window, text = "Counsellor",fg = "#1f3d7a", font="Arial 14",command = open_counsellor, cursor = get_handcursor())
+	scounsellor_button.place(x=320, y = 300,width = 135, height = 75)
 
 	def open_schedule():
 		window.open_student_schedule(window,student_window)
@@ -65,11 +65,11 @@ def student_window(window): #this is personal, only individual can see the whole
 	schedule_pic = schedule_pic.resize((42,42), Image.ANTIALIAS)
 	schedule_image =ImageTk.PhotoImage(schedule_pic)
 	schedule_image.icon = schedule_image
-	schedule_image = Button(window, image = schedule_image, command = open_schedule, cursor = "pointinghand")
-	schedule_image.place(x=253, y = 370)
-	schedule_button = Button(window, text = "Schedule",fg = "#1f3d7a", font="Alice 18",height = 2,width = 15, command = open_schedule, cursor = "pointinghand")
-	schedule_button.place(x=297, y = 370)
-	#schedule_button1 = Button(window, text = "Schedule", highlightbackground = "green",fg = "#191966", font="Courier 18",height = 3,width = 15, command = open_schedule, cursor = "pointinghand")
+	schedule_image = Button(window, image = schedule_image, command = open_schedule, cursor = get_handcursor())
+	schedule_image.place(x=253, y = 370,width = 75, height = 75)
+	schedule_button = Button(window, text = "Schedule",fg = "#1f3d7a", font="Arial 14",command = open_schedule, cursor = get_handcursor())
+	schedule_button.place(x=320, y = 370,width = 135, height = 75)
+	#schedule_button1 = Button(window, text = "Schedule", highlightbackground = "green",fg = "#191966", font="Courier 18",height = 3,width = 15, command = open_schedule, cursor = get_handcursor())
 
 	def open_result():
 		window.open_student_result(window,student_window)
@@ -77,23 +77,23 @@ def student_window(window): #this is personal, only individual can see the whole
 	examResult_pic = examResult_pic.resize((42,42), Image.ANTIALIAS)
 	examResult_image =ImageTk.PhotoImage(examResult_pic)
 	examResult_image.icon = examResult_image
-	examResult_image = Button(window, image = examResult_image, command = open_result, cursor = "pointinghand")
-	examResult_image.place(x=253, y = 440)
-	examResult_button = Button(window, text = "Results",fg = "#1f3d7a", font="Alice 18",height = 2,width = 15, command = open_result, cursor = "pointinghand")
-	examResult_button.place(x=297, y = 440)
+	examResult_image = Button(window, image = examResult_image, command = open_result, cursor = get_handcursor())
+	examResult_image.place(x=253, y = 440,width = 75, height = 75)
+	examResult_button = Button(window, text = "Results",fg = "#1f3d7a", font="Arial 14",height = 2,width = 15, command = open_result, cursor = get_handcursor())
+	examResult_button.place(x=320, y = 440,width = 135, height = 75)
 
 
 """
 	def open_exam():#other teachers can see schedules
 		window.open_teacher_schedule(window,student_window)
-	schedule_button = Label(window, text = "Exam Registration", font="Courier 18",height = 3,width = 30, 
-			highlightbackground ="#1a001a",bd = 2, command = open_exam, cursor = "pointinghand")
+	schedule_button = Label(window, text = "Exam Registration", font="Courier 18",height = 3,width = 30,
+			highlightbackground ="#1a001a",bd = 2, command = open_exam, cursor = get_handcursor())
 	schedule_button.place(x=80, y = 455)
 
 	def open_exam_result():#other teachers can see schedules
 		window.open_teacher_schedule(window,student_window)
-	schedule_button = Label(window, text = "Exam Result", font="Courier 18",height = 3,width = 30, 
-			highlightbackground ="#1a001a",bd = 2, command = open_exam_result, cursor = "pointinghand")
+	schedule_button = Label(window, text = "Exam Result", font="Courier 18",height = 3,width = 30,
+			highlightbackground ="#1a001a",bd = 2, command = open_exam_result, cursor = get_handcursor())
 	schedule_button.place(x=80, y = 455)
 
 """

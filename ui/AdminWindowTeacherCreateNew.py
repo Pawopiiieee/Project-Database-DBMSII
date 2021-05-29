@@ -1,6 +1,6 @@
 from tkinter import *
-from tkinter import ttk 
-from ui.Helpers import clear_window, go_back
+from tkinter import ttk
+from ui.Helpers import clear_window, go_back, get_handcursor
 from tkinter.messagebox import showinfo,askquestion
 from ui.SignOut import sign_out
 from functools import partial
@@ -11,27 +11,27 @@ def createNew_teacher(window, return_function):
 	whole_window = Canvas(window, width = 500, height = 700, bg = "#EBEBE9")
 	whole_window.create_rectangle(0, 0, 500, 70, fill="#006386", outline = "#006386")
 	whole_window.pack()
-	header_label = Label(window,text = "Teacher Overview", fg = "#e6b800", font = "Alice 35", bg ="#006386")
-	header_label.place(x = 120, y = 15)
+	header_label = Label(window,text = "Teacher Overview", fg = "#e6b800", font = "Arial 30", bg ="#006386")
+	header_label.place(x = 110, y = 15)
 
-	lastname_label = Label(window,text = "Lastname", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
+	lastname_label = Label(window,text = "Lastname", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	lastname_label.place(x = 20, y = 100)
-	input_lastname = Text(window, height = 1, width = 14, bg = "light yellow", highlightbackground = "#006386", font = "Alice 13")
+	input_lastname = Text(window, height = 1, width = 14, bg = "light yellow", highlightbackground = "#006386", font = "Arial 13")
 	input_lastname.place(x=100, y = 100)
 
-	firstname_label = Label(window,text = "Firstname", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
+	firstname_label = Label(window,text = "Firstname", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	firstname_label.place(x = 250, y = 100)
-	input_firstname = Text(window, height = 1, width = 14, bg = "light yellow", highlightbackground = "#006386", font = "Alice 13")
+	input_firstname = Text(window, height = 1, width = 14, bg = "light yellow", highlightbackground = "#006386", font = "Arial 13")
 	input_firstname.place(x=330, y = 100)
 
-	teacherID_label = Label(window,text = "Teacher ID", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
+	teacherID_label = Label(window,text = "Teacher ID", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	teacherID_label.place(x = 20, y = 130)
-	input_teacherID = Text(window, height = 1, width = 14, bg = "light yellow", highlightbackground = "#006386", font = "Alice 13")
+	input_teacherID = Text(window, height = 1, width = 14, bg = "light yellow", highlightbackground = "#006386", font = "Arial 13")
 	input_teacherID.place(x=100, y = 130)
 
-	salary_label = Label(window,text = "Salary", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
+	salary_label = Label(window,text = "Salary", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	salary_label.place(x = 250, y = 130)
-	input_salary = Text(window, height = 1, width = 14, bg = "light yellow", highlightbackground = "#006386", font = "Alice 13")
+	input_salary = Text(window, height = 1, width = 14, bg = "light yellow", highlightbackground = "#006386", font = "Arial 13")
 	input_salary.place(x=330, y = 130)
 
 	selected_study = StringVar()
@@ -44,7 +44,7 @@ def createNew_teacher(window, return_function):
 		showinfo(title="Result", message= confirm_msg)
 	study_sh.bind("<<ComboboxSelected>>", study_changed)
 	study_sh.place(x = 80, y = 160)
-	study_label = Label(window,text = "Study", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
+	study_label = Label(window,text = "Study", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	study_label.place(x = 20, y = 160)
 
 	selected_counsellor = StringVar()
@@ -57,10 +57,10 @@ def createNew_teacher(window, return_function):
 		showinfo(title="Result", message= confirm_msg)
 	counsellor_sh.bind("<<ComboboxSelected>>", counsellor_changed)
 	counsellor_sh.place(x = 420, y = 160)
-	studentCounsellor_label = Label(window, text = "Student Counsellor",fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9" )
+	studentCounsellor_label = Label(window, text = "Student Counsellor",fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9" )
 	studentCounsellor_label.place(x = 270, y = 160)
 
-	personal_label = Label(window,text = "Personal Detail", fg = "#e6b800", font = "Alice 18 bold", bg ="#006386")
+	personal_label = Label(window,text = "Personal Detail", fg = "#e6b800", font = "Arial 18 bold", bg ="#006386")
 	personal_label.place(x = 20, y = 240)
 
 	birthYear = IntVar()
@@ -112,7 +112,7 @@ def createNew_teacher(window, return_function):
 		showinfo(title="Result", message= confirm_msg)
 	birth_day_ch.bind("<<ComboboxSelected>>", birth_day_choose)
 	birth_day_ch.place(x = 420, y = 290)
-	dob_label = Label(window,text = "Date of Birth (YY/MM/DD)", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
+	dob_label = Label(window,text = "Date of Birth (YY/MM/DD)", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	dob_label.place(x = 20, y = 290)
 
 	selected_nationality = StringVar()
@@ -125,7 +125,7 @@ def createNew_teacher(window, return_function):
 		showinfo(title="Result", message= confirm_msg)
 	nationality.bind("<<ComboboxSelected>>", nationality_changed)
 	nationality.place(x = 120, y = 320)
-	studentCounsellor_label = Label(window, text = "Nationality",fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9" )
+	studentCounsellor_label = Label(window, text = "Nationality",fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9" )
 	studentCounsellor_label.place(x = 20, y = 320)
 
 	selected_gender = StringVar()
@@ -138,41 +138,41 @@ def createNew_teacher(window, return_function):
 		showinfo(title="Result", message= confirm_msg)
 	gender_sh.bind("<<ComboboxSelected>>", counsellor_changed)
 	gender_sh.place(x = 100, y = 350)
-	studentCounsellor_label = Label(window, text = "Gender",fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9" )
+	studentCounsellor_label = Label(window, text = "Gender",fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9" )
 	studentCounsellor_label.place(x = 20, y = 350)
 
-	houseNo_label = Label(window,text = "House No.", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
+	houseNo_label = Label(window,text = "House No.", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	houseNo_label.place(x = 20, y = 380)
-	input_houseNo = Text(window, height = 1, width = 5, bg = "light yellow", highlightbackground = "#006386", font = "Alice 13")
+	input_houseNo = Text(window, height = 1, width = 5, bg = "light yellow", highlightbackground = "#006386", font = "Arial 13")
 	input_houseNo.place(x=100, y = 380)
-	input_houseNo2 = Text(window, height = 1, width = 3, bg = "light yellow", highlightbackground = "#006386", font = "Alice 13")
+	input_houseNo2 = Text(window, height = 1, width = 3, bg = "light yellow", highlightbackground = "#006386", font = "Arial 13")
 	input_houseNo2.place(x=160, y = 380)
 
-	street_label = Label(window,text = "Street", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
+	street_label = Label(window,text = "Street", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	street_label.place(x = 210, y = 380)
-	input_street = Text(window, height = 1, width = 20, bg = "light yellow", highlightbackground = "#006386", font = "Alice 13")
+	input_street = Text(window, height = 1, width = 20, bg = "light yellow", highlightbackground = "#006386", font = "Arial 13")
 	input_street.place(x=270, y = 380)
 
-	city_label = Label(window,text = "City", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
+	city_label = Label(window,text = "City", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	city_label.place(x = 20, y = 410)
-	input_city = Text(window, height = 1, width = 20, bg = "light yellow", highlightbackground = "#006386", font = "Alice 13")
+	input_city = Text(window, height = 1, width = 20, bg = "light yellow", highlightbackground = "#006386", font = "Arial 13")
 	input_city.place(x=70, y = 410)
 
-	postal_label = Label(window,text = "Postal Code", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
+	postal_label = Label(window,text = "Postal Code", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	postal_label.place(x = 270, y = 410)
-	input_postal = Text(window, height = 1, width = 6, bg = "light yellow", highlightbackground = "#006386", font = "Alice 13")
+	input_postal = Text(window, height = 1, width = 6, bg = "light yellow", highlightbackground = "#006386", font = "Arial 13")
 	input_postal.place(x=360, y = 410)
-	input_postal2 = Text(window, height = 1, width = 3, bg = "light yellow", highlightbackground = "#006386", font = "Alice 13")
+	input_postal2 = Text(window, height = 1, width = 3, bg = "light yellow", highlightbackground = "#006386", font = "Arial 13")
 	input_postal2.place(x=430, y = 410)
 
-	phoneNumber_label = Label(window,text = "Phone Number", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
+	phoneNumber_label = Label(window,text = "Phone Number", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	phoneNumber_label.place(x = 20, y = 440)
-	input_phoneNumber = Text(window, height = 1, width = 15, bg = "light yellow", highlightbackground = "#006386", font = "Alice 13")
+	input_phoneNumber = Text(window, height = 1, width = 15, bg = "light yellow", highlightbackground = "#006386", font = "Arial 13")
 	input_phoneNumber.place(x=140, y = 440)
 
-	email_label = Label(window,text = "Email", fg = "#006386", font = "Alice 14 bold", bg ="#EBEBE9")
+	email_label = Label(window,text = "Email", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	email_label.place(x = 20, y = 470)
-	input_email = Text(window, height = 1, width = 15, bg = "light yellow", highlightbackground = "#006386", font = "Alice 13")
+	input_email = Text(window, height = 1, width = 15, bg = "light yellow", highlightbackground = "#006386", font = "Arial 13")
 	input_email.place(x=80, y = 470)
 
 	def submit_all():
@@ -196,20 +196,16 @@ def createNew_teacher(window, return_function):
 		get_postal2 = input_postal2.get(1.0, "end-1c")
 		get_phoneNumber = input_phoneNumber.get(1.0, "end-1c")
 		get_email = input_email.get(1.0, "end-1c")
-	
+
 		print(get_firstname,get_lastname, get_studentID, get_startYear,get_study,get_counsellor)
 		print(get_birthYear,get_birthMonth,get_birthDay,get_selected_nationality,get_selected_gender)
 		print(get_houseNo,get_houseNo2,get_street,get_city,get_postal,get_postal2,get_phoneNumber,get_email)
 		if result == "yes":
 			ui.AdminWindowTeachers.admin_window_teachers(window, return_function) #avoid circular import
-		
 
-	submit_text = Button(window, text = "Submit",font = "Alice 20 bold",fg = "#006386",highlightbackground ="#48C9B0",height = 2, width = 6, command =submit_all,cursor = "pointinghand")
+
+	submit_text = Button(window, text = "Submit",font = "Arial 14 bold",fg = "#006386",highlightbackground ="#48C9B0",height = 2, width = 6, command =submit_all,cursor = get_handcursor())
 	submit_text.place(x=200, y = 530)
-
-
-
-
 
 
 	go_back(window, return_function)
