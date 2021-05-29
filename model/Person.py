@@ -1,7 +1,6 @@
 from model.Database import *
 
 
-
 class Person: # Table person
     personID = None
     userName = None
@@ -17,6 +16,7 @@ class Person: # Table person
     city = None
     phone = None
     email = None
+    teacherID = None
 
     def loadByUsername(self, username, password):
         global g_Database
@@ -26,11 +26,18 @@ class Person: # Table person
         self.load(rows[0]['PersonID'])
         return True
 
-    def load(self, id): # by PersonID
+    def load(self, id = -1): # by PersonID
         global g_Database
-        rows = g_Database.fetchAll('SELECT * FROM person WHERE PersonID='+str(id))
+        if id != -1:
+            rows = g_Database.fetchAll('SELECT * FROM person WHERE personID='+str(id))
+        else:
+            rows = g_Database.fetchAll('SELECT * FROM person')
+        for row in rows:
+            print(row)
         if not len(rows):
             return False # no row found
+
+
 
         self.personID     = rows[0]['PersonID']
         self.userName     = rows[0]['username']
@@ -46,6 +53,7 @@ class Person: # Table person
         self.city         = rows[0]['city']
         self.phone        = rows[0]['phone']
         self.email        = rows[0]['email']
+        self.teacherID    = rows[0]['teacherID']
 
         return True
 
@@ -82,7 +90,7 @@ class Person: # Table person
         g_Database.executeQuery(
             """
             UPDATE person
-            SET userName = %s, userPass = %s, fname = %s, lname = %s, birthday = %s, nationality = %s, gender = %s, streetname = %s, streetnumber = %s, postalCode = %s, city = %s, phone = %s, email = %s
+            SET userName = %s, userPass = %s, fname = %s, lname = %s, birthday = %s, nationality = %s, gender = %s, streetname = %s, streetnumber = %s, postalCode = %s, city = %s, phone = %s, email = %s, teacherID = %s
             WHERE PersonID=%s
             """,
             (
@@ -99,7 +107,8 @@ class Person: # Table person
                 self.city,
                 self.phone,
                 self.email,
-                self.personID
+                self.personID,
+                self.teacherID
             )
         )
 

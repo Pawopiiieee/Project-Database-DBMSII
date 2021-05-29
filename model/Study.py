@@ -18,15 +18,18 @@ class Study:
     studyID = None
     studyname = None
     description = None
-    language = None
-    studyyears = None
+    language    = None
+    studyyears  = None
 
+    #gets all studies options: ID or No ID
     def load(self, id = -1):
         global g_Database
         if id != -1:
             rows = g_Database.fetchAll('SELECT * FROM study WHERE StudyID='+str(id))
         else:
             rows = g_Database.fetchAll('SELECT * FROM study')
+        for row in rows:
+            print(row)
         if not len(rows):
             return False # no row found
 
@@ -37,6 +40,19 @@ class Study:
         self.studyyears   = rows[0]['studyyears']
 
         return True
+
+        #@todo debug where clause!!!!!
+    def getStudentsEnrolledInStudy(self):
+        global g_Database
+        rows = g_Database.fetchAll('select student.StudentID, studyname from student inner join study on student.enrolled = study.studyname')
+        for row in rows:
+            print(row)
+        if not len(rows):
+            return False
+
+        self.studyname = rows[0]['studyname']
+        return True
+
 
     def insert(self):
         global g_Database

@@ -16,13 +16,13 @@ from model.Database import *
 """
 
 class Exam:
-    ExamID = None
+    ExamID      = None
     coursetitle = None
-    room = None
-    resit = None
-    date = None
-    time = None
-    courseID = None
+    room        = None
+    resit       = None
+    date        = None
+    time        = None
+    courseID    = None
 
     def load(self, id = -1):
         global g_Database
@@ -30,16 +30,18 @@ class Exam:
             rows = g_Database.fetchAll('SELECT * FROM exam WHERE ExamID='+str(id))
         else:
             rows = g_Database.fetchAll('SELECT * FROM exam')
+        for row in rows:
+            print(row)
         if not len(rows):
             return False # no row found
 
-        self.examID    = rows[0]['ExamID']
+        self.examID         = rows[0]['ExamID']
         self.coursetitle    = rows[0]['coursetitle']
-        self.room = rows[0]['room']
-        self.resit    = rows[0]['resit']
-        self.date     = rows[0]['date']
-        self.time = rows[0]['time']
-        self.courseID = rows[0]['courseID']
+        self.room           = rows[0]['room']
+        self.resit          = rows[0]['resit']
+        self.date           = rows[0]['date']
+        self.time           = rows[0]['time']
+        self.courseID       = rows[0]['courseID']
 
         return True
 

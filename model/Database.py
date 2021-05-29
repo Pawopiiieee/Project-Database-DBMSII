@@ -19,8 +19,8 @@ class Database:
         # try to connect, or return mysql error, if successfull will return connection object
         try:
             self.connection = mysql.connector.connect(
-                host = HOSTNAME,
-                user = USERNAME,
+                host     = HOSTNAME,
+                user     = USERNAME,
                 password = PASSWORD,
                 database = DB_NAME
             )
@@ -94,38 +94,48 @@ class Database:
             email VARCHAR(100),
             studentID INT,
             adminID INT,
-            teacherID INT);"""
+            teacherID INT
+            foreign key (studentID) references student(StudentID),
+            foreign key (teacherID) references teacher(TeacherID),
+            foreign key (adminID) references admin(adminID));"""
 
         create_teacher_table = """
         CREATE TABLE teacher (
             TeacherID INT PRIMARY KEY AUTO_INCREMENT,
             salary INT,
             studycouncelor ENUM('Y', 'N'),
-            personID INT);"""
+            personID INT
+            foreign key (personID) references person(PersonID));"""
 
         create_course_table = """
         CREATE TABLE course (
             CourseID INT PRIMARY KEY AUTO_INCREMENT,
-            coursename VARCHAR(60),
+            coursetitle VARCHAR(60),
             description VARCHAR(120),
-            teacherID INT);"""
+            teacherID INT
+            foreign key (teacherID) references teacher(TeacherID));"""
 
         create_student_table = """
         CREATE TABLE student (
             StudentID INT PRIMARY KEY AUTO_INCREMENT,
             start_year DATE,
             studycouncelor ENUM('Y', 'N'),
-            personID INT);"""
+            enrolled VARCHAR(256)
+            personID INT
+            foreign key (personID) references person(PersonID),
+            foreign key (enrolled) references study(studyname));"""
 
         create_study_table = """
         CREATE TABLE study(
             StudyID INT PRIMARY KEY AUTO_INCREMENT,
-            studyname VARCHAR(60),
+            studyname VARCHAR(60 UNIQUE),
             description VARCHAR(60),
             language VARCHAR(60),
             studyyears INT,
             teacherID INT,
-            studentID INT);"""
+            studentID INT
+            foreign key (teacherID) references teacher(TeacherID)
+            foreign key (studentID) references student(StudentID));"""
 
         create_exam_table = """
         CREATE TABLE exam (
@@ -135,19 +145,30 @@ class Database:
             resit ENUM('Y', 'N'),
             date DATE,
             time TIME,
-            courseID INT);"""
+            courseID INT
+            foreign key (courseID) references course(courseID));"""
 
         create_result_table = """
         CREATE TABLE result (
             ResultID INT PRIMARY KEY AUTO_INCREMENT,
             examID INT,
             studentID INT,
-            pass ENUM('Y', 'N'));"""
+            pass ENUM('Y', 'N')
+            grade int);"""
 
         create_admin_table = """
         CREATE TABLE admin (
-            ID INT PRIMARY KEY AUTO_INCREMENT
+            adminID INT PRIMARY KEY,
+            personID INT,
+            foreign key (personID) references person(PersonID)
         );"""
+
+        create_studentcourse_table = """
+        CREATE TABLE studentcourse (
+        studentID INT PRIMARY KEY,
+        courseID INT,
+        foreign key (courseID) references course(courseID) on delete cascade,
+        foreign key (studentID) references student(StudentID) on delete cascade);"""
 
         self.executeQuery(create_university_table)
         self.executeQuery(create_teacher_table)
@@ -157,6 +178,7 @@ class Database:
         self.executeQuery(create_exam_table)
         self.executeQuery(create_result_table)
         self.executeQuery(create_admin_table)
+        self.executeQuery(create_studentcourse_table)
 
 
 # Global database object
