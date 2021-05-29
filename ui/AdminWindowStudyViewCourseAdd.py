@@ -16,28 +16,31 @@ def view_course_add(window, return_function):
 	title_label = Label(window,text = "Study: ", fg = "#006386", font = "Arial 16 bold", bg ="#EBEBE9")
 	title_label.place(x = 20, y = 100)
 
+	course_title = Label(window, text = "Course Title",fg = "#006386", font = "Arial 10  bold", bg ="#EBEBE9" )
+	course_title.place(x = 20, y = 130)
+	input_title = Text(window, height = 1, width = 25, bg = "light yellow", highlightbackground = "#006386", font = "Arial 17")
+	input_title.place(x=120, y = 130)
 
-	course_id = Label(window, text = "Course ID",fg = "#006386", font = "Arial 10  bold", bg ="#EBEBE9" )
-	course_id.place(x = 20, y = 130)
-	input_id = Text(window, height = 1, width = 25, bg = "light yellow", highlightbackground = "#006386", font = "Arial 17")
-	input_id.place(x=120, y = 130)
+	show_desc = Label(window, text = "Description",fg = "#006386", font = "Arial 12 bold", bg ="#EBEBE9" )
+	show_desc.place(x = 20, y = 220)
+	input_text = Text(window,  bg = "light yellow", highlightbackground = "#006386", font = "Arial 10")
+	#input_text.insert(END,study.description)
+	input_text.place(x=125, y = 160,height = 220, width = 350)
 
 	id_student= [12345,22345,32345,42345,52345,1129,992776]
 
 	def submit_data():
-		get_id = input_id.get(1.0, "end-1c")
+		get_title = input_title.get(1.0, "end-1c")
+		get_desc = input_text.get(1.0, "end-1c")
 
-		if int(get_id) not in id_student:
-			showerror(title="Error", message= "Course ID not found!",icon ="error")
-		else:
-			result = askquestion(title="Confirmation", message= "Do you want to proceed?")
-			if result == "yes":
-				print (get_id)
-				ui.AdminWindowStudyViewCourses.view_courses(window, return_function)
+		result = askquestion(title="Confirmation", message= "Do you want to proceed?")
+		if result == "yes":
+			print (get_title,get_desc)
+			ui.AdminWindowStudyViewCourses.view_courses(window, return_function)
 
 
 	submit_text = Button(window, text = "Submit",font = "Arial 20 bold",fg = "#006386",highlightbackground ="#48C9B0",height = 2, width = 6, command =submit_data,cursor = get_handcursor())
-	submit_text.place(x=200, y = 300)
+	submit_text.place(x=200, y = 350)
 
 
 	go_back(window, return_function)
