@@ -9,6 +9,8 @@ from tkinter.messagebox import askquestion
 from ui.SignOut import sign_out
 from functools import partial
 
+from model import Study
+
 
 def admin_window_studies(window,return_function):
 	clear_window(window)
@@ -30,8 +32,7 @@ def admin_window_studies(window,return_function):
 	header_label4 = Label(window, text = "Action",fg = "#e6b800", font="Arial 10 bold", bg ="#006386" )
 	header_label4.place(x=320, y = 125, width=165, height=30)
 
-	studies = ["abc","def","ghi","jkl","mno"]
-	descriptions = ["abcdefghi","abcdefghi","abcdefghi","abcdefghi","abcdefghi"]
+	studies = Study.load_all()
 	num_pos_y = 158
 	#initial_num = 0
 	y_position = 160
@@ -39,20 +40,20 @@ def admin_window_studies(window,return_function):
 		number_label = Label(window, text = (i + 1),fg = "#00293c", font = "Arial 10", height = 2, width = 3 )
 		number_label.place(x = 10, y = num_pos_y,width = 30, height=30)
 		#initial_num += 1
-		course_label = Label(window, text = studies[i],fg = "#00293c", font = "Arial 10", height = 2, width = 15)
+		course_label = Label(window, text = studies[i].studyname,fg = "#00293c", font = "Arial 10", height = 2, width = 15)
 		course_label.place(x = 40, y = num_pos_y, width = 140, height=30)
 
-		desc_label = Label(window, text = descriptions[i],fg = "#00293c", font = "Arial 10",  height = 2, width = 15)
+		desc_label = Label(window, text = studies[i].description,fg = "#00293c", font = "Arial 10",  height = 2, width = 15)
 		desc_label.place(x = 180 , y = num_pos_y, width = 140, height=30)
 
 		bg_label = Label(window)
 		bg_label.place(x=320, y= num_pos_y, width = 165, height=30)
 		num_pos_y += 30
 
-		view_button = Button(window, text = "View",font = "Arial 10", fg = "#006386", bg = "#ccd9ff",highlightbackground = "#ccd9ff",cursor = get_handcursor(), width = 4, relief = FLAT,command = partial(study_over_view, window, return_function))
+		view_button = Button(window, text = "View",font = "Arial 10", fg = "#006386", bg = "#ccd9ff",highlightbackground = "#ccd9ff",cursor = get_handcursor(), width = 4, relief = FLAT,command = partial(study_over_view, window, return_function, studies[i]))
 		view_button.place(x= 330, y = y_position, height=26)
 
-		edit_button = Button(window, text = "Edit",font = "Arial 10", fg = "#006386",bg = "#fff2cc",highlightbackground = "#fff2cc",cursor = get_handcursor(), width = 4, relief = FLAT,command = partial(study_overview_edit, window, return_function))
+		edit_button = Button(window, text = "Edit",font = "Arial 10", fg = "#006386",bg = "#fff2cc",highlightbackground = "#fff2cc",cursor = get_handcursor(), width = 4, relief = FLAT,command = partial(study_overview_edit, window, return_function, studies[i]))
 		edit_button.place(x= 380, y = y_position, height=26)
 
 		def confirm_deletion():

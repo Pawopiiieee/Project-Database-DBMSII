@@ -35,15 +35,14 @@ def admin_window_students(window,return_function):
 	#initial_num = 0
 	y_position = 160
 	for i in range (len(last_name_students)):
-		number_label = Label(window, text = (i + 1),fg = "#00293c", font = "Arial 13", height = 2, width = 3 )
-		number_label.place(x = 10, y = num_pos_y, height=30)
+		number_label = Label(window, text = (i + 1),fg = "#00293c", font = "Arial 13")
+		number_label.place(x = 10, y = num_pos_y,width=30, height=30)
 		#initial_num += 1
-		last_name_label = Label(window, text = last_name_students[i],fg = "#00293c", font = "Arial 13", height = 2, width = 15)
-		last_name_label.place(x = 40, y = num_pos_y, height=30)
+		last_name_label = Label(window, text = last_name_students[i],fg = "#00293c", font = "Arial 13")
+		last_name_label.place(x = 40, y = num_pos_y,width=150, height=30)
 
-		first_name_label = Label(window, text = first_name[i],fg = "#00293c", font = "Arial 13",  height = 2, width = 15)
-		first_name_label.place(x = 180 , y = num_pos_y, height=30)
-
+		first_name_label = Label(window, text = first_name[i],fg = "#00293c", font = "Arial 13")
+		first_name_label.place(x = 180 , y = num_pos_y,width=150, height=30)
 		bg_label = Label(window)
 		bg_label.place(x=320, y= num_pos_y, width = 165, height=30)
 		num_pos_y += 30

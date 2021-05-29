@@ -16,14 +16,14 @@ def teaching_courses(window, return_function):
 	teacher_id_label = Label(window, text = "Teacher ID", fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
 	teacher_id_label.place(x=20, y = 130)
 
-	courses_label = Label(window, text = "Course Name",fg = "#e6b800", font="Arial 10 bold", width = 20,bg ="#006386")
-	courses_label.place(x=45, y = 170,height=30)
+	courses_label = Label(window, text = "Course Name",fg = "#e6b800", font="Arial 10 bold", bg ="#006386")
+	courses_label.place(x=20, y = 170,width = 180, height=30)
 
-	courseID_label = Label(window, text = "Course ID",fg = "#e6b800", font="Arial 10 bold", width = 12,bg ="#006386")
-	courseID_label.place(x=200, y = 170,height=30)
+	courseID_label = Label(window, text = "Course ID",fg = "#e6b800", font="Arial 10 bold",bg ="#006386")
+	courseID_label.place(x=200, y = 170,width = 100,height=30)
 
-	study_label = Label(window, text = "Study",fg = "#e6b800", font="Arial 10 bold", width = 20,bg ="#006386")
-	study_label.place(x=300,  y = 170,height=30)
+	study_label = Label(window, text = "Study",fg = "#e6b800", font="Arial 10 bold",bg ="#006386")
+	study_label.place(x=300,  y = 170,width = 180,height=30)
 
 	courses = ["abc","def","ghi","jkl","mno"]
 	course_id= ["AA12345","AA22345","AA32345","AA42345","AA52345"]
@@ -32,14 +32,14 @@ def teaching_courses(window, return_function):
 
 	for i in range (len(courses)):
 
-		course_lab = Label(window, text = courses[i],fg = "#00293c", font = "Arial 10", height = 2, width = 20,relief="ridge",borderwidth=2)
-		course_lab.place(x = 45, y = num_pos_y,height=30)
+		course_lab = Label(window, text = courses[i],fg = "#00293c", font = "Arial 10",relief="ridge",borderwidth=2)
+		course_lab.place(x = 20, y = num_pos_y,width = 180,height=30)
 
-		courseID_lab = Label(window, text = course_id[i],fg = "#00293c", font = "Arial 10",  height = 2, width = 12,relief="ridge",borderwidth=2)
-		courseID_lab.place(x = 200 , y = num_pos_y,height=30)
+		courseID_lab = Label(window, text = course_id[i],fg = "#00293c", font = "Arial 10",relief="ridge",borderwidth=2)
+		courseID_lab.place(x = 200 , y = num_pos_y,width = 100,height=30)
 
-		study_lab = Label(window, text = studies[i],fg = "#00293c", font = "Arial 10",  height = 2, width = 20,relief="ridge",borderwidth=2)
-		study_lab.place(x = 300 , y = num_pos_y,height=30)
+		study_lab = Label(window, text = studies[i],fg = "#00293c", font = "Arial 10",relief="ridge",borderwidth=2)
+		study_lab.place(x = 300 , y = num_pos_y,width = 180,height=30)
 
 		num_pos_y += 30
 

@@ -14,6 +14,17 @@ from model.Database import *
 +-------------+-------------+------+-----+---------+----------------+
 """
 
+def load_all():
+    global g_Database
+    rows = g_Database.fetchAll('SELECT * FROM study')
+    studies = []
+    for row in rows:
+        study = Study()
+        study.read_row(row)
+        studies.append(study)
+
+    return studies
+
 class Study:
     studyID = None
     studyname = None
@@ -21,25 +32,26 @@ class Study:
     language    = None
     studyyears  = None
 
+    #create static method
+    load_all = staticmethod(load_all)
+
     #gets all studies options: ID or No ID
-    def load(self, id = -1):
+    def load(self, id):
         global g_Database
-        if id != -1:
-            rows = g_Database.fetchAll('SELECT * FROM study WHERE StudyID='+str(id))
-        else:
-            rows = g_Database.fetchAll('SELECT * FROM study')
-        for row in rows:
-            print(row)
+        rows = g_Database.fetchAll('SELECT * FROM study WHERE StudyID='+str(id))
+        
         if not len(rows):
             return False # no row found
 
-        self.studyID      = rows[0]['StudyID']
-        self.studyname    = rows[0]['studyname']
-        self.description  = rows[0]['description']
-        self.language     = rows[0]['language']
-        self.studyyears   = rows[0]['studyyears']
-
+        self.read_row(rows[0])
         return True
+
+    def read_row(self, row):
+        self.studyID      = row['StudyID']
+        self.studyname    = row['studyname']
+        self.description  = row['description']
+        self.language     = row['language']
+        self.studyyears   = row['studyyears']
 
         #@todo debug where clause!!!!!
     def getStudentsEnrolledInStudy(self):
@@ -76,13 +88,14 @@ class Study:
         g_Database.executeQuery(
             """
                 UPDATE study
-                SET studyname = %s, description = %s, language = %s
-                WHERE courseID=%s
+                SET studyname = %s, description = %s, language = %s, studyyears = %s
+                WHERE studyID=%s
             """,
             (
                 self.studyname,
                 self.description,
                 self.language,
+                self.studyyears,
                 self.studyID
             )
         )
