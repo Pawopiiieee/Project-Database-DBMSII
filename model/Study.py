@@ -1,4 +1,6 @@
 from model.Database import *
+from model.Course import Course
+import model.Student 
 
 """
 +-------------+-------------+------+-----+---------+----------------+
@@ -46,6 +48,17 @@ class Study:
         self.read_row(rows[0])
         return True
 
+    #gets all studies options: ID or No ID
+    def loadByName(self, name):
+        global g_Database
+        rows = g_Database.fetchAll('SELECT * FROM study WHERE studyname="'+str(name)+'"')
+        
+        if not len(rows):
+            return False # no row found
+
+        self.read_row(rows[0])
+        return True
+
     def read_row(self, row):
         self.studyID      = row['StudyID']
         self.studyname    = row['studyname']
@@ -53,18 +66,29 @@ class Study:
         self.language     = row['language']
         self.studyyears   = row['studyyears']
 
-        #@todo debug where clause!!!!!
+    def getCoursesInStudy(self):
+        global g_Database
+        rows = g_Database.fetchAll('select * from course where studyID = ' + str(self.studyID))
+
+        courses = []
+        for row in rows:
+            course = Course()
+            course.read_row(row)
+            courses.append(course)
+
+        return courses
+
     def getStudentsEnrolledInStudy(self):
         global g_Database
-        rows = g_Database.fetchAll('select student.StudentID, studyname from student inner join study on student.enrolled = study.studyname')
+        rows = g_Database.fetchAll('select * from student where enrolled = "' + str(self.studyname) + '"')
+        
+        students = []
         for row in rows:
-            print(row)
-        if not len(rows):
-            return False
+            student = model.Student.Student()
+            student.read_row(row)
+            students.append(student)
 
-        self.studyname = rows[0]['studyname']
-        return True
-
+        return students
 
     def insert(self):
         global g_Database

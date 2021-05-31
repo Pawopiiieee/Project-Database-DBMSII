@@ -2,8 +2,9 @@ from tkinter import *
 from tkinter import messagebox
 from PIL import ImageTk, Image
 from ui.Helpers import clear_window,get_handcursor
+from functools import partial
 
-def teacher_window(window): #this is personal, only individual can see the whole detail
+def teacher_window(teacher, person, window): #this is personal, only individual can see the whole detail
 	clear_window(window)
 	upper_window = Canvas(window, width = 500, height = 700, bg = "#e9f7fb")
 	upper_window.create_rectangle(0, 0, 500, 300, fill="#006386")
@@ -17,17 +18,17 @@ def teacher_window(window): #this is personal, only individual can see the whole
 	upper_window.pack()
 
 	def open_personal_data(): #confidential data
-		window.open_teacher_personal(window, teacher_window)
+		window.open_teacher_personal(window, partial(teacher_window, teacher, person),teacher,person)
 	personal_data_button = Button(window, text = "Personal Data", fg= "#e6b800", font="Courier 18",
 			bg="#0f0f3d",highlightbackground ="#0f0f3d",bd = 2, command = open_personal_data, cursor = get_handcursor())
 	personal_data_button.place(x=150, y = 325,width = 200, height = 75)
 	def open_course():#other teachers can see courses
-		window.open_teacher_course(window,teacher_window)
+		window.open_teacher_course(window, partial(teacher_window, teacher, person),teacher,person)
 	course_button = Button(window, text = "Courses",fg= "#e6b800", font="Courier 18",height = 3,width = 30,
 			bg="#000033",highlightbackground ="#000033",bd = 2,command = open_course, cursor = get_handcursor())
 	course_button.place(x=150, y = 390,width = 200, height = 75)
 	def open_schedule():#other teachers can see schedules
-		window.open_teacher_schedule(window,teacher_window)
+		window.open_teacher_schedule(window,partial(teacher_window, teacher, person))
 	schedule_button = Button(window, text = "Schedule", fg= "#e6b800",font="Courier 18",height = 3,width = 30,
 			bg ="#1a001a",highlightbackground ="#1a001a",bd = 2, command = open_schedule, cursor = get_handcursor())
 	schedule_button.place(x=150, y = 455,width = 200, height = 75)

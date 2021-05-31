@@ -36,8 +36,24 @@ def logIn_screen(window):
 
 			person = Person()
 			if person.loadByUsername(user_name, pass_word):
-				window.open_select_role(window)
-				return
+				is_student = person.getStudent()
+				if is_student != None:
+					window.open_student(is_student, person, window)
+					return
+
+				is_teacher = person.getTeacher()
+				is_admin = person.getAdmin()
+				if is_teacher != None:
+					if is_admin != None:
+						window.open_select_role(is_teacher, person,window)
+					else:
+						window.open_teacher(is_teacher, person,window)
+					return
+
+				if is_admin != None:
+					window.open_admin(window)
+					return
+
 		messagebox.showerror("Invalid input", "Incorrect Username/Password")
 
 	username_label = Label(window, text = 'Username',font="Arial 10 bold")

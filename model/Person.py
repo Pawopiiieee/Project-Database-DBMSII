@@ -1,5 +1,7 @@
 from model.Database import *
-
+from model.Student import *
+from model.Teacher import *
+from model.Admin import *
 
 class Person: # Table person
     personID = None
@@ -10,53 +12,80 @@ class Person: # Table person
     birthday = None
     nationality = None
     gender = None
-    street = None
+    streetname = None
     streetNumber = None
     postalCode = None
     city = None
     phone = None
     email = None
-    teacherID = None
 
     def loadByUsername(self, username, password):
         global g_Database
         rows = g_Database.fetchAll('SELECT * FROM person WHERE username="' + username + '" AND userpass="' + password + '"')
         if not len(rows):
             return False # no row found
-        self.load(rows[0]['PersonID'])
+        
+        self.read_row(rows[0])
         return True
 
-    def load(self, id = -1): # by PersonID
+    def load(self, id): # by PersonID
         global g_Database
-        if id != -1:
-            rows = g_Database.fetchAll('SELECT * FROM person WHERE personID='+str(id))
-        else:
-            rows = g_Database.fetchAll('SELECT * FROM person')
-        for row in rows:
-            print(row)
+        rows = g_Database.fetchAll('SELECT * FROM person WHERE personID='+str(id))
+        
         if not len(rows):
             return False # no row found
 
-
-
-        self.personID     = rows[0]['PersonID']
-        self.userName     = rows[0]['username']
-        self.userPass     = rows[0]['userpass']
-        self.fname        = rows[0]['fname']
-        self.lname        = rows[0]['lname']
-        self.birthday     = rows[0]['birthday']
-        self.gender       = rows[0]['gender']
-        self.nationality  = rows[0]['nationality']
-        self.streetname   = rows[0]['streetname']
-        self.streetNumber = rows[0]['streetnumber']
-        self.postalCode   = rows[0]['postalcode']
-        self.city         = rows[0]['city']
-        self.phone        = rows[0]['phone']
-        self.email        = rows[0]['email']
-        self.teacherID    = rows[0]['teacherID']
-
+        self.read_row(rows[0])
         return True
 
+    def read_row(self,row):
+        self.personID     = row['PersonID']
+        self.userName     = row['username']
+        self.userPass     = row['userpass']
+        self.fname        = row['fname']
+        self.lname        = row['lname']
+        self.birthday     = row['birthday']
+        self.gender       = row['gender']
+        self.nationality  = row['nationality']
+        self.streetname   = row['streetname']
+        self.streetNumber = row['streetnumber']
+        self.postalCode   = row['postalcode']
+        self.city         = row['city']
+        self.phone        = row['phone']
+        self.email        = row['email']
+
+    def getStudent(self):
+        global g_Database
+        rows = g_Database.fetchAll('SELECT * FROM student WHERE personID='+str(self.personID))
+
+        if (not len(rows)):
+            return None
+
+        student = Student()
+        student.read_row(rows[0])
+        return student
+        
+    def getTeacher(self):
+        global g_Database
+        rows = g_Database.fetchAll('SELECT * FROM teacher WHERE personID='+str(self.personID))
+
+        if (not len(rows)):
+            return None
+
+        teacher = Teacher()
+        teacher.read_row(rows[0])
+        return teacher
+        
+    def getAdmin(self):
+        global g_Database
+        rows = g_Database.fetchAll('SELECT * FROM admin WHERE personID='+str(self.personID))
+
+        if (not len(rows)):
+            return None
+
+        admin = Admin()
+        admin.read_row(rows[0])
+        return admin
 
     def insert(self):
         global g_Database
@@ -74,7 +103,7 @@ class Person: # Table person
                 self.birthday,
                 self.nationality,
                 self.gender,
-                self.street,
+                self.streetname,
                 self.streetNumber,
                 self.postalCode,
                 self.city,
@@ -90,7 +119,7 @@ class Person: # Table person
         g_Database.executeQuery(
             """
             UPDATE person
-            SET userName = %s, userPass = %s, fname = %s, lname = %s, birthday = %s, nationality = %s, gender = %s, streetname = %s, streetnumber = %s, postalCode = %s, city = %s, phone = %s, email = %s, teacherID = %s
+            SET userName = %s, userPass = %s, fname = %s, lname = %s, birthday = %s, nationality = %s, gender = %s, streetname = %s, streetnumber = %s, postalCode = %s, city = %s, phone = %s, email = %s
             WHERE PersonID=%s
             """,
             (
@@ -101,14 +130,13 @@ class Person: # Table person
                 self.birthday,
                 self.nationality,
                 self.gender,
-                self.street,
+                self.streetname,
                 self.streetNumber,
                 self.postalCode,
                 self.city,
                 self.phone,
                 self.email,
-                self.personID,
-                self.teacherID
+                self.personID
             )
         )
 

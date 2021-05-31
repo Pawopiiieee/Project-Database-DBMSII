@@ -4,7 +4,7 @@ from PIL import ImageTk, Image
 import time
 from ui.Helpers import clear_window
 
-def select_role(window): #the case that a teacher is also an admin 
+def select_role(teacher, person, window): #the case that a teacher is also an admin 
 	clear_window(window)
 	
 	upper_window = Canvas(window, width = 500)
@@ -19,7 +19,7 @@ def select_role(window): #the case that a teacher is also an admin
 	label_logo.place(x=170,y=70)
 
 	def call_teacher_window():
-		window.open_teacher(window)
+		window.open_teacher(teacher, person, window)
 	def call_admin_window():
 		window.open_admin(window)
 

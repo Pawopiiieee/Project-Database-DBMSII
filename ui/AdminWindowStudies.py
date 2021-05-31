@@ -66,11 +66,3 @@ def admin_window_studies(window,return_function):
 	go_back(window, return_function)
 	sign_out(window)
 
-"""
-	create_pic = Image.open("images/create-w.png")
-	create_pic = create_pic.resize((30,30), Image.ANTIALIAS)
-	create_image =ImageTk.PhotoImage(create_pic)
-	create_image.icon = create_image
-	create_data = Button(window, image = create_image, cursor = get_handcursor())
-	create_data.place(x=20, y = 80)
-"""

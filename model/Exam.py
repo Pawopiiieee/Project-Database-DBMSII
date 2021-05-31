@@ -16,45 +16,40 @@ from model.Database import *
 """
 
 class Exam:
-    ExamID      = None
-    coursetitle = None
+    examID      = None
     room        = None
     resit       = None
     date        = None
     time        = None
     courseID    = None
 
-    def load(self, id = -1):
+    def load(self, id):
         global g_Database
-        if id != -1:
-            rows = g_Database.fetchAll('SELECT * FROM exam WHERE ExamID='+str(id))
-        else:
-            rows = g_Database.fetchAll('SELECT * FROM exam')
-        for row in rows:
-            print(row)
+        rows = g_Database.fetchAll('SELECT * FROM exam WHERE ExamID='+str(id))
+
         if not len(rows):
             return False # no row found
-
-        self.examID         = rows[0]['ExamID']
-        self.coursetitle    = rows[0]['coursetitle']
-        self.room           = rows[0]['room']
-        self.resit          = rows[0]['resit']
-        self.date           = rows[0]['date']
-        self.time           = rows[0]['time']
-        self.courseID       = rows[0]['courseID']
-
+            
+        self.read_row(rows[0])
         return True
+
+    def read_row(self, row):
+        self.examID         = row['ExamID']
+        self.room           = row['room']
+        self.resit          = row['resit']
+        self.date           = row['date']
+        self.time           = row['time']
+        self.courseID       = row['courseID']
 
     def insert(self):
         global g_Database
         self.examID = g_Database.executeQuery(
             """
                 INSERT INTO exam
-                (coursetitle, room, resit, date, time, courseID)
-                VALUES (%s, %s, %s, %s, %s, %s)
+                (room, resit, date, time, courseID)
+                VALUES (%s, %s, %s, %s, %s)
             """,
             (
-                self.coursetitle,
                 self.room,
                 self.resit,
                 self.date,
@@ -69,11 +64,10 @@ class Exam:
         g_Database.executeQuery(
             """
                 UPDATE exam
-                SET coursetitle = %s, room = %s, resit = %s, date = %s, time = %s, courseID = %s
+                SET room = %s, resit = %s, date = %s, time = %s, courseID = %s
                 WHERE ExamID=%s
             """,
             (
-                self.coursetitle,
                 self.room,
                 self.resit,
                 self.date,

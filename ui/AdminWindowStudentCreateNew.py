@@ -5,6 +5,11 @@ from tkinter.messagebox import showinfo,askquestion
 from ui.SignOut import sign_out
 from functools import partial
 import ui.AdminWindowStudents
+import datetime
+from model.Person import *
+from model.Student import *
+from model.Teacher import *
+from model.Study import *
 
 def createNew_student(window, return_function):
 	clear_window(window)
@@ -45,9 +50,12 @@ def createNew_student(window, return_function):
 	startYear_label.place(x = 250, y = 130)
 
 	selected_study = StringVar()
-	studies = ["abc","def","ghi","jkl","mno"]
+	studies = Study.load_all()
+	studynames = []
+	for study in studies:
+		studynames.append(study.studyname)
 	study_sh = ttk.Combobox(window,textvariable = selected_study,width = 20)
-	study_sh["value"] = studies
+	study_sh["value"] = studynames
 	study_sh["state"] = "readonly"
 	def study_changed (event):
 		confirm_msg = f"You Selected {study_sh.get()}!"
@@ -58,9 +66,13 @@ def createNew_student(window, return_function):
 	study_label.place(x = 20, y = 160)
 
 	selected_counsellor = StringVar()
-	counsellors = ["bob1","bob2","bob3","bob4","bob5"]
+	counsellors = Teacher.load_studycounselers()
+	counsellornames = []
+	for c in counsellors:
+		person = c.getPerson()
+		counsellornames.append(person.fname + " " + person.lname)
 	counsellor_sh = ttk.Combobox(window,textvariable = selected_counsellor,width = 20)
-	counsellor_sh["value"] = counsellors
+	counsellor_sh["value"] = counsellornames
 	counsellor_sh["state"] = "readonly"
 
 	def counsellor_changed (event):
@@ -140,7 +152,7 @@ def createNew_student(window, return_function):
 	studentCounsellor_label.place(x = 20, y = 320)
 
 	selected_gender = StringVar()
-	genders = ["Male","Female","None"]
+	genders = ["M","F","O"]
 	gender_sh = ttk.Combobox(window,textvariable = selected_gender,width = 10)
 	gender_sh["value"] = genders
 	gender_sh["state"] = "readonly"
@@ -188,30 +200,35 @@ def createNew_student(window, return_function):
 
 	def submit_all():
 		result = askquestion(title="Confirmation", message= "Do you want to process?")
-		get_lastname = input_lastname.get(1.0, "end-1c")
-		get_firstname = input_firstname.get(1.0, "end-1c")
-		get_studentID = input_studentID.get(1.0, "end-1c")
-		get_startYear = startYear.get()
-		get_study = selected_study.get()
-		get_counsellor = selected_counsellor.get()
-		get_birthYear = birthYear.get()
-		get_birthMonth = birthMonth.get()
-		get_birthDay = birthDay.get()
-		get_selected_nationality = selected_nationality.get()
-		get_selected_gender = selected_gender.get()
-		get_houseNo = input_houseNo.get(1.0, "end-1c")
-		get_houseNo2 = input_houseNo2.get(1.0, "end-1c")
-		get_street = input_street.get(1.0, "end-1c")
-		get_city = input_city.get(1.0, "end-1c")
-		get_postal = input_postal.get(1.0, "end-1c")
-		get_postal2 = input_postal2.get(1.0, "end-1c")
-		get_phoneNumber = input_phoneNumber.get(1.0, "end-1c")
-		get_email = input_email.get(1.0, "end-1c")
 
-		print(get_firstname,get_lastname, get_studentID, get_startYear,get_study,get_counsellor)
-		print(get_birthYear,get_birthMonth,get_birthDay,get_selected_nationality,get_selected_gender)
-		print(get_houseNo,get_houseNo2,get_street,get_city,get_postal,get_postal2,get_phoneNumber,get_email)
 		if result == "yes":
+			person = Person()
+			person.lname = input_lastname.get(1.0, "end-1c")
+			person.fname = input_firstname.get(1.0, "end-1c")
+			person.birthday = datetime.date(birthYear.get(), months.index(birthMonth.get()) + 1, birthDay.get())
+			person.nationality = selected_nationality.get()
+			person.gender = selected_gender.get()
+			person.streetNumber = str(input_houseNo.get(1.0, "end-1c")) + str(input_houseNo2.get(1.0, "end-1c"))
+			person.streetname = input_street.get(1.0, "end-1c")
+			person.city = input_city.get(1.0, "end-1c")
+			person.postalCode = str(input_postal.get(1.0, "end-1c")) + str(input_postal2.get(1.0, "end-1c"))
+			person.phone = input_phoneNumber.get(1.0, "end-1c")
+			person.email = input_email.get(1.0, "end-1c")
+			person.insert()
+
+			student = Student()
+			student.personID = person.personID
+			student.studentID = int(input_studentID.get(1.0, "end-1c"))
+			student.startYear = datetime.date(startYear.get(), 1, 1)
+			student.enrolled = selected_study.get()
+			counseler_index = counsellornames.index(selected_counsellor.get())
+			student.studyCouncelor = counsellors[counseler_index].teacherID
+			student.insert()
+
+			person.userName = (person.lname + str(student.studentID))
+			person.userPass = "welkom01"
+			person.update()
+		
 			ui.AdminWindowStudents.admin_window_students(window, return_function) #avoid circular import
 
 	submit_text = Button(window, text = "Submit",font = "Arial 10  bold",fg = "#006386",highlightbackground ="#48C9B0",height = 1, width = 6, command =submit_all,cursor = get_handcursor())

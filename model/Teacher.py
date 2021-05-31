@@ -1,5 +1,6 @@
 from model.Database import *
-from model.Person import *
+import model.Person
+import model.Course
 
 """
 +----------------+---------------+------+-----+---------+----------------+
@@ -12,115 +13,104 @@ from model.Person import *
 +----------------+---------------+------+-----+---------+----------------+
 """
 
+def load_all():
+	global g_Database
+	rows = g_Database.fetchAll('SELECT * FROM teacher')
+	teachers = []
+	for row in rows:
+		teacher = Teacher()
+		teacher.read_row(row)
+		teachers.append(teacher)
+	return teachers
+
+def load_studycounselers():
+	global g_Database
+	rows = g_Database.fetchAll('SELECT * FROM teacher')
+	studycounselers = []
+	for row in rows:
+		studycounseler = Teacher()
+		studycounseler.read_row(row)
+		studycounselers.append(studycounseler)
+	return studycounselers
 
 class Teacher:
-    TeacherID      = None
-    salary         = None
-    studycouncelor = None
+	teacherID      = None
+	salary         = None
+	studycouncelor = None
+	personID = None
 
-    #retrieves teachers, option: ID or No ID
-    def load(self, id = -1):
-        global g_Database
-        if id != -1:
-            rows = g_Database.fetchAll('SELECT * FROM teacher WHERE teacherID='+str(id))
-        else:
-            rows = g_Database.fetchAll('SELECT * FROM teacher')
-        for row in rows:
-            print(row)
-        if not len(rows):
-            return False # no row found
+	#create static method
+	load_all = staticmethod(load_all)
+	load_studycounselers = staticmethod(load_studycounselers)
 
-        self.teacherID      = rows[0]['TeacherID']
-        self.salary         = rows[0]['salary']
-        self.studycouncelor = rows[0]['studycouncelor']
-        self.personID       = rows[0]['personID']
+	#retrieves teachers
+	def load(self, id):
+		global g_Database
+		rows = g_Database.fetchAll('SELECT * FROM teacher WHERE teacherID='+str(id))
 
-        return True
-    #retrieves full information of teachers from person table: Options: ID or No ID
-    def getTeacher(self, id = -1):
-        global g_Database
-        if id != -1:
-            rows = g_Database.fetchAll('select * from teacher inner join person on teacher.personID = person.PersonID where teacher.teacherID=' +str(id))
-        else:
-            rows = g_Database.fetchAll('select * from teacher inner join person on teacher.personID = person.PersonID')
-        for row in rows:
-            print(rows)
-        if not len(rows):
-            return False
+		if not len(rows):
+			return False # no row found
 
-        self.teacherID = rows[0]['TeacherID']
-        self.salary = rows[0]['salary']
-        self.studycouncelor = rows[0]['studycouncelor']
-        self.personID = rows[0]['personID']
+		self.read_row(rows[0])
+		return True
+		
+	def read_row(self,row):
+		self.teacherID      = row['TeacherID']
+		self.salary         = row['salary']
+		self.studycouncelor = row['studycouncelor']
+		self.personID       = row['personID']
 
-        return True
+	#retrieves full information of teachers from person table: 
+	def getPerson(self):
+		person = model.Person.Person()
+		person.load(self.personID)
+		return person
 
-    def getTeacherStudies(self, id = -1):
-        global g_Database
-        if id != -1:
-            rows = g_Database.fetchAll('select studyname, teacherID from study where teacherID =' +str(id))
-        else:
-            rows = g_Database.fetchAll('select studyname, teacherID from study')
-        for row in rows:
-            print(row)
-        if not len(rows):
-            return False
+	def getTeacherCourses(self):
+		global g_Database
+		rows = g_Database.fetchAll('select * from course where teacherID =' +str(self.teacherID))
 
-        self.studyname = rows[0]['studyname']
-        self.teacherID = rows[0]['teacherID']
+		courses = []
+		for row in rows:
+			course = model.Course.Course()
+			course.read_row(row)
+			courses.append(course)
+		return courses
 
-        return True
+	def insert(self):
+		global g_Database
+		self.teacherID = g_Database.executeQuery(
+			"""
+				INSERT INTO Teacher
+				(salary, studycouncelor, personID)
+				VALUES (%s, %s, %s)
+			""",
+			(
+				self.salary,
+				self.studycouncelor,
+				self.personID
+			)
+		)
 
-    def getTeacherCourse(self, id = -1):
-        global g_Database
-        if id != -1:
-            rows = g_Database.fetchAll('select coursetitle, teacherID from course where teacherID=' +str(id))
-        else:
-            rows = g_Database.fetchAll('select coursetitle, teacherID from course')
-        for row in rows:
-            print(row)
-        if not len(rows):
-            return False;
+	def update(self):
+		global g_Database
+		g_Database.executeQuery(
+			"""
+			UPDATE teacher
+			SET salary = %s, studycouncelor = %s, personID = %s
+			WHERE teacherID=%s
+			""",
+			(
+				self.salary,
+				self.studycouncelor,
+				self.personID,
+				self.teacherID
+			)
+		)
 
-        self.coursetitle = rows[0]['coursetitle']
-        self.teacherID = rows[0]['teacherID']
+	def delete(self):
+		global g_Database
+		g_Database.executeQuery('DELETE FROM teacher WHERE teacherID = ' + str(self.teacherID))
 
-        return True
-
-    def insert(self):
-        global g_Database
-        return g_Database.executeQuery(
-            """
-                INSERT INTO Teacher
-                (salary, studycouncelor, personID)
-                VALUES (%s, %s, %s)
-            """,
-            (
-                self.salary,
-                self.studycouncelor,
-                self.personID
-            )
-        )
-
-    def update(self):
-        global g_Database
-        g_Database.executeQuery(
-            """
-            UPDATE teacher
-            SET salary = %s, studycouncelor = %s, personID = %s
-            WHERE teacherID=%s
-            """,
-            (
-                self.salary,
-                self.studycouncelor,
-                self.personID,
-                self.teacherID
-            )
-        )
-
-    def delete(self):
-        global g_Database
-        g_Database.executeQuery('DELETE FROM teacher WHERE teacherID = ' + str(self.teacherID))
-
-    def __repr__(self):
-        return str(self.__dict__)
+	def __repr__(self):
+		return str(self.__dict__)

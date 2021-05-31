@@ -20,7 +20,10 @@ from ui.StudentCounsellor import student_personal_counsellor
 from ui.StudentExamRegistration import student_exam_registration
 from ui.StudentExamResult import student_results
 
+from data.create_database import check_or_create_db
+
 if __name__ == "__main__":
+	check_or_create_db()
 
 	master = Tk()
 	master.title("Diemen Academy")
@@ -45,9 +48,9 @@ if __name__ == "__main__":
 	master.open_exam_registration = student_exam_registration
 	master.open_student_result = student_results
 
-	#logIn_screen(master)
+	logIn_screen(master)
 	#loading_screen(master)
-	admin_window(master)
+	#admin_window(master)
 	#student_window(master)
 	#teacher_window(master)
 	master.mainloop()

@@ -1,4 +1,6 @@
 from model.Database import *
+import model.Student
+import model.Study
 """
 +-------------+--------------+------+-----+---------+----------------+
 | Field       | Type         | Null | Key | Default | Extra          |
@@ -10,65 +12,94 @@ from model.Database import *
 +-------------+--------------+------+-----+---------+----------------+
 """
 
+def load_all():
+    global g_Database
+    rows = g_Database.fetchAll('SELECT * FROM course')
+    courses = []
+    for row in rows:
+        course = Course()
+        course.read_row(row)
+        courses.append(course)
+    return courses
+
 class Course:
     courseID    = None
     coursetitle = None
     description = None
+    credits     = None
+    studyID     = None
     teacherID   = None
 
-    def load(self, id = -1):
+    #create static method
+    load_all = staticmethod(load_all)
+
+    def load(self,id):
         global g_Database
-        if id != -1:
-            rows = g_Database.fetchAll('SELECT * FROM course WHERE courseID='+str(id))
-        else:
-            rows = g_Database.fetchAll('SELECT * FROM course')
-        for row in rows:
-            print(row)
+        rows = g_Database.fetchAll('SELECT * FROM course WHERE courseID='+str(id))
+        
         if not len(rows):
             return False # no row found
 
-        self.courseID      = rows[0]['CourseID']
-        self.coursetitle   = rows[0]['coursetitle']
-        self.description   = rows[0]['description']
-        self.teacherID     = rows[0]['teacherID']
-
+        self.read_row(rows[0])
         return True
+
+    def read_row(self,row):
+        self.courseID      = row['CourseID']
+        self.coursetitle   = row['coursetitle']
+        self.description   = row['description']
+        self.credits       = row['credits']
+        self.teacherID     = row['teacherID']
+        self.studyID       = row['studyID']
 
     #get students in course
     def getStudentsInCourse(self):
         global g_Database
-        rows = g_Database.fetchAll('select course.courseID, course.coursetitle, course.description, studentcourse.studentID from course inner join studentcourse on course.courseID = studentcourse.courseID')
+        rows = g_Database.fetchAll('select * from studentcourse sc inner join student s on sc.studentID = s.studentID where sc.courseID = '+str(self.courseID))
+        
+        students = []
         for row in rows:
-            print(rows)
+            student = model.Student.Student()
+            student.read_row(row)
+            students.append(student)
 
-    #insert int to table studentcourse
-    def insertIntoStudentCourse(self):
+        return students
+
+    def getStudy(self):
         global g_Database
-        self.studentID = g_Database.executeQuery(
-         """
-            INSERT INTO studentcourse
-            (studentID, courseID)
-            VALUES(%s, %s)
-         """,
-         (
-            self.studentID,
-            self.courseID
-         )
-     )
+        rows = g_Database.fetchAll('SELECT * FROM study WHERE studyID='+str(self.studyID))
 
+        if (not len(rows)):
+            return None
+        study = model.Study.Study()
+        study.read_row(rows[0])
+        return study
+
+    def getExams(self):
+        global g_Database
+        rows = g_Database.fetchAll('select * from exam where courseID = '+str(self.courseID))
+        
+        exams = []
+        for row in rows:
+            exam = model.Exam.Exam()
+            exam.read_row(row)
+            exams.append(exam)
+
+        return exams
 
     def insert(self):
         global g_Database
         self.courseID = g_Database.executeQuery(
             """
                 INSERT INTO course
-                (coursetitle, description, teacherID)
-                VALUES (%s, %s, %s)
+                (coursetitle, description, credits, teacherID, studyID)
+                VALUES (%s, %s, %s, %s, %s)
             """,
             (
                 self.coursetitle,
                 self.description,
+                self.credits,
                 self.teacherID,
+                self.studyID
             )
         )
         print("course ID = " + str(self.courseID))
