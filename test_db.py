@@ -203,15 +203,21 @@ def generatePerson(first_names,last_names,gender,stu_nationality,city,stu):
 # teacher.getTeacher(2)
 # teacher.getTeacherStudies(3)
 # teacher.getTeacherCourse(2)
-course = Course()
-course.getStudentsInCourse()
-course.studentID = 3
-course.insertIntoStudentCourse()
+# course = Course()
+# course.getStudentsInCourse()
+# course.load()
+# course.studentID = 3
+# course.insertIntoStudentCourse()
 # teacher.update()
 #for i in range (1):
 #    boy_name = generatePerson(male_name,last_name,"M", nationality,city_name,study)
 #    boy_name.insert();
 #    print(boy_name)
+
+result = Result()
+result.load_all()
+exam = Exam()
+exam.load_all()
 
 #for i in range (1):
 #	girl_name = generatePerson(female_name,last_name,"F", nationality,city_name,study)

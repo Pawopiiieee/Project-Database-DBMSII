@@ -15,6 +15,17 @@ from model.Database import *
 +-------------+---------------+------+-----+---------+----------------+
 """
 
+def load_all():
+    global g_Database
+    rows = g_Database.fetchAll('SELECT * FROM exam')
+    exams = []
+    for row in rows:
+        exam = Exam()
+        exam.read_row(row)
+        exams.append(exam)
+
+    return exams
+
 class Exam:
     examID      = None
     room        = None
@@ -23,13 +34,16 @@ class Exam:
     time        = None
     courseID    = None
 
+    #create static method 
+    load_all = staticmethod(load_all)
+
     def load(self, id):
         global g_Database
         rows = g_Database.fetchAll('SELECT * FROM exam WHERE ExamID='+str(id))
 
         if not len(rows):
             return False # no row found
-            
+
         self.read_row(rows[0])
         return True
 

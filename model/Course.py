@@ -36,7 +36,7 @@ class Course:
     def load(self,id):
         global g_Database
         rows = g_Database.fetchAll('SELECT * FROM course WHERE courseID='+str(id))
-        
+
         if not len(rows):
             return False # no row found
 
@@ -55,7 +55,7 @@ class Course:
     def getStudentsInCourse(self):
         global g_Database
         rows = g_Database.fetchAll('select * from studentcourse sc inner join student s on sc.studentID = s.studentID where sc.courseID = '+str(self.courseID))
-        
+
         students = []
         for row in rows:
             student = model.Student.Student()
@@ -77,7 +77,7 @@ class Course:
     def getExams(self):
         global g_Database
         rows = g_Database.fetchAll('select * from exam where courseID = '+str(self.courseID))
-        
+
         exams = []
         for row in rows:
             exam = model.Exam.Exam()

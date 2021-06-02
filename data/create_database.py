@@ -95,6 +95,15 @@ def createDb(db):
 		foreign key (personID) references person(PersonID)
 	);"""
 
+	create_examResults_table = """
+	create table examResults(
+		ResultID int Primary key,
+     	ExamID int,
+		add foreign key (ResultID) references result(ResultID),
+		add foreign key (ExamID) references exam(ExamID)
+	);
+	"""
+
 	create_studentcourse_table = """
 	CREATE TABLE IF NOT EXISTS studentcourse (
 		studentID INT,

@@ -1,6 +1,6 @@
 from model.Database import *
 from model.Course import Course
-import model.Student 
+import model.Student
 
 """
 +-------------+-------------+------+-----+---------+----------------+
@@ -28,8 +28,8 @@ def load_all():
     return studies
 
 class Study:
-    studyID = None
-    studyname = None
+    studyID     = None
+    studyname   = None
     description = None
     language    = None
     studyyears  = None
@@ -41,7 +41,7 @@ class Study:
     def load(self, id):
         global g_Database
         rows = g_Database.fetchAll('SELECT * FROM study WHERE StudyID='+str(id))
-        
+
         if not len(rows):
             return False # no row found
 
@@ -52,7 +52,7 @@ class Study:
     def loadByName(self, name):
         global g_Database
         rows = g_Database.fetchAll('SELECT * FROM study WHERE studyname="'+str(name)+'"')
-        
+
         if not len(rows):
             return False # no row found
 
@@ -81,7 +81,7 @@ class Study:
     def getStudentsEnrolledInStudy(self):
         global g_Database
         rows = g_Database.fetchAll('select * from student where enrolled = "' + str(self.studyname) + '"')
-        
+
         students = []
         for row in rows:
             student = model.Student.Student()

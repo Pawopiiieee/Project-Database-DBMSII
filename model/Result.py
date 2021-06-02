@@ -5,12 +5,23 @@ from model.Database import *
 | Field     | Type          | Null | Key | Default | Extra          |
 +-----------+---------------+------+-----+---------+----------------+
 | ResultID  | int           | NO   | PRI | NULL    | auto_increment |
-| examID    | int           | YES  |     | NULL    |                |
-| studentID | int           | YES  |     | NULL    |                |
-| pass      | enum('Y','N') | YES  |     | NULL    |                |
+| examID    | int           | YES  | MUL | NULL    |                |
+| studentID | int           | YES  | MUL | NULL    |                |
+| passed    | enum('Y','N') | YES  |     | NULL    |                |
 | grade     | int           | NO   |     | NULL    |                |
 +-----------+---------------+------+-----+---------+----------------+
 """
+
+def load_all():
+	global g_Database
+	rows = g_Database.fetchAll('SELECT * FROM result')
+	results = []
+	for row in rows:
+		result = Result()
+		result.read_row(row)
+		results.append(result)
+
+	return results
 
 class Result:
 	ResultID  = None
@@ -19,36 +30,37 @@ class Result:
 	grade     = None
 	passed    = None
 
-	def load(self, id = -1):
+	#create static method
+	load_all = staticmethod(load_all)
+
+	def load(self, id):
 		global g_Database
-		if id != -1:
-			rows = g_Database.fetchAll('SELECT * FROM result WHERE ResultID='+str(id))
-		else:
-			rows = g_Database.fetchAll('SELECT * FROM result')
-		for row in rows:
-			print(row)
+		rows = g_Database.fetchAll('SELECT * FROM result WHERE ResultID='+str(id))
+
 		if not len(rows):
-			return False # no row found
+			return False #no row found
 
-		self.ResultID  = rows[0]['ResultID']
-		self.examID    = rows[0]['examID']
-		self.studentID = rows[0]['studentID']
-		self.passed    = rows[0]['passed']
-		self.grade     = rows[0]['grade']
-
+		self.read_row(rows[0])
 		return True
 
-	def getStudentGrades(self, id = -1):
-		global g_Database
-		if id != -1:
-			rows = g_Database.fetchAll('Select grade from result where studentID = ?'+str(id))
-		else:
-			rows = g_Database.fetchAll('select result.grade, student.StudentID from result inner join student on student.StudentID = result.StudentID')
-		for row in rows:
-			print(row)
-		if not len(rows):
-			return False
+	def read_row(self, row):
+		self.resultID 	= row['ResultID']
+		self.examID 	= row['examID']
+		self.studentID  = row['studentID']
+		self.grade 		= row['grade']
+		self.passed 	= row['passed']
 
+	def getStudentGrades(self):
+		global g_Database
+		rows = g_Database.fetchAll('Select * from result where studentID='+str(self.studentID))
+
+		grades = []
+		for row in rows:
+			result = Result()
+			result.read_row(row)
+			grades.append(result)
+
+		return grades
 
 	def insert(self):
 		global g_Database

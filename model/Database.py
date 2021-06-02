@@ -5,7 +5,7 @@ from getpass import getpass
 # Connection credentials
 HOSTNAME = 'localhost'
 USERNAME = 'root'
-PASSWORD = 'welkom01' # This is the database password, not the user password
+PASSWORD = 'Dolfijn123%' # This is the database password, not the user password
 DB_NAME  = 'Diemen'
 
 class Database:
