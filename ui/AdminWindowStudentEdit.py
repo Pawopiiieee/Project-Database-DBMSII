@@ -39,7 +39,7 @@ def student_edit(window, return_function,student, person):
 
 	startYear = IntVar()
 	start_Year = []
-	for i in range(2010,2022):
+	for i in range(2010,2025):
 		start_Year.append(i)
 	start_Year_sh = ttk.Combobox(window,textvariable = startYear, width = 5)
 	start_Year_sh["value"] = start_Year
@@ -67,7 +67,8 @@ def student_edit(window, return_function,student, person):
 	study_sh.bind("<<ComboboxSelected>>", study_changed)
 	study_sh.place(x = 80, y = 160)
 	study_label = Label(window,text = "Study", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
-	study_sh.current(studynames.index(student.enrolled))
+	if student.enrolled != None:
+		study_sh.current(studynames.index(student.enrolled))
 	study_label.place(x = 20, y = 160)
 
 	selected_counsellor = StringVar()
@@ -198,7 +199,7 @@ def student_edit(window, return_function,student, person):
 	postal_label = Label(window,text = "Postal Code", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	postal_label.place(x = 270, y = 410)
 	input_postal = Text(window, height = 1, width = 6, bg = "light yellow", highlightbackground = "#006386", font = "Arial 13")
-	input_postal.insert(END, (person.postalCode))
+	input_postal.insert(END, person.postalCode)
 	input_postal.place(x=360, y = 410)
 
 	phoneNumber_label = Label(window,text = "Phone Number", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")

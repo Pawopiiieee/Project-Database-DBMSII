@@ -50,9 +50,9 @@ def view_students(window, return_function,study):
 		def confirm_deletion(student):
 			result = askquestion(title="Confirmation", message= "Do you want to delete this data?")
 			if result == "yes":
-				student.studyID = None
+				student.enrolled = None
 				student.update()
-				view_students(window,return_function,study)
+			view_students(window,return_function,study)
 		delete_button = Button(window, text = "Delete",font = "Arial 10", fg = "#006386",highlightbackground = "#ffcccc",bg = "#ffcccc",cursor = get_handcursor(), height = 1,width = 5, relief = FLAT, command = partial(confirm_deletion, students[i]))
 		delete_button.place(x= 400, y = y_position)
 

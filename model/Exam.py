@@ -1,5 +1,5 @@
 from model.Database import *
-
+from model.Result import Result
 
 """
 +-------------+---------------+------+-----+---------+----------------+
@@ -54,6 +54,15 @@ class Exam:
         self.date           = row['date']
         self.time           = row['time']
         self.courseID       = row['courseID']
+
+    def getStudentGrade(self, studentID):
+        global g_Database
+        rows = g_Database.fetchAll('SELECT * FROM result where ExamID=' + str(self.examID) + ' and studentID = ' + str(studentID))
+        if not len(rows):
+            return None # no row found
+        result = Result()
+        result.read_row(rows[0])
+        return result
 
     def insert(self):
         global g_Database

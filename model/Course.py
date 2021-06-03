@@ -122,6 +122,7 @@ class Course:
 
     def delete(self):
         global g_Database
+        g_Database.executeQuery('DELETE FROM studentcourse WHERE courseID = ' + str(self.courseID))
         g_Database.executeQuery('DELETE FROM course WHERE courseID = ' + str(self.courseID))
 
     def __repr__(self):

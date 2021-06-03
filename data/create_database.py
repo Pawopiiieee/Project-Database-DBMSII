@@ -82,7 +82,7 @@ def createDb(db):
 		ResultID INT PRIMARY KEY AUTO_INCREMENT,
 		examID INT,
 		studentID INT,
-		pass ENUM('Y', 'N'),
+		passed ENUM('Y', 'N'),
 		grade int,
 		foreign key (examID) references exam(examId),
 		foreign key (studentID) references student(studentId)

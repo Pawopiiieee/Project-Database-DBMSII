@@ -20,7 +20,9 @@ def view_courses_add(window, return_function,student):
 
 	selected_course = StringVar()
 	study = student.getStudy()
-	courses = study.getCoursesInStudy()
+	courses = []
+	if study != None:
+		courses = study.getCoursesInStudy()
 	coursenames = []
 	for c in courses:
 		coursenames.append(c.coursetitle)

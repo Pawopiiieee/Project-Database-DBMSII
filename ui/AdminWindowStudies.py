@@ -56,10 +56,12 @@ def admin_window_studies(window,return_function):
 		edit_button = Button(window, text = "Edit",font = "Arial 10", fg = "#006386",bg = "#fff2cc",highlightbackground = "#fff2cc",cursor = get_handcursor(), width = 4, relief = FLAT,command = partial(study_overview_edit, window, return_function, studies[i]))
 		edit_button.place(x= 380, y = y_position, height=26)
 
-		def confirm_deletion():
-			askquestion(title="Delete Data", message= "Do you want to process?", icon = "warning")
-
-		delete_button = Button(window, text = "Delete",font = "Arial 10", fg = "#006386",bg = "#ffcccc",highlightbackground = "#ffcccc",cursor = get_handcursor(), width = 5, relief = FLAT, command = confirm_deletion)
+		def confirm_deletion(study):
+			result = askquestion(title="Delete Data", message= "Do you want to process?", icon = "warning")
+			if result == "yes":
+				study.delete()
+			admin_window_studies(window,return_function)
+		delete_button = Button(window, text = "Delete",font = "Arial 10", fg = "#006386",bg = "#ffcccc",highlightbackground = "#ffcccc",cursor = get_handcursor(), width = 5, relief = FLAT, command = partial(confirm_deletion, studies[i]))
 		delete_button.place(x= 430, y = y_position, height=26)
 		y_position += 30
 

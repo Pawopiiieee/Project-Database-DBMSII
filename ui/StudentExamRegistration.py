@@ -15,8 +15,7 @@ def student_exam_registration(window, return_function, student):
 	header_label = Label(window,text = "Exam Registration", fg = "#EBEBE9", font = "Arial 24", bg ="#006386")
 	header_label.place(x = 120, y = 15)
 
-	courses = student.getEnrolledCourses()
-	
+	courses = student.getEnrolledCourses()	
 	buttons = []
 	def confirm_register(exam_n):
 		button = buttons[exam_n]

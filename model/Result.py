@@ -24,7 +24,7 @@ def load_all():
 	return results
 
 class Result:
-	ResultID  = None
+	resultID  = None
 	examID    = None
 	studentID = None
 	grade     = None
@@ -50,21 +50,9 @@ class Result:
 		self.grade 		= row['grade']
 		self.passed 	= row['passed']
 
-	def getStudentGrades(self):
-		global g_Database
-		rows = g_Database.fetchAll('Select * from result where studentID='+str(self.studentID))
-
-		grades = []
-		for row in rows:
-			result = Result()
-			result.read_row(row)
-			grades.append(result)
-
-		return grades
-
 	def insert(self):
 		global g_Database
-		self.ResultID = g_Database.executeQuery(
+		self.resultID = g_Database.executeQuery(
 			"""
 			INSERT INTO result
 			(examID, studentID, passed, grade)
@@ -77,7 +65,7 @@ class Result:
 				self.grade
 			)
 		)
-		print("Result ID = " + str(self.ResultID))
+		print("Result ID = " + str(self.resultID))
 
 
 	def update(self):
@@ -93,7 +81,7 @@ class Result:
 				self.studentID,
 				self.passed,
 				self.grade,
-				self.ResultID
+				self.resultID
 			)
 		)
 

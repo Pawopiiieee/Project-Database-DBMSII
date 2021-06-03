@@ -73,7 +73,7 @@ def student_window(student, person, window): #this is personal, only individual 
 	#schedule_button1 = Button(window, text = "Schedule", highlightbackground = "green",fg = "#191966", font="Courier 18",height = 3,width = 15, command = open_schedule, cursor = get_handcursor())
 
 	def open_result():
-		window.open_student_result(window,partial(student_window, student, person))
+		window.open_student_result(window,partial(student_window, student, person),student,person)
 	examResult_pic = Image.open("images/exam_result.png")
 	examResult_pic = examResult_pic.resize((42,42), Image.ANTIALIAS)
 	examResult_image =ImageTk.PhotoImage(examResult_pic)

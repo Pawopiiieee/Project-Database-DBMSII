@@ -46,9 +46,16 @@ def view_courses(window, return_function,study):
 		bg_label = Label(window, relief="ridge",borderwidth=2)
 		bg_label.place(x=370, y= num_pos_y, width=100, height= 30)
 
-		def confirm_deletion():
-			askquestion(title="Confirmation", message= "Do you want to delete this data?")
-		delete_button = Button(window, text = "Delete",font = "Arial 10", fg = "#006386",bg = "#ffcccc",highlightbackground = "#ffcccc",cursor = get_handcursor(), height = 1,width = 5, relief = FLAT, command = confirm_deletion)
+		def confirm_deletion(course):
+			result = askquestion(title="Confirmation", message= "Do you want to delete this data?")
+			if result == "yes":
+				exams = course.getExams()
+				for exam in exams:
+					exam.delete()
+				course.delete()
+			view_courses(window, return_function,study)
+
+		delete_button = Button(window, text = "Delete",font = "Arial 10", fg = "#006386",bg = "#ffcccc",highlightbackground = "#ffcccc",cursor = get_handcursor(), height = 1,width = 5, relief = FLAT, command =partial(confirm_deletion, courses[i]))
 		delete_button.place(x= 390, y = y_position, width=70, height= 20)
 
 		num_pos_y += 30

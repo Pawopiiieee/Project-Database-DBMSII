@@ -2,6 +2,7 @@ from model.Database import *
 import model.Person
 import model.Study
 import model.Course
+import model.Result
 
 def load_all():
 	global g_Database
@@ -63,6 +64,18 @@ class Student:
 			courses.append(course)
 
 		return courses
+
+	def getStudentGrades(self):
+		global g_Database
+		rows = g_Database.fetchAll('Select * from result where studentID='+str(self.studentID))
+
+		grades = []
+		for row in rows:
+			result = model.Result.Result()
+			result.read_row(row)
+			grades.append(result)
+
+		return grades
 
 	def enrollInCourse(self, courseId):
 		global g_Database

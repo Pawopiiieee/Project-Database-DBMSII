@@ -91,10 +91,10 @@ def generatePerson():
     person.birthday = getRandomDate(1980, 2004)
     person.nationality = random.choice(nationality)
     alphabets = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
-    person.street_name = ''.join(random.choice(alphabets) for _ in range(6))
-    person.number = random.randint(100000,200000)
+    person.streetname = ''.join(random.choice(alphabets) for _ in range(6))
+    person.streetNumber = random.randint(100000,200000)
     person.city = random.choice(city_name)
-    person.postal_code = str(random.randint(1111,9999)) + str(''.join(random.choice(alphabets) for _ in range(2)))
+    person.postalCode = str(random.randint(1111,9999)) + str(''.join(random.choice(alphabets) for _ in range(2)))
     person.insert()
     return person
 
@@ -135,6 +135,12 @@ def generateCourse(name):
     course.studyID = random.choice(studies).studyID
     course.teacherID = random.choice(teachers).teacherID
     course.insert()
+
+    exam = Exam()
+    exam.courseID = course.courseID
+    exam.date = getRandomDate(2020, 2022)
+    exam.resit = random.choice(['Y', 'N'])
+    exam.room = random.randint(1777, 2000)
     return course
 
 courses = []
@@ -157,7 +163,7 @@ def generateStudent():
     return student
     
 students = []
-for i in range(12):
+for i in range(25):
     students.append(generateStudent())
 
 

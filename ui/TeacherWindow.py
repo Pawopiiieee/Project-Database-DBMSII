@@ -20,18 +20,18 @@ def teacher_window(teacher, person, window): #this is personal, only individual 
 	def open_personal_data(): #confidential data
 		window.open_teacher_personal(window, partial(teacher_window, teacher, person),teacher,person)
 	personal_data_button = Button(window, text = "Personal Data", fg= "#e6b800", font="Courier 18",
-			bg="#0f0f3d",highlightbackground ="#0f0f3d",bd = 2, command = open_personal_data, cursor = get_handcursor())
-	personal_data_button.place(x=150, y = 325,width = 200, height = 75)
+			bg="#99ccff",highlightbackground ="#99ccff",bd = 2, command = open_personal_data, cursor = get_handcursor())
+	personal_data_button.place(x=150, y = 325,width = 200, height = 65)
 	def open_course():#other teachers can see courses
 		window.open_teacher_course(window, partial(teacher_window, teacher, person),teacher,person)
 	course_button = Button(window, text = "Courses",fg= "#e6b800", font="Courier 18",height = 3,width = 30,
-			bg="#000033",highlightbackground ="#000033",bd = 2,command = open_course, cursor = get_handcursor())
-	course_button.place(x=150, y = 390,width = 200, height = 75)
+			bg="#66ffcc",highlightbackground ="#66ffcc",bd = 2,command = open_course, cursor = get_handcursor())
+	course_button.place(x=150, y = 400,width = 200, height = 65)
 	def open_schedule():#other teachers can see schedules
 		window.open_teacher_schedule(window,partial(teacher_window, teacher, person))
 	schedule_button = Button(window, text = "Schedule", fg= "#e6b800",font="Courier 18",height = 3,width = 30,
-			bg ="#1a001a",highlightbackground ="#1a001a",bd = 2, command = open_schedule, cursor = get_handcursor())
-	schedule_button.place(x=150, y = 455,width = 200, height = 75)
+			bg ="#66ffcc",highlightbackground ="#66ffcc",bd = 2, command = open_schedule, cursor = get_handcursor())
+	schedule_button.place(x=150, y = 475,width = 200, height = 65)
 """
 	calendar_button = Button(window, text = "Calendar", font="Courier 18",height = 3,width = 30, #other teachers can see calendar
 			highlightbackground ="#1a000d",bd = 2, command = calendar)

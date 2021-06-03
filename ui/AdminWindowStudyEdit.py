@@ -43,7 +43,7 @@ def study_overview_edit(window, return_function,study):
 	total_year = ttk.Combobox(window,textvariable = get_total, width = 7)
 	total_year["value"] = amount_years
 	total_year.current(amount_years.index(study.studyyears))
-	total_year.place(x = 110, y = 470)
+	total_year.place(x = 170, y = 470)
 
 	def submit_all():
 		result = askquestion(title="Confirmation", message= "Do you want to process?")
