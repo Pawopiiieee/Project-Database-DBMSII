@@ -50,7 +50,7 @@ city_name = ["Amsterdam", "Rotterdam", "Den Haag", "Utrecht", "Eindhoven", "Tilb
     "Vlaardingen", "Assen", "Bergen op Zoom", "Capelle aan den IJssel", "Veenendaal", "Katwijk", "Zeist", "Nieuwegein", "Roermond", "Den Helder", "Doetinchem",
     "Hoogeveen", "Terneuzen", "Middelburg"]
 
-study_names = ["Bussiness ICT","BIM parttime","Mathematical Engineering","Plane design","Precision Engineering","Architecture"]
+study_names = ["Business ICT","BIM parttime","Mathematical Engineering","Plane design","Precision Engineering","Architecture"]
 course_name = ["Computational Thinking","Computer Networks","Linear Algebra","Logic and Modelling","Biological Psychology","Data Wrangling"]
 
 def getRandomDate(startYear, endYear):
@@ -92,41 +92,55 @@ def generatePerson():
     person.nationality = random.choice(nationality)
     alphabets = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
     person.streetname = ''.join(random.choice(alphabets) for _ in range(6))
-    person.streetNumber = random.randint(100000,200000)
+    person.streetNumber = random.randint(1,99)
     person.city = random.choice(city_name)
-    person.postalCode = str(random.randint(1111,9999)) + str(''.join(random.choice(alphabets) for _ in range(2)))
+    person.postalCode = str(random.randint(1111,9999)) + str(''.join(random.choice(alphabets) for _ in range(2))).upper()
     person.insert()
     return person
 
 def generateTeacher(is_admin = False):
     person = generatePerson()
 
+
     teacher = Teacher()
     teacher.salary = random.randint(2500, 6500)
     teacher.studycouncelor = random.choice(['Y', 'N'])
     teacher.personID = person.personID
     teacher.insert()
-    
+
     if is_admin:
         person.userName = "admin"
     else:
         person.userName = (person.lname + str(teacher.teacherID))
     person.userPass = "welkom01"
+    person.email = (person.lname + "." + person.fname + "@diemenacademy.nl")
     person.update()
     return teacher
 
 teachers = []
 counselers = []
 for i in range(4):
-    t = generateTeacher()
+    teacher = generateTeacher()
     if i == 0:
         # ensure there is always at least 1 studycounseler
-        t.studycouncelor = 'Y'
-        t.update()
-    teachers.append(t)
-    if (t.studycouncelor == 'Y'):
-        counselers.append(t)
-        
+        teacher.studycouncelor = 'Y'
+        teacher.update()
+
+    teachers.append(teacher)
+
+    if (teacher.studycouncelor == 'Y'):
+        counselers.append(teacher)
+
+def generateAdmin():
+    teacher = generateTeacher(True)
+    teachers.append(teacher)
+
+    admin = Admin()
+    admin.personID = teacher.personID
+    admin.insert()
+
+generateAdmin()
+
 def generateCourse(name):
     course = Course()
     course.coursetitle = name
@@ -135,17 +149,24 @@ def generateCourse(name):
     course.studyID = random.choice(studies).studyID
     course.teacherID = random.choice(teachers).teacherID
     course.insert()
-
-    exam = Exam()
-    exam.courseID = course.courseID
-    exam.date = getRandomDate(2020, 2022)
-    exam.resit = random.choice(['Y', 'N'])
-    exam.room = random.randint(1777, 2000)
     return course
 
 courses = []
 for c in course_name:
     courses.append(generateCourse(c))
+
+def generateExam(course):
+    exam = Exam()
+    exam.courseID = course.courseID
+    exam.date = getRandomDate(2020, 2022)
+    exam.resit = random.choice(['Y', 'N'])
+    exam.room = random.randint(1777, 2000)
+    exam.insert()
+    return exam
+
+exams = []
+for c in courses:
+    exams.append(generateExam(c))
 
 def generateStudent():
     person = generatePerson()
@@ -156,22 +177,39 @@ def generateStudent():
     student.enrolled = random.choice(studies).studyname
     student.personID = person.personID
     student.insert()
-    
+
     person.userName = (person.lname + str(student.studentID))
     person.userPass = "welkom01"
     person.update()
+
+    for course in random.sample(courses, 4):
+        student.enrollInCourse(course.courseID)
+
     return student
-    
+
 students = []
-for i in range(25):
+for i in range(15):
     students.append(generateStudent())
 
+def generateResult():
+    result = Result()
 
-def generateAdmin():
-    person = generateTeacher(True)
+    student = random.choice(students)
+    enrolledCourses = student.getEnrolledCourses()
+    randomCourse = random.choice(enrolledCourses)
+    exams = randomCourse.getExams()
 
-    admin = Admin()
-    admin.personID = person.personID
-    admin.insert()
+    result.studentID = student.studentID
+    result.examID = exams[0].examID
+    result.grade = random.randint(10, 100)
 
-generateAdmin()
+    if result.grade > 55:
+        result.passed = 'Y'
+    else:
+        result.passed = 'N'
+    result.insert()
+    return result
+
+results = []
+for i in range(40):
+    results.append(generateResult())

@@ -1,13 +1,13 @@
 from tkinter import *
 from tkinter import messagebox
-from PIL import ImageTk, Image  
+from PIL import ImageTk, Image
 import time
 from ui.Helpers import clear_window
 
-def select_role(teacher, person, window): #the case that a teacher is also an admin 
+def select_role(teacher, person, window): #the case that a teacher is also an admin
 	clear_window(window)
-	
-	upper_window = Canvas(window, width = 500)
+
+	upper_window = Canvas(window, width = 500, height = 700)
 	upper_window.create_rectangle(0, 0, 500, 70, fill="#006386")
 	upper_window.place(x = 0, y = 0)
 

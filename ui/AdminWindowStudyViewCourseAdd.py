@@ -18,19 +18,19 @@ def view_course_add(window, return_function,study):
 
 	title_label = Label(window,text = "Study: ", fg = "#006386", font = "Arial 12 bold", bg ="#EBEBE9")
 	title_label.place(x = 20, y = 100)
-	study_label = Label(window, text = study.studyname, fg = "#006386", font = "Arial 16 bold", bg ="#EBEBE9")
-	study_label.place(x = 120, y = 100)
+	study_label = Label(window, text = study.studyname, fg = "#006386", font = "Arial 12", bg ="#EBEBE9")
+	study_label.place(x = 130, y = 100)
 
 	course_title = Label(window, text = "Course Title",fg = "#006386", font = "Arial 12  bold", bg ="#EBEBE9" )
 	course_title.place(x = 20, y = 140)
-	input_title = Text(window, height = 1, width = 25, bg = "light yellow", highlightbackground = "#006386", font = "Arial 17")
-	input_title.place(x=110, y = 140)
+	input_title = Text(window,  bg = "light yellow", highlightbackground = "#006386", font = "Arial 12")
+	input_title.place(x=130, y = 140,height = 22, width = 250)
 
 	show_desc = Label(window, text = "Description",fg = "#006386", font = "Arial 12 bold", bg ="#EBEBE9" )
 	show_desc.place(x = 20, y = 260)
 	input_text = Text(window,  bg = "light yellow", highlightbackground = "#006386", font = "Arial 10")
 	#input_text.insert(END,study.description)
-	input_text.place(x=110, y = 180,height = 220, width = 350)
+	input_text.place(x=130, y = 180,height = 220, width = 350)
 
 	#id_student= [12345,22345,32345,42345,52345,1129,992776]
 

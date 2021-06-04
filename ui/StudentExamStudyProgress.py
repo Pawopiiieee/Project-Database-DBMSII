@@ -17,46 +17,48 @@ def student_studyProgress(window, return_function,student,person): #this is goin
 
 	name_label = Label(window, text = "Name", fg = "#006386", font = "Arial 10  bold", bg ="#EBEBE9")
 	name_label.place(x=20, y = 100)
-	name_input = Label(window, text = (str(person.lname) + "  " + str(person.fname)),fg = "#00293c", font = "Arial 10", bg ="#EBEBE9")
-	name_input.place(x = 120, y = 100)
+	name_input = Label(window, text = (str(person.fname) + " " + str(person.lname)),fg = "#00293c", font = "Arial 10", bg ="#EBEBE9")
+	name_input.place(x = 130, y = 100)
 
 	study_label = Label(window, text = "Study", fg = "#006386", font = "Arial 10  bold", bg ="#EBEBE9")
 	study_label.place(x=20, y = 130)
 	study = Label(window, text = student.enrolled,fg = "#00293c", font = "Arial 10", bg ="#EBEBE9")
-	study.place(x= 120, y = 130)
+	study.place(x= 130, y = 130)
 
 	study_label = Label(window, text = "Start Year", fg = "#006386", font = "Arial 10  bold", bg ="#EBEBE9")
 	study_label.place(x=20, y = 160)
 	startYear_info = Label(window,text =student.startYear , fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
-	startYear_info.place(x = 350, y = 160)
+	startYear_info.place(x = 130, y = 160)
 
-	totalCredits_label = Label(window, text = "Total Credits  240", fg = "#006386", font = "Arial 10  bold", bg ="#EBEBE9")
+	totalCredits_label = Label(window, text = "Total Credits", fg = "#006386", font = "Arial 10  bold", bg ="#EBEBE9")
 	totalCredits_label.place(x=20, y = 190)
+	totalCredits = Label(window, text = "240", fg = "#006386", font = "Arial 10  bold", bg ="#EBEBE9")
+	totalCredits.place(x=130, y = 190)
 
 	courses = student.getEnrolledCourses() #get total credit/grades from course > passed exam > Y > get credits
-	course_credit = 0
+	total_credits = 0
 	total_grade = 0
 	for course in courses:
 		exams = course.getExams()
 		for exam in exams:
 			result = exam.getStudentGrade(student.studentID)
 			if result != None and result.passed == 'Y':
-				course_credit += course.credits
-				total_grade += result
+				total_credits += course.credits
+				total_grade += (result.grade * course.credits)
 				break  #need to count only 1 exam / course
-	if course_credit == 0:
+	if total_credits == 0:
 		avg_grade = "Average Grade Currently Not Available"
 		avgGP = Label(window, text = avg_grade , fg = "red", font = "Arial 10  bold", bg ="#EBEBE9")
-		avgGP.place(x=150, y = 250)
-	else: 
-		avg_grade = total_grade / course_credit 
-		avgGP = Label(window, text = avg_grade , fg = "#006386", font = "Arial 10  bold", bg ="#EBEBE9")
-		avgGP.place(x=150, y = 250)
+		avgGP.place(x=170, y = 250)
+	else:
+		avg_grade = round((float(total_grade) / total_credits) / 10, 2)
+		avgGP = Label(window, text = str(avg_grade) + " / 10" , fg = "#006386", font = "Arial 10  bold", bg ="#EBEBE9")
+		avgGP.place(x=170, y = 250)
 
 	earnedCredits_label = Label(window, text = "Earned Credits ", fg = "#006386", font = "Arial 10  bold", bg ="#EBEBE9")
 	earnedCredits_label.place(x=20, y = 220)
-	earnedCredits_label = Label(window, text = course_credit, fg = "#006386", font = "Arial 10  bold", bg ="#EBEBE9")
-	earnedCredits_label.place(x=120, y = 220)
+	earnedCredits_label = Label(window, text = total_credits, fg = "#006386", font = "Arial 10  bold", bg ="#EBEBE9")
+	earnedCredits_label.place(x=130, y = 220)
 
 	avgGP_label = Label(window, text = "Average Grade Point ", fg = "#006386", font = "Arial 10  bold", bg ="#EBEBE9")
 	avgGP_label.place(x=20, y = 250)

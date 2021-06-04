@@ -53,7 +53,7 @@ def teacher_edit(window, return_function,teacher, person):
 		confirm_msg = f"You Selected {counsellor_sh.get()}!"
 		showinfo(title="Result", message= confirm_msg)
 	counsellor_sh.bind("<<ComboboxSelected>>", counsellor_changed)
-	counsellor_sh.place(x = 130, y = 160)
+	counsellor_sh.place(x = 160, y = 160)
 	studentCounsellor_label = Label(window, text = "Student Counsellor",fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9" )
 	counsellor_sh.current(counsellors.index(teacher.studycouncelor))
 	studentCounsellor_label.place(x = 20, y = 160)
@@ -76,7 +76,7 @@ def teacher_edit(window, return_function,teacher, person):
 		showinfo(title="Result", message= confirm_msg)
 	birth_year_ch.bind("<<ComboboxSelected>>", birth_year_choose)
 	birth_year_ch.current(birth_year.index(person.birthday.year))
-	birth_year_ch.place(x = 180, y = 290)
+	birth_year_ch.place(x = 190, y = 290)
 
 	birthMonth = StringVar()
 	months = [
@@ -96,7 +96,7 @@ def teacher_edit(window, return_function,teacher, person):
 	birth_month_ch = ttk.Combobox(window,textvariable = birthMonth, width = 10, font = "Arial 10")
 	birth_month_ch["value"] = months
 	birth_month_ch["state"] = "readonly"
-	birth_month_ch.place(x = 255, y = 290)
+	birth_month_ch.place(x = 270, y = 290)
 	def birth_month_choose (event):
 		confirm_msg = f"You Selected {birth_month_ch.get()}!"
 		showinfo(title="Result", message= confirm_msg)
@@ -114,7 +114,7 @@ def teacher_edit(window, return_function,teacher, person):
 		confirm_msg = f"You Selected {birth_day_ch.get()}!"
 		showinfo(title="Result", message= confirm_msg)
 	birth_day_ch.bind("<<ComboboxSelected>>", birth_day_choose)
-	birth_day_ch.place(x = 350, y = 290)
+	birth_day_ch.place(x = 370, y = 290)
 	dob_label = Label(window,text = "Date of Birth (YY/MM/DD)", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	birth_day_ch.current(birth_day.index(person.birthday.day))
 	dob_label.place(x = 20, y = 290)
@@ -181,7 +181,7 @@ def teacher_edit(window, return_function,teacher, person):
 	email_label.place(x = 20, y = 470)
 	input_email = Text(window, bg = "light yellow", highlightbackground = "#006386", font = "Arial 10")
 	input_email.insert(END, (person.email))
-	input_email.place(x=120, y = 470, height = 22, width = 170)
+	input_email.place(x=120, y = 470, height = 22, width = 220)
 
 	def submit_all():
 		result = askquestion(title="Confirmation", message= "Do you want to process?")
@@ -191,10 +191,10 @@ def teacher_edit(window, return_function,teacher, person):
 			person.birthday = datetime.date(birthYear.get(), months.index(birthMonth.get()) + 1, birthDay.get())
 			person.nationality = selected_nationality.get()
 			person.gender = selected_gender.get()
-			person.streetNumber = str(input_houseNo.get(1.0, "end-1c")) 
+			person.streetNumber = str(input_houseNo.get(1.0, "end-1c"))
 			person.streetname = input_street.get(1.0, "end-1c")
 			person.city = input_city.get(1.0, "end-1c")
-			person.postalCode = str(input_postal.get(1.0, "end-1c")) 
+			person.postalCode = str(input_postal.get(1.0, "end-1c"))
 			person.phone = input_phoneNumber.get(1.0, "end-1c")
 			person.email = input_email.get(1.0, "end-1c")
 			person.update()
@@ -203,7 +203,7 @@ def teacher_edit(window, return_function,teacher, person):
 			teacher.salary = int(input_salary.get(1.0, "end-1c"))
 			teacher.studyCouncelor = selected_counsellor.get()
 			teacher.update()
-		
+
 			ui.AdminWindowTeacherView.teacher_view(window, return_function,teacher,person) #avoid circular import
 
 	submit_text = Button(window, text = "Submit",font = "Arial 10  bold",fg = "#006386",highlightbackground ="#48C9B0",height = 1, width = 6, command =submit_all,cursor = get_handcursor())

@@ -5,7 +5,7 @@ from getpass import getpass
 # Connection credentials
 HOSTNAME = 'localhost'
 USERNAME = 'root'
-PASSWORD = 'Dolfijn123%' # This is the database password, not the user password
+PASSWORD = 'welkom01' # This is the database password, not the user password
 DB_NAME  = 'Diemen'
 
 class Database:
@@ -22,7 +22,8 @@ class Database:
                 host     = HOSTNAME,
                 user     = USERNAME,
                 password = PASSWORD,
-                database = DB_NAME
+                database = DB_NAME,
+                auth_plugin='mysql_native_password'
             )
 
         except Error as err:

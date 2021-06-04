@@ -19,7 +19,7 @@ def course(window, return_function, teacher, person):#this is going to show the 
 
 	teacherName_label = Label(window, text = "Name:", fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
 	teacherName_label.place(x=20, y = 100)
-	teacherName_label = Label(window, text = (str(person.lname) + "  " + str(person.fname)), fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
+	teacherName_label = Label(window, text = (str(person.fname) + " " + str(person.lname)), fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
 	teacherName_label.place(x=120, y = 100)
 	teacher_id_label = Label(window, text = "Teacher ID", fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
 	teacher_id_label.place(x=20, y = 130)

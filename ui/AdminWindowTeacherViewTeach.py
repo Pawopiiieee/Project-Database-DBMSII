@@ -17,7 +17,7 @@ def teaching_courses(window, return_function,teacher,person):
 
 	teacherName_label = Label(window, text = "TeacherName", fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
 	teacherName_label.place(x=20, y = 100)
-	teacherName = Label(window, text = (str(person.lname) +"  "+ str(person.fname)), fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
+	teacherName = Label(window, text = (str(person.fname) + " " + str(person.lname)), fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
 	teacherName.place(x=120, y = 100)
 
 	teacher_id_label = Label(window, text = "Teacher ID", fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")

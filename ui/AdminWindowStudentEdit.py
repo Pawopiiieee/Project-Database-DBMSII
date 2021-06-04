@@ -87,7 +87,7 @@ def student_edit(window, return_function,student, person):
 		confirm_msg = f"You Selected {counsellor_sh.get()}!"
 		showinfo(title="Result", message= confirm_msg)
 	counsellor_sh.bind("<<ComboboxSelected>>", counsellor_changed)
-	counsellor_sh.place(x = 140, y = 190)
+	counsellor_sh.place(x = 150, y = 190)
 	studentCounsellor_label = Label(window, text = "Student Counsellor",fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9" )
 	counsellor_sh.current(current_counseler)
 	studentCounsellor_label.place(x = 20, y = 190)
@@ -107,7 +107,7 @@ def student_edit(window, return_function,student, person):
 		showinfo(title="Result", message= confirm_msg)
 	birth_year_ch.bind("<<ComboboxSelected>>", birth_year_choose)
 	birth_year_ch.current(birth_year.index(person.birthday.year))
-	birth_year_ch.place(x = 180, y = 290)
+	birth_year_ch.place(x = 190, y = 290)
 
 	birthMonth = StringVar()
 	months = [
@@ -127,7 +127,7 @@ def student_edit(window, return_function,student, person):
 	birth_month_ch = ttk.Combobox(window,textvariable = birthMonth, width = 10, font = "Arial 10")
 	birth_month_ch["value"] = months
 	birth_month_ch["state"] = "readonly"
-	birth_month_ch.place(x = 255, y = 290)
+	birth_month_ch.place(x = 270, y = 290)
 	def birth_month_choose (event):
 		confirm_msg = f"You Selected {birth_month_ch.get()}!"
 		showinfo(title="Result", message= confirm_msg)
@@ -145,7 +145,7 @@ def student_edit(window, return_function,student, person):
 		confirm_msg = f"You Selected {birth_day_ch.get()}!"
 		showinfo(title="Result", message= confirm_msg)
 	birth_day_ch.bind("<<ComboboxSelected>>", birth_day_choose)
-	birth_day_ch.place(x = 350, y = 290)
+	birth_day_ch.place(x = 370, y = 290)
 	dob_label = Label(window,text = "Date of Birth (YY/MM/DD)", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	birth_day_ch.current(birth_day.index(person.birthday.day))
 	dob_label.place(x = 20, y = 290)
@@ -159,7 +159,7 @@ def student_edit(window, return_function,student, person):
 		confirm_msg = f"You Selected {nationality.get()}!"
 		showinfo(title="Result", message= confirm_msg)
 	nationality.bind("<<ComboboxSelected>>", nationality_changed)
-	nationality.place(x = 120, y = 320)
+	nationality.place(x = 130, y = 320)
 	studentNationality_label = Label(window, text = "Nationality",fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9" )
 	nationality.current(nationalities.index(person.nationality))
 	studentNationality_label.place(x = 20, y = 320)
@@ -173,7 +173,7 @@ def student_edit(window, return_function,student, person):
 		confirm_msg = f"You Selected {gender_sh.get()}!"
 		showinfo(title="Result", message= confirm_msg)
 	gender_sh.bind("<<ComboboxSelected>>", counsellor_changed)
-	gender_sh.place(x = 120, y = 350)
+	gender_sh.place(x = 130, y = 350)
 	studentGender_label = Label(window, text = "Gender",fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9" )
 	gender_sh.current(genders.index(person.gender))
 	studentGender_label.place(x = 20, y = 350)
@@ -182,37 +182,37 @@ def student_edit(window, return_function,student, person):
 	houseNo_label.place(x = 20, y = 380)
 	input_houseNo = Text(window,  bg = "light yellow", highlightbackground = "#006386", font = "Arial 10")
 	input_houseNo.insert(END, (str(person.streetNumber)))
-	input_houseNo.place(x=120, y = 380, height = 22, width = 30)
+	input_houseNo.place(x=130, y = 380, height = 22, width = 30)
 
 	street_label = Label(window,text = "Street", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	street_label.place(x = 270, y = 380)
 	input_street = Text(window, height = 1, width = 20, bg = "light yellow", highlightbackground = "#006386", font = "Arial 10")
 	input_street.insert(END, (str(person.streetname)))
-	input_street.place(x=350, y = 380, height = 22, width = 120)
+	input_street.place(x=360, y = 380, height = 22, width = 120)
 
 	city_label = Label(window,text = "City", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	city_label.place(x = 20, y = 410)
 	input_city = Text(window, bg = "light yellow", highlightbackground = "#006386", font = "Arial 10")
 	input_city.insert(END, (str(person.city)))
-	input_city.place(x=120, y = 410, height = 22, width = 120)
+	input_city.place(x=130, y = 410, height = 22, width = 120)
 
 	postal_label = Label(window,text = "Postal Code", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	postal_label.place(x = 270, y = 410)
 	input_postal = Text(window, bg = "light yellow", highlightbackground = "#006386", font = "Arial 10")
 	input_postal.insert(END, person.postalCode)
-	input_postal.place(x=350, y = 410, height = 22, width = 50)
+	input_postal.place(x=360, y = 410, height = 22, width = 50)
 
 	phoneNumber_label = Label(window,text = "Phone Number", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	phoneNumber_label.place(x = 20, y = 440)
 	input_phoneNumber = Text(window, bg = "light yellow", highlightbackground = "#006386", font = "Arial 10")
 	input_phoneNumber.insert(END, (person.phone))
-	input_phoneNumber.place(x=120, y = 440, height = 22, width = 120)
+	input_phoneNumber.place(x=130, y = 440, height = 22, width = 120)
 
 	email_label = Label(window,text = "Email", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	email_label.place(x = 20, y = 470)
 	input_email = Text(window, bg = "light yellow", highlightbackground = "#006386", font = "Arial 10")
 	input_email.insert(END, (person.email))
-	input_email.place(x=120, y = 470, height = 22, width = 170)
+	input_email.place(x=130, y = 470, height = 22, width = 170)
 
 	def submit_all(student, person):
 		result = askquestion(title="Confirmation", message= "Do you want to process?")
@@ -223,10 +223,10 @@ def student_edit(window, return_function,student, person):
 			person.birthday = datetime.date(birthYear.get(), months.index(birthMonth.get()) + 1, birthDay.get())
 			person.nationality = selected_nationality.get()
 			person.gender = selected_gender.get()
-			person.streetNumber = str(input_houseNo.get(1.0, "end-1c")) 
+			person.streetNumber = str(input_houseNo.get(1.0, "end-1c"))
 			person.streetname = input_street.get(1.0, "end-1c")
 			person.city = input_city.get(1.0, "end-1c")
-			person.postalCode = str(input_postal.get(1.0, "end-1c")) 
+			person.postalCode = str(input_postal.get(1.0, "end-1c"))
 			person.phone = input_phoneNumber.get(1.0, "end-1c")
 			person.email = input_email.get(1.0, "end-1c")
 			person.update()
@@ -237,7 +237,7 @@ def student_edit(window, return_function,student, person):
 			counseler_index = counsellornames.index(selected_counsellor.get())
 			student.studyCouncelor = counsellors[counseler_index].teacherID
 			student.update()
-		
+
 			ui.AdminWindowStudentView.student_view(window, return_function, student, person) #avoid circular import
 
 	submit_text = Button(window, text = "Submit",font = "Arial 10  bold",fg = "#006386",highlightbackground ="#48C9B0",height = 1, width = 6, command =partial(submit_all,student,person),cursor = get_handcursor())

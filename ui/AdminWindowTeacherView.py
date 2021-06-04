@@ -40,7 +40,7 @@ def teacher_view(window, return_function, teacher, person):
 	studentCounsellor_label.place(x = 20, y = 140)
 
 	studentCounsellor_info = Label(window,text = teacher.studycouncelor, fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
-	studentCounsellor_info.place(x = 120, y = 140)
+	studentCounsellor_info.place(x = 150, y = 140)
 
 
 	personal_label = Label(window,text = "Personal Detail", fg = "#006386", font = "Arial 14 bold", bg ="#EBEBE9")
@@ -57,7 +57,7 @@ def teacher_view(window, return_function, teacher, person):
 
 	nationality_info = Label(window,text =person.nationality , fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	nationality_info.place(x = 120, y = 260)
-	
+
 	gender_label = Label(window,text = "Gender", fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9")
 	gender_label.place(x = 20, y = 280)
 

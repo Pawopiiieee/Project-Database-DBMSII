@@ -30,7 +30,10 @@ def student_personal_course(window, return_function,student,person):
 		coursTitle = Label(window, text = courses[i].coursetitle,fg = "#00293c", font = "Arial 10", height = 2, width = 25,relief="ridge",borderwidth=2)
 		coursTitle.place(x = 135, y = id_pos_y,width = 200,height=30)
 
-		subject_label = Label(window,text = "dd/mm/yyyy", fg = "#00293c", font = "Arial 10",  highlightbackground ="#acd0c0", height = 2, width = 12,borderwidth=2, relief="groove")
+		exams = courses[i].getExams()
+
+
+		subject_label = Label(window,text = str(exams[0].date), fg = "#00293c", font = "Arial 10",  highlightbackground ="#acd0c0", height = 2, width = 12,borderwidth=2, relief="groove")
 		subject_label.place(x = 335, y = id_pos_y,width = 150,height=30)
 
 		id_pos_y += 30

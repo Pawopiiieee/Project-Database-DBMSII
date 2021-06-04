@@ -21,7 +21,7 @@ def teacher_edit_courses(window, return_function,teacher, person):
 
 	teacherName_label = Label(window, text = "TeacherName", fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
 	teacherName_label.place(x=20, y = 100)
-	teacherName = Label(window, text = (str(person.lname) +"  "+ str(person.fname)), fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
+	teacherName = Label(window, text = (str(person.fname) + " " + str(person.lname)), fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
 	teacherName.place(x=120, y = 100)
 
 	teacher_id_label = Label(window, text = "Teacher ID", fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
@@ -30,7 +30,7 @@ def teacher_edit_courses(window, return_function,teacher, person):
 	teacher_id.place(x=120, y = 130)
 
 	create_data_text = Button(text = "Create new data", fg = "#e6b800", font="Arial 10 bold", width = 15, cursor = get_handcursor(), highlightbackground =  "#006386", command = partial (add_remove_courses,window,return_function,teacher, person))
-	create_data_text.place(x=370, y = 110,height=30)
+	create_data_text.place(x=350, y = 110,height=30)
 
 	Courses_label = Label(window, text = "Course Name",fg = "#e6b800", font="Arial 10 bold", width = 20,bg ="#006386")
 	Courses_label.place(x=20, y = 160, width = 150,height=30)
@@ -56,7 +56,7 @@ def teacher_edit_courses(window, return_function,teacher, person):
 
 		courseID_label = Label(window, text = courses[i].courseID,fg = "#00293c", font = "Arial 9", width = 12,relief="ridge",borderwidth=2)
 		courseID_label.place(x = 170 , y = num_pos_y, width = 100, height=30)
-		
+
 		study = courses[i].getStudy()
 		study_lab = Label(window, text = study.studyname,fg = "#00293c", font = "Arial 10", width =20,relief="ridge",borderwidth=2)
 		study_lab.place(x = 270 , y = num_pos_y,width = 150, height=30)

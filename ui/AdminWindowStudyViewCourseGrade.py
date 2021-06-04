@@ -16,7 +16,7 @@ def submit_grade_courses(window, return_function,course):
 		for g in range(len(grade_point)):
 			text_button = grade_point[g]
 			grade = text_button.get(1.0, "end-1c")
-		
+
 			if int(grade) < 0 or int(grade) > 100:
 				has_incorrect_grade = True
 
@@ -64,9 +64,9 @@ def submit_grade_courses(window, return_function,course):
 
 	student_name_label = Label(window, text = "Student Name", fg = "#e6b800", font="Arial 10 bold",bg ="#006386")
 	student_name_label.place(x=20, y = 180, width = 250,height = 30)
-	student_id_label = Label(window, text = "Student ID", fg = "#e6b800", font="Arial 10 bold",height = 1, width = 13,bg ="#006386")
+	student_id_label = Label(window, text = "Student ID", fg = "#e6b800", font="Arial 10 bold", bg ="#006386")
 	student_id_label.place(x=270, y = 180, width = 100,height = 30)
-	grade_label = Label(window, text = "Grade",fg = "#e6b800", font="Arial 10 bold",height = 1, width = 10,bg ="#006386")
+	grade_label = Label(window, text = "Grade",fg = "#e6b800", font="Arial 10 bold", bg ="#006386")
 	grade_label.place(x=370, y = 180, width = 100,height = 30)
 
 	all_exams = course.getExams()
@@ -78,7 +78,7 @@ def submit_grade_courses(window, return_function,course):
 	for i in range (len(studentIncourse)):
 		person = studentIncourse[i].getPerson()
 
-		studentName_label = Label(window, text = str(person.lname) + "  "+ str(person.fname),fg = "#00293c", font = "Arial 10", relief="ridge",borderwidth=2)
+		studentName_label = Label(window, text = str(person.fname) + " " + str(person.lname),fg = "#00293c", font = "Arial 10", relief="ridge",borderwidth=2)
 		studentName_label.place(x = 20, y = num_pos_y, width = 250,height = 30)
 
 		studentID_label = Label(window, text = studentIncourse[i].studentID,fg = "#00293c", font = "Arial 10",  relief="ridge",borderwidth=2)

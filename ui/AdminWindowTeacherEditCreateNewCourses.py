@@ -21,7 +21,7 @@ def add_remove_courses(window, return_function,teacher,person):
 
 	teacherName_label = Label(window, text = "TeacherName", fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
 	teacherName_label.place(x=20, y = 100)
-	teacherName = Label(window, text = (str(person.lname) +"  "+ str(person.fname)), fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
+	teacherName = Label(window, text = (str(person.fname) + " " + str(person.lname)), fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
 	teacherName.place(x=120, y = 100)
 
 	teacher_id_label = Label(window, text = "Teacher ID", fg = "#006386", font="Arial 10 bold",bg = "#EBEBE9")
@@ -45,7 +45,7 @@ def add_remove_courses(window, return_function,teacher,person):
 		selected_study = Label(window, text = "Select Study",fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9" )
 		selected_study.place(x = 20, y = num_pos_y)
 		selected_study = StringVar()
-		
+
 		study_ch = ttk.Combobox(window,textvariable = selected_study)
 		study_ch["value"] = studynames
 		study_ch["state"] = "readonly"
@@ -71,7 +71,7 @@ def add_remove_courses(window, return_function,teacher,person):
 		select_coures = Label(window, text = "Select Course",fg = "#006386", font = "Arial 10 bold", bg ="#EBEBE9" )
 		select_coures.place(x = 20, y = num_pos_y2)
 		selected_course = StringVar()
-		
+
 		courses_ch = ttk.Combobox(window,textvariable = selected_course)
 		courses_ch["value"] = []
 		courses_ch["state"] = "readonly"

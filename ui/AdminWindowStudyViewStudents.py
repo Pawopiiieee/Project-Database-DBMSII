@@ -38,7 +38,7 @@ def view_students(window, return_function,study):
 
 		person = students[i].getPerson()
 
-		lastName_label = Label(window, text = person.lname + "  "+ person.fname,fg = "#00293c", font = "Arial 10",relief="ridge",borderwidth=2)
+		lastName_label = Label(window, text = person.fname + " " + person.lname,fg = "#00293c", font = "Arial 10",relief="ridge",borderwidth=2)
 		lastName_label.place(x = 20, y = num_pos_y, width = 250,height=30)
 
 		studentID_label = Label(window, text = students[i].studentID,fg = "#00293c", font = "Arial 10",relief="ridge",borderwidth=2)
