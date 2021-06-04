@@ -60,9 +60,10 @@ def logIn_screen(window):
 	username_entry = Entry(window,textvariable = username, font="Arial 10")
 	username_label.place(x = 130, y = 180)
 	username_entry.place(x=207, y = 180)
+
 	password_label = Label(window, text = 'Password', font="Arial 10 bold")
 	password_entry = Entry(window,textvariable = password, font="Arial 10", show = "*")
-	password_label.place(x = 130, y = 200)
-	password_entry.place(x =207, y = 200)
+	password_label.place(x = 130, y = 210)
+	password_entry.place(x =207, y = 210)
 	submit_button = Button(window,text = "Log In", command = input_value, cursor = get_handcursor())
-	submit_button.place(x = 220, y = 300)
+	submit_button.place(x = 220, y = 320, width = 70, height = 30)

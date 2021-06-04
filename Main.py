@@ -48,8 +48,8 @@ if __name__ == "__main__":
 	master.open_exam_registration = student_exam_registration
 	master.open_student_result = student_results
 
-	logIn_screen(master)
-	#loading_screen(master)
+
+	loading_screen(master)
 	#admin_window(master)
 	#student_window(master)
 	#teacher_window(master)

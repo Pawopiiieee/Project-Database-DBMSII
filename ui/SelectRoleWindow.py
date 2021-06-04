@@ -12,11 +12,11 @@ def select_role(teacher, person, window): #the case that a teacher is also an ad
 	upper_window.place(x = 0, y = 0)
 
 	academy_logo = Image.open("images/diemen_logo2.png")
-	academy_logo = academy_logo.resize((185,150), Image.ANTIALIAS)
+	academy_logo = academy_logo.resize((285,250), Image.ANTIALIAS)
 	test = ImageTk.PhotoImage(academy_logo)
 	label_logo = Label(image=test)
 	label_logo.image = test
-	label_logo.place(x=170,y=70)
+	label_logo.place(x=130,y=100)
 
 	def call_teacher_window():
 		window.open_teacher(teacher, person, window)
@@ -24,6 +24,6 @@ def select_role(teacher, person, window): #the case that a teacher is also an ad
 		window.open_admin(window)
 
 	admin_button = Button(window,text = "Continue as an Admin", bd = '5',command = call_admin_window)
-	admin_button.place(x = 180, y = 250)
+	admin_button.place(x = 180, y = 300)
 	teacher_button = Button(window,text = "Continue as a Teacher", bd = '5',command = call_teacher_window)
-	teacher_button.place(x = 180, y = 300)
+	teacher_button.place(x = 180, y = 350)
